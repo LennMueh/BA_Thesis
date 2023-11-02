@@ -20,11 +20,11 @@ if __name__ == '__main__':
 
     print("DNN, 1 Hidden Layer, 5 Epochs")
     dnn1_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(dnn1_model,"models/dnn_hid1_relu_5epoch")
+    keras.saving.save_model(dnn1_model, "../models/dnn_hid1_relu_5epoch")
 
     print("DNN, 1 Hidden Layer, 10 Epochs")
     dnn1_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(dnn1_model, "models/dnn_hid1_relu_10epoch")
+    keras.saving.save_model(dnn1_model, "../models/dnn_hid1_relu_10epoch")
 
     dnn2_model = keras.Sequential([
         keras.layers.Flatten(input_shape=(28, 28)),
@@ -37,11 +37,11 @@ if __name__ == '__main__':
 
     print("DNN, 2 Hidden Layers, 5 Epochs")
     dnn2_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(dnn2_model, "models/dnn_hid2_relu_5epoch")
+    keras.saving.save_model(dnn2_model, "../models/dnn_hid2_relu_5epoch")
 
     print("DNN, 2 Hidden Layers, 10 Epochs")
     dnn2_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(dnn2_model, "models/dnn_hid2_relu_10epoch")
+    keras.saving.save_model(dnn2_model, "../models/dnn_hid2_relu_10epoch")
 
     cnn_model = keras.Sequential([
         keras.layers.Conv2D(32, (3,3), activation='relu', input_shape=(28,28, 1)),
@@ -55,8 +55,8 @@ if __name__ == '__main__':
 
     print("CNN, 1 Hidden Layer, 5 Epochs")
     cnn_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(cnn_model, "models/cnn_hid1_relu_5epoch")
+    keras.saving.save_model(cnn_model, "../models/cnn_hid1_relu_5epoch")
 
     print("CNN, 1 Hidden Layer, 10 Epochs")
     cnn_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(cnn_model, "models/cnn_hid1_relu_10epoch")
+    keras.saving.save_model(cnn_model, "../models/cnn_hid1_relu_10epoch")
