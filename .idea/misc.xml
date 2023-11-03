@@ -5,5 +5,5 @@
     <option name="pathToExecutable" value="C:\Users\lenna\AppData\Roaming\Python\Python310\Scripts\black.exe" />
     <option name="sdkUUID" value="094c9a9e-c524-43c6-95a6-f5fcb62565bb" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.11.0rc1 Docker (tensorflow/tensorflow:latest-gpu)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10.12 WSL (Ubuntu): (/home/ubu/.virtualenvs/BA_Experiments/bin/python)" project-jdk-type="Python SDK" />
 </project>
