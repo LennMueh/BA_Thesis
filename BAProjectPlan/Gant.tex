@@ -1,0 +1,73 @@
+\documentclass{article}
+\renewcommand\familydefault{\sfdefault} 
+
+\usepackage[a3paper,margin=1in,landscape]{geometry}
+\usepackage{pgfgantt}
+%\usepackage[nodayofweek]{datetime}
+%\newdateformat{ganttdate}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
+%\ganttdate
+
+\author{Lennart Mu\"hlhahn}
+\title{Schedule for my Bachelor's Thesis}
+\date{\today}
+
+\pagenumbering{gobble}
+
+\begin{document}
+%\maketitle
+
+\def\startdate{2023-10-03}
+\setganttlinklabel{f-s}{}
+\setganttlinklabel{s-s}{}
+\setganttlinklabel{f-f}{}
+
+\begin{figure}[tbp]
+    \begin{center}
+    
+    \begin{ganttchart}[
+        expand chart=\textwidth,
+        vgrid,
+        hgrid,
+        link/.style={-latex, draw=red, fill=red},
+        ]{1}{9},
+    
+    %labels
+    %\gantttitlecalendar{month=name} \\
+    \gantttitle{1st week}{1}
+    \gantttitle{2nd week}{1}
+    \gantttitle{3rd week}{1}
+    \gantttitle{4th week}{1}
+    \gantttitle{5th week}{1}
+    \gantttitle{6th week}{1}
+    \gantttitle{7th week}{1}
+    \gantttitle{8th week}{1}
+    \gantttitle{9th week}{1}
+    \\
+    %\gantttitlecalendar{day} \\
+    %tasks
+    \ganttbar[name=deepFaultFunctions]{1. Adapt DeepFault Functions}{1}{1} \\
+    \ganttbar[name=mutationFunctions]{2. Implement mutation functions}{1}{1} \\
+    \ganttbar[name=set_bench]{3. Setup experiments}{1}{1} \\
+    \ganttbar[name=perform_bench]{4. Perform experiments}{2}{4} \\
+    \ganttbar[name=draft_introduction]{5. Draft introduction}{5}{5} \\
+    \ganttbar[name=draft_main]{6. Draft main chapter}{5}{5} \\
+    \ganttbar[name=draft_background]{7. Draft background chapter}{6}{6} \\
+    \ganttbar[name=draft_results]{8. Draft experimental results chapter}{6}{6} \\
+    \ganttbar[name=draft_conclusion]{9. Draft conclusion}{7}{7} \\
+    \ganttbar[name=revise_chapters]{10. Revise chapters}{7}{8} \\
+    \ganttbar[name=write_abstract]{11. Write abstract}{8}{8} \\
+    \ganttbar[name=print]{12. Print Thesis}{9}{9}
+    
+    %\ganttgroup{Practical Results}{1}{9} \\
+    %\ganttgroup{Written Thesis}{1}{9} \\
+    
+    %relations 
+    \ganttlink[link type=f-s]{deepFaultFunctions}{set_bench}
+    \ganttlink[link type=f-s]{mutationFunctions}{set_bench}
+    \ganttlink[link type=f-s]{set_bench}{perform_bench}
+    \ganttlink[link type=f-s]{perform_bench}{draft_results}
+    \ganttlink[link type=f-f]{draft_results}{draft_conclusion}
+    \end{ganttchart}
+    \end{center}
+\end{figure}
+\end{document}
