@@ -41,9 +41,9 @@ if __name__ == '__main__':
 
     print("DNN, 2 Hidden Layers, 10 Epochs")
     dnn2_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(dnn2_model, "../models/dnn_hid2_relu_10epoch")
+    keras.saving.save_model(dnn2_model, "../models/dnn_hid2_relu_10epoch")0
 
-    cnn_model = keras.Sequential([
+    cnn1_model = keras.Sequential([
         keras.layers.Conv2D(32, (3,3), activation='relu', input_shape=(28,28, 1)),
         keras.layers.MaxPool2D((2,2)),
         keras.layers.Flatten(),
@@ -51,12 +51,32 @@ if __name__ == '__main__':
         keras.layers.Dense(10, activation='softmax')
     ])
 
-    cnn_model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    cnn1_model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    print("CNN, 1 Hidden Layer, 5 Epochs")
-    cnn_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(cnn_model, "../models/cnn_hid1_relu_5epoch")
+    print("CNN, 1 Convolution Layer, 5 Epochs")
+    cnn1_model.fit(train_images, train_labels, epochs=5)
+    keras.saving.save_model(cnn1_model, "../models/cnn_conv1_relu_5epoch")
 
-    print("CNN, 1 Hidden Layer, 10 Epochs")
-    cnn_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(cnn_model, "../models/cnn_hid1_relu_10epoch")
+    print("CNN, 1 Convolution Layer, 10 Epochs")
+    cnn1_model.fit(train_images, train_labels, epochs=5)
+    keras.saving.save_model(cnn1_model, "../models/cnn_conv1_relu_10epoch")
+    
+    cnn2_model = keras.Sequential([
+        keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+        keras.layers.MaxPooling2D((2, 2)),
+        keras.layers.Conv2D(64, (3, 3), activation='relu'),  # Additional convolutional layer
+        keras.layers.MaxPooling2D((2, 2)),
+        keras.layers.Flatten(),
+        keras.layers.Dense(128, activation='relu'),  # Additional fully connected layer
+        keras.layers.Dense(10, activation='softmax')
+    ])
+
+    cnn2_model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+    print("CNN, 2 Convolution Layer, 5 Epochs")
+    cnn1_model.fit(train_images, train_labels, epochs=5)
+    keras.saving.save_model(cnn1_model, "../models/cnn_conv2_relu_5epoch")
+
+    print("CNN, 2 Convolution Layer, 10 Epochs")
+    cnn1_model.fit(train_images, train_labels, epochs=5)
+    keras.saving.save_model(cnn1_model, "../models/cnn_conv2_relu_10epoch")
