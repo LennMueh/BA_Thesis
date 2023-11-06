@@ -12,7 +12,7 @@ if __name__ == '__main__':
 
     dnn1_model = keras.Sequential([
         keras.layers.Flatten(input_shape=(28, 28)),
-        keras.layers.Dense(128, activation='relu'),
+        keras.layers.Dense(128, activation='gelu'),
         keras.layers.Dense(10, activation='softmax')
     ])
 
@@ -20,16 +20,16 @@ if __name__ == '__main__':
 
     print("DNN, 1 Hidden Layer, 5 Epochs")
     dnn1_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(dnn1_model, "../models/dnn_hid1_relu_5epoch")
+    keras.saving.save_model(dnn1_model, "../models/dnn_hid1_gelu_5epoch")
 
     print("DNN, 1 Hidden Layer, 10 Epochs")
     dnn1_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(dnn1_model, "../models/dnn_hid1_relu_10epoch")
+    keras.saving.save_model(dnn1_model, "../models/dnn_hid1_gelu_10epoch")
 
     dnn2_model = keras.Sequential([
         keras.layers.Flatten(input_shape=(28, 28)),
-        keras.layers.Dense(128, activation='relu'),
-        keras.layers.Dense(64, activation='relu'),
+        keras.layers.Dense(128, activation='gelu'),
+        keras.layers.Dense(64, activation='gelu'),
         keras.layers.Dense(10, activation='softmax')
     ])
 
@@ -37,17 +37,17 @@ if __name__ == '__main__':
 
     print("DNN, 2 Hidden Layers, 5 Epochs")
     dnn2_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(dnn2_model, "../models/dnn_hid2_relu_5epoch")
+    keras.saving.save_model(dnn2_model, "../models/dnn_hid2_gelu_5epoch")
 
     print("DNN, 2 Hidden Layers, 10 Epochs")
     dnn2_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(dnn2_model, "../models/dnn_hid2_relu_10epoch")0
+    keras.saving.save_model(dnn2_model, "../models/dnn_hid2_gelu_10epoch")
 
     cnn1_model = keras.Sequential([
-        keras.layers.Conv2D(32, (3,3), activation='relu', input_shape=(28,28, 1)),
+        keras.layers.Conv2D(32, (3,3), activation='gelu', input_shape=(28,28, 1)),
         keras.layers.MaxPool2D((2,2)),
         keras.layers.Flatten(),
-        keras.layers.Dense(64, activation='relu'),
+        keras.layers.Dense(64, activation='gelu'),
         keras.layers.Dense(10, activation='softmax')
     ])
 
@@ -55,19 +55,19 @@ if __name__ == '__main__':
 
     print("CNN, 1 Convolution Layer, 5 Epochs")
     cnn1_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(cnn1_model, "../models/cnn_conv1_relu_5epoch")
+    keras.saving.save_model(cnn1_model, "../models/cnn_conv1_gelu_5epoch")
 
     print("CNN, 1 Convolution Layer, 10 Epochs")
     cnn1_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(cnn1_model, "../models/cnn_conv1_relu_10epoch")
+    keras.saving.save_model(cnn1_model, "../models/cnn_conv1_gelu_10epoch")
     
     cnn2_model = keras.Sequential([
-        keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+        keras.layers.Conv2D(32, (3, 3), activation='gelu', input_shape=(28, 28, 1)),
         keras.layers.MaxPooling2D((2, 2)),
-        keras.layers.Conv2D(64, (3, 3), activation='relu'),  # Additional convolutional layer
+        keras.layers.Conv2D(64, (3, 3), activation='gelu'),  # Additional convolutional layer
         keras.layers.MaxPooling2D((2, 2)),
         keras.layers.Flatten(),
-        keras.layers.Dense(128, activation='relu'),  # Additional fully connected layer
+        keras.layers.Dense(128, activation='gelu'),  # Additional fully connected layer
         keras.layers.Dense(10, activation='softmax')
     ])
 
@@ -75,8 +75,8 @@ if __name__ == '__main__':
 
     print("CNN, 2 Convolution Layer, 5 Epochs")
     cnn1_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(cnn1_model, "../models/cnn_conv2_relu_5epoch")
+    keras.saving.save_model(cnn1_model, "../models/cnn_conv2_gelu_5epoch")
 
     print("CNN, 2 Convolution Layer, 10 Epochs")
     cnn1_model.fit(train_images, train_labels, epochs=5)
-    keras.saving.save_model(cnn1_model, "../models/cnn_conv2_relu_10epoch")
+    keras.saving.save_model(cnn1_model, "../models/cnn_conv2_gelu_10epoch")
