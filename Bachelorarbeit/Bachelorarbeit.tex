@@ -24,12 +24,12 @@ fancyheadings, % headings with seplines and logo
 ]{stsreprt}
 
 % Information for the Titlepage
-\author{Arthur D.}
-\title{Super Duper Thesis Work With A Very Long Title Spreading Over Multiple Lines}
+\author{Lennart Mühlhahn}
+\title{Mutation-Based Accuracy Improvements in Neural Networks using Spectrum-Based Fault Localization}
 \date{\today}
 \subject{Bachelor Thesis}
-\professor{J.R. Professor}
-\advisor{A.B. First\\B.C. Second}
+\professor{Prof. Dr. Sibylle Schupp}
+\advisor{Daniel Rashedi}
 
 \usepackage[utf8]{inputenc}
 
@@ -41,6 +41,11 @@ fancyheadings, % headings with seplines and logo
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 %\usepackage{fix-cm}
+
+% to include bibliography
+\usepackage{biblatex}
+\addbibresource{Bachelorarbeit.bib}
+\usepackage{hyperref}
 
 % to generate some dummy text
 \usepackage{lipsum}
@@ -58,7 +63,7 @@ fancyheadings, % headings with seplines and logo
 \listoffigures{}
 \mainmatter
 \chapter{Introduction}
-\lipsum[1-19]
+\lipsum[1-19]\cite{eniser_deepfault_2019}
 \chapter{Background}
 \section{asdf}
 \lipsum[10-19]
@@ -77,5 +82,5 @@ fancyheadings, % headings with seplines and logo
 \backmatter
 \chapter{Bibliography}
 \lipsum[100-110]
-
+\printbibliography
 \end{document}
