@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow import keras
-from plot_keras_history import show_history, plot_history
+from plot_keras_history import plot_history
 import matplotlib.pyplot as plt
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

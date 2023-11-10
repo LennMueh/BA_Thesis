@@ -1,7 +1,5 @@
-from OldCodeDeepFault.utils import calculate_prediction_metrics, get_layer_outs
 import numpy as np
-
-
+import utilities.analysis as an
 def test_model(model, X_test, Y_test):
     """
     Test a neural network.
@@ -9,20 +7,20 @@ def test_model(model, X_test, Y_test):
     """
 
     # Find activations of each neuron in each layer for each input x in X_test
-    layer_outs = get_layer_outs(model, X_test)
+    layer_outs = an.get_layer_outs(model, X_test)
 
     # Print information about the model
     print(model.summary())
 
     # Evaluate the model
-    score = model.evaluate(X_test, Y_test, verbose=0)
+    score = model.evaluate(X_test, np.argmax(Y_test, axis=1), verbose=0)
     print('[loss, accuracy] -> ' + str(score))
 
     # Make predictions
     Y_pred = model.predict(X_test)
 
     # Calculate classification report and confusion matrix
-    calculate_prediction_metrics(Y_test, Y_pred, score)
+    an.calculate_prediction_metrics(Y_test, Y_pred, score)
 
     # Find test and prediction classes
     expectations = np.argmax(Y_test, axis=1)

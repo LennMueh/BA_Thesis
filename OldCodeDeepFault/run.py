@@ -12,8 +12,7 @@ from sklearn.model_selection import train_test_split
 import random
 
 if __name__ == "__main__":
-    args = parse_arguments()
-    model_name     = args['model']
+    model_name = args['model']
     dataset = 'mnist'
     selected_class = 0
     step_size = 1
@@ -61,6 +60,10 @@ if __name__ == "__main__":
     ####################
     # 3) Receive the correct classifications  & misclassifications and identify
     # the suspicious neurons per layer
+
+    # Do below.
+
+
     trainable_layers = get_trainable_layers(model)
     scores, num_cf, num_uf, num_cs, num_us = construct_spectrum_matrices(model,
                                                                         trainable_layers,
