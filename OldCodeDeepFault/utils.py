@@ -303,5 +303,3 @@ def weight_analysis(model):
                 deactivatables.append((i,k))
 
     return deactivatables
-
-

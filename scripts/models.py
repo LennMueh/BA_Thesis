@@ -85,7 +85,7 @@ if __name__ == '__main__':
 
     print("CNN, 2 Convolution Layer, 10 Epochs")
     cnn2_model.fit(train_images, train_labels, epochs=6, validation_data=(test_images, test_labels))
-    keras.saving.save_model(cnn1_model, "../models/cnn_conv2_gelu_6epoch")
+    keras.saving.save_model(cnn2_model, "../models/cnn_conv2_gelu_6epoch")
     plot_history(cnn2_model.history, path="../models/cnn_hid2_gelu.png")
 
 

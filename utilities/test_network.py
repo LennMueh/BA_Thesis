@@ -1,5 +1,5 @@
 import numpy as np
-import utilities.analysis as an
+import utilities.utilities as an
 def test_model(model, X_test, Y_test):
     """
     Test a neural network.
