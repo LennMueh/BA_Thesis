@@ -1,8 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras
 from plot_keras_history import plot_history
-import matplotlib.pyplot as plt
-# Press the green button in the gutter to run the script.
+
 if __name__ == '__main__':
     tf.random.set_seed(42)
 
@@ -12,43 +11,40 @@ if __name__ == '__main__':
     train_images = train_images / 255.0
     test_images = test_images / 255.0
 
-    dnn1_model = keras.Sequential([
+    dnn_model1_gelu = keras.Sequential([
         keras.layers.Flatten(input_shape=(28, 28)),
         keras.layers.Dense(128, activation='gelu'),
         keras.layers.Dense(10, activation='softmax')
     ])
 
-    dnn1_model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    dnn_model1_gelu.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    print("DNN, 1 Hidden Layer")
-    dnn1_model.fit(train_images, train_labels, epochs=6, validation_data=(test_images, test_labels))
-    keras.saving.save_model(dnn1_model, "../models/dnn_hid1_gelu_6epoch")
+    dnn_model1_gelu.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model1_gelu, "../models/dnn_hid1_gelu_1epoch")
 
-    #print("DNN, 1 Hidden Layer, 10 Epochs")
-    #dnn1_model.fit(train_images, train_labels, epochs=20, validation_data=(test_images, test_labels))
-    #keras.saving.save_model(dnn1_model, "../models/dnn_hid1_gelu_10epoch")
-    plot_history(dnn1_model.history, path="../models/dnn_hid1_gelu.png")
+    dnn_model1_gelu.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model1_gelu, "../models/dnn_hid1_gelu_6epoch")
 
-    dnn2_model = keras.Sequential([
+    plot_history(dnn_model1_gelu.history, path="../models/dnn_hid1_gelu.png")
+
+    dnn_model2_gelu = keras.Sequential([
         keras.layers.Flatten(input_shape=(28, 28)),
         keras.layers.Dense(128, activation='gelu'),
         keras.layers.Dense(64, activation='gelu'),
         keras.layers.Dense(10, activation='softmax')
     ])
 
-    dnn2_model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    dnn_model2_gelu.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    #print("DNN, 2 Hidden Layers, 5 Epochs")
-    #dnn2_model.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
-    #keras.saving.save_model(dnn2_model, "../models/dnn_hid2_gelu_5epoch")
+    dnn_model2_gelu.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model2_gelu, "../models/dnn_hid2_gelu_1epoch")
 
-    print("DNN, 2 Hidden Layers")
-    dnn2_model.fit(train_images, train_labels, epochs=6, validation_data=(test_images, test_labels))
-    keras.saving.save_model(dnn2_model, "../models/dnn_hid2_gelu_6epoch")
+    dnn_model2_gelu.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model2_gelu, "../models/dnn_hid2_gelu_6epoch")
 
-    plot_history(dnn2_model.history, path="../models/dnn_hid2_gelu.png")
+    plot_history(dnn_model2_gelu.history, path="../models/dnn_hid2_gelu.png")
 
-    cnn1_model = keras.Sequential([
+    cnn_model1_gelu = keras.Sequential([
         keras.layers.Conv2D(32, (3,3), activation='gelu', input_shape=(28,28, 1)),
         keras.layers.MaxPool2D((2,2)),
         keras.layers.Flatten(),
@@ -56,18 +52,16 @@ if __name__ == '__main__':
         keras.layers.Dense(10, activation='softmax')
     ])
 
-    cnn1_model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    cnn_model1_gelu.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    print("CNN, 1 Convolution Layer, 6 Epochs")
-    #cnn1_model.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
-    #keras.saving.save_model(cnn1_model, "../models/cnn_conv1_gelu_5epoch")
+    cnn_model1_gelu.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(cnn_model1_gelu, "../models/cnn_conv1_gelu_1epoch")
 
-    #print("CNN, 1 Convolution Layer, 10 Epochs")
-    cnn1_model.fit(train_images, train_labels, epochs=6, validation_data=(test_images, test_labels))
-    keras.saving.save_model(cnn1_model, "../models/cnn_conv1_gelu_6epoch")
-    plot_history(dnn2_model.history, path="../models/cnn_hid1_gelu.png")
+    cnn_model1_gelu.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(cnn_model1_gelu, "../models/cnn_conv1_gelu_6epoch")
+    plot_history(dnn_model2_gelu.history, path="../models/cnn_hid1_gelu.png")
     
-    cnn2_model = keras.Sequential([
+    cnn_model2_gelu = keras.Sequential([
         keras.layers.Conv2D(32, (3, 3), activation='gelu', input_shape=(28, 28, 1)),
         keras.layers.MaxPooling2D((2, 2)),
         keras.layers.Conv2D(64, (3, 3), activation='gelu'),  # Additional convolutional layer
@@ -77,15 +71,80 @@ if __name__ == '__main__':
         keras.layers.Dense(10, activation='softmax')
     ])
 
-    cnn2_model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    cnn_model2_gelu.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    #print("CNN, 2 Convolution Layer, 5 Epochs")
-    #cnn1_model.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
-    #keras.saving.save_model(cnn1_model, "../models/cnn_conv2_gelu_5epoch")
+    cnn_model2_gelu.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(cnn_model2_gelu, "../models/cnn_conv2_gelu_1epoch")
 
-    print("CNN, 2 Convolution Layer, 10 Epochs")
-    cnn2_model.fit(train_images, train_labels, epochs=6, validation_data=(test_images, test_labels))
-    keras.saving.save_model(cnn2_model, "../models/cnn_conv2_gelu_6epoch")
-    plot_history(cnn2_model.history, path="../models/cnn_hid2_gelu.png")
+    cnn_model2_gelu.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(cnn_model2_gelu, "../models/cnn_conv2_gelu_6epoch")
+    plot_history(cnn_model2_gelu.history, path="../models/cnn_hid2_gelu.png")
 
+    dnn_model1_relu = keras.Sequential([
+        keras.layers.Flatten(input_shape=(28, 28)),
+        keras.layers.Dense(128, activation='relu'),
+        keras.layers.Dense(10, activation='softmax')
+    ])
 
+    dnn_model1_relu.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+    dnn_model1_relu.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model1_relu, "../models/dnn_hid1_relu_1epoch")
+
+    dnn_model1_relu.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model1_relu, "../models/dnn_hid1_relu_6epoch")
+
+    plot_history(dnn_model1_relu.history, path="../models/dnn_hid1_relu.png")
+
+    dnn_model2_relu = keras.Sequential([
+        keras.layers.Flatten(input_shape=(28, 28)),
+        keras.layers.Dense(128, activation='relu'),
+        keras.layers.Dense(64, activation='relu'),
+        keras.layers.Dense(10, activation='softmax')
+    ])
+
+    dnn_model2_relu.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+    dnn_model2_relu.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model2_relu, "../models/dnn_hid2_relu_1epoch")
+
+    dnn_model2_relu.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model2_relu, "../models/dnn_hid2_relu_6epoch")
+
+    plot_history(dnn_model2_relu.history, path="../models/dnn_hid2_relu.png")
+
+    cnn_model1_relu = keras.Sequential([
+        keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+        keras.layers.MaxPool2D((2, 2)),
+        keras.layers.Flatten(),
+        keras.layers.Dense(64, activation='relu'),
+        keras.layers.Dense(10, activation='softmax')
+    ])
+
+    cnn_model1_relu.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+    cnn_model1_relu.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(cnn_model1_relu, "../models/cnn_conv1_relu_1epoch")
+
+    cnn_model1_relu.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(cnn_model1_relu, "../models/cnn_conv1_relu_6epoch")
+    plot_history(dnn_model2_relu.history, path="../models/cnn_hid1_relu.png")
+
+    cnn_model2_relu = keras.Sequential([
+        keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+        keras.layers.MaxPooling2D((2, 2)),
+        keras.layers.Conv2D(64, (3, 3), activation='relu'),  # Additional convolutional layer
+        keras.layers.MaxPooling2D((2, 2)),
+        keras.layers.Flatten(),
+        keras.layers.Dense(128, activation='relu'),  # Additional fully connected layer
+        keras.layers.Dense(10, activation='softmax')
+    ])
+
+    cnn_model2_relu.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+    cnn_model2_relu.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(cnn_model2_relu, "../models/cnn_conv2_relu_1epoch")
+
+    cnn_model2_relu.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(cnn_model2_relu, "../models/cnn_conv2_relu_6epoch")
+    plot_history(cnn_model2_relu.history, path="../models/cnn_hid2_relu.png")
