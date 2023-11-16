@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import random
 
 
 def scores_with_foo(trainable_layers, scores, num_cf, num_uf, num_cs, num_us, suspicious_num, foo):
@@ -58,3 +59,16 @@ def dstar_analysis(trainable_layers, scores, num_cf, num_uf, num_cs, num_us, sus
 
     return scores_with_foo(trainable_layers, scores, num_cf, num_uf, num_cs, num_us, suspicious_num, dstar)
 
+def random_neurons(trainable_layers, scores, suspicious_num):
+    layer_length = []
+    for score in scores:
+        layer_length.append(len(score))
+    neurons = []
+    index = 0
+    for i in trainable_layers:
+        ran = range(layer_length[index])
+        for j in ran:
+            neurons.append((i, j))
+        index += 1
+    samples = random.sample(neurons, suspicious_num)
+    return samples

@@ -1,18 +1,5 @@
 import tensorflow as tf
 import numpy as np
-
-def filter_val_set(desired_class, data, labels):
-    data_class = []
-    labels_class = []
-    for data,labels in zip(data,labels):
-        if labels[desired_class] == 1:
-            data_class.append(data)
-            labels_class.append(labels)
-
-    print("Validation set filtered for desired class: " + str(desired_class))
-
-    return np.arralabels(data_class), np.arralabels(labels_class)
-
 def get_data():
     tf.random.set_seed(42)
 
