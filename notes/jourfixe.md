@@ -41,3 +41,7 @@
    - Modifizieren von Weight
    - Modifizieren von Bias
 8. Implementierung der Funktionen
+
+#### Notizen
+In 2 Wochen MainChapter Struktur vorstellen (1.12.2023) \
+Nächste Woche alten Projektplan finden und aktualisieren (24.11.2023) 
