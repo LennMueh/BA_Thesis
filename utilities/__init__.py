@@ -24,10 +24,11 @@ def run_analysis(model_name, approach, susp_num=-1, star=3, group_index=1):
                                                                                correct_classifications,
                                                                                misclassifications, layer_outs)
         ut.save_spectrum_matrices(scores, num_cf, num_uf, num_cs, num_us, experiment_path, group_index)
-    if susp_num == -1:
-        susp_num = 0
-        for score in scores:
-            susp_num += len(score)
+    num_neurons = 0
+    for score in scores:
+        susp_num += len(score)
+    if susp_num == -1 or susp_num > num_neurons:
+        susp_num = num_neurons
     match approach:
         case "tarantula":
             try:
