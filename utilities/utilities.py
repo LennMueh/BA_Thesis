@@ -91,8 +91,11 @@ def save_suspicious_neurons(suspicious_neurons, filename, approach, susp_num, gr
     filename = filename + '_' + approach + '_SN' + str(susp_num) + '_suspicious_neurons.h5'
     with h5py.File(filename, 'a') as hf:
         group = hf.create_group('group' + str(group_index))
-        for i in range(len(suspicious_neurons)):
-            group.create_dataset("suspicious_neurons_" + str(i), data=suspicious_neurons[i])
+        #for i in range(len(suspicious_neurons)):
+            #group.create_dataset("suspicious_neurons_" + str(i), data=suspicious_neurons[i])
+        for i, tuple_data in enumerate(suspicious_neurons):
+            list_data = list(tuple_data)
+            group.create_dataset(f'suspicious_neurons_{i}', data=list_data)
 
     print("Suspicious neurons saved in ", filename)
     return
@@ -105,8 +108,11 @@ def load_suspicious_neurons(filename, approach, susp_num, group_index=1):
             group = hf.get('group' + str(group_index))
             i = 0
             suspicious_neurons = []
+            #while f'suspicious_neurons_{i}' in group:
+            #    suspicious_neurons.append(group[f'suspicious_neurons_{i}'][:])
+            #    i += 1
             while f'suspicious_neurons_{i}' in group:
-                suspicious_neurons.append(group[f'suspicious_neurons_{i}'][:])
+                suspicious_neurons.append(tuple(group[f'suspicious_neurons_{i}'][:]))
                 i += 1
             print("Suspicious neurons loaded from ", filename)
             return suspicious_neurons
@@ -177,7 +183,7 @@ def load_spectrum_matrices(filename, group_index=1):
 
 def save_spectrum_matrices(scores, num_cf, num_uf, num_cs, num_us, filename, group_index=1):
     filename = filename + '_spectrum_matrices.h5'
-    with h5py.File(filename, 'w') as hf:
+    with h5py.File(filename, 'a') as hf:
         group = hf.create_group('group' + str(group_index))
         for i in range(len(scores)):
             group.create_dataset(f'scores_{i}', data=scores[i])

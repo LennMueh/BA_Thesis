@@ -16,13 +16,14 @@ def run_analysis(model_name, approach, susp_num=-1, star=3, group_index=1):
                                                                                              test_labels)
         ut.save_classifications(correct_classifications, misclassifications, experiment_path, group_index)
         ut.save_layer_outs(layer_outs, experiment_path, group_index)
+    trainable_layers = tn.get_trainable_layers(model)
     try:
         scores, num_cf, num_uf, num_cs, num_us = ut.load_spectrum_matrices(experiment_path, group_index)
     except:
-        trainable_layers = tn.get_trainable_layers(model)
         scores, num_cf, num_uf, num_cs, num_us = tn.contruct_spectrum_matrices(model, trainable_layers,
                                                                                correct_classifications,
                                                                                misclassifications, layer_outs)
+        ut.save_spectrum_matrices(scores, num_cf, num_uf, num_cs, num_us, experiment_path, group_index)
     if susp_num == -1:
         susp_num = 0
         for score in scores:

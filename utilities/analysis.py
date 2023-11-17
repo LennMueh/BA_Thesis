@@ -15,10 +15,7 @@ def scores_with_foo(trainable_layers, scores, num_cf, num_uf, num_cs, num_us, su
     flat_scores = [float(item) for sublist in scores for item in sublist if not math.isnan(float(item))]
 
     # grab the indexes of the highest suspicious_num scores
-    if suspicious_num >= len(flat_scores):
-        flat_indexes = range(len(flat_scores))
-    else:
-        flat_indexes = np.argpartition(flat_scores, -suspicious_num)[-suspicious_num:]
+    flat_indexes = np.argsort(flat_scores)[::-1][:suspicious_num]
 
     suspicious_neuron_idx = []
     for idx in flat_indexes:
