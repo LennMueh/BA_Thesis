@@ -1,5 +1,5 @@
 import numpy as np
-import utilities.utilities as an
+import nn_analysis.utilities as an
 import time
 
 

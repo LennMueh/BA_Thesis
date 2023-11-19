@@ -1,7 +1,7 @@
-import utilities.data_managment as dm
-import utilities.utilities as ut
-import utilities.test_network as tn
-import utilities.analysis as an
+import nn_analysis.data_managment as dm
+import nn_analysis.utilities as ut
+import nn_analysis.test_network as tn
+import nn_analysis.analysis as an
 
 
 def run_analysis(model_name, approach, susp_num=-1, star=3, group_index=1):
