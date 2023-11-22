@@ -1,7 +1,11 @@
-import nn_modification.utilities as nnm
-import nn_analysis.data_managment as dm
+import nn_analysis as nn
 
-model = dm.get_model("dnn_hid1_relu_6epoch")
-coordinate = (1, 0)
-new_model = nnm.modify_all_weights(model, coordinate, 0.0)
-print("Stop")
+tarantula_1 = nn.run_analysis("cnn_conv2_relu_1epoch", "tarantula")
+tarantula_6 = nn.run_analysis("cnn_conv2_relu_6epoch", "tarantula")
+oichai_1 = nn.run_analysis("cnn_conv2_relu_1epoch", "ochiai")
+oichai_6 = nn.run_analysis("cnn_conv2_relu_6epoch", "ochiai")
+dstar_1 = nn.run_analysis("cnn_conv2_relu_1epoch", "dstar")
+dstar_6 = nn.run_analysis("cnn_conv2_relu_6epoch", "dstar")
+random_1 = nn.run_analysis("cnn_conv2_relu_1epoch", "random")
+random_6 = nn.run_analysis("cnn_conv2_relu_6epoch", "random")
+print("Stop here")
