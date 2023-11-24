@@ -69,3 +69,10 @@ Nächste Woche alten Projektplan finden und aktualisieren (24.11.2023)
 8. Implementierung in der Funtion zum Testen
 
 #### Notizen
+Ideen für Experimente:
+- Versuche Convolutions zu prüfen
+- Faktor multiplizieren Weight und Bias `{-1,-0.5,-0.25,0.25,0.5,1}`
+- Kleinere Datensätze fürs Training
+- Remove the gelu models, add models with less neurons per layer, with more layers
+- Dann, verdächtigsten Layer herausfinden und diesen Löschen
+- Dann, verdächtigsten Layer herausfinden und diesen einen neuen Layer hinterstellen/vorstellen (dense, convolution)
