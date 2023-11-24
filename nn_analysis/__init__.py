@@ -39,9 +39,12 @@ def run_analysis(model_name, approach, susp_num=-1, star=3, group_index=1):
     if susp_num == -1 or susp_num > num_neurons:
         susp_num = num_neurons
 
-    file_path_suspicious_neurons = experiment_path + '_' + approach + '_SN' + str(susp_num) + '_suspicious_neurons.h5'
+    approach_name = approach
+    if approach == "dstar":
+        approach_name = approach + str(star)
+    file_path_suspicious_neurons = experiment_path + '_' + approach_name + '_SN' + str(susp_num) + '_suspicious_neurons.h5'
     if os.path.isfile(file_path_suspicious_neurons) and approach != "random":
-        suspicious_neuron_idx = ut.load_suspicious_neurons(experiment_path, approach, susp_num, group_index)
+        suspicious_neuron_idx = ut.load_suspicious_neurons(experiment_path, approach_name, susp_num, group_index)
     else:
         match approach:
             case "tarantula":
@@ -59,5 +62,4 @@ def run_analysis(model_name, approach, susp_num=-1, star=3, group_index=1):
                 ut.save_suspicious_neurons(suspicious_neuron_idx, experiment_path, approach, susp_num, group_index)
             case "random":
                 suspicious_neuron_idx = an.random_neurons(trainable_layers, scores, susp_num)
-                ut.save_suspicious_neurons(suspicious_neuron_idx, experiment_path, approach, susp_num, group_index)
     return suspicious_neuron_idx

@@ -44,4 +44,28 @@
 
 #### Notizen
 In 2 Wochen MainChapter Struktur vorstellen (1.12.2023) \
-Nächste Woche alten Projektplan finden und aktualisieren (24.11.2023) 
+Nächste Woche alten Projektplan finden und aktualisieren (24.11.2023)
+
+### 24.11.2023
+
+#### Vorbereitung
+1. Funktionen and run first experiments
+   - Funktion zum Löschen und Modifizieren von Neuronen
+   - Erste Durchläufe
+2. Ja
+3. Ja
+    - Algorithmus bricht schnell ab
+    - 6 Hid layers bringt kaum eine Verbesserung
+    - Veränderungen sehen sehr random aus
+    - Veränderungen sind sehr klein
+4. Nein, keine Anhaltenden Probleme
+5. Nein, noch nicht
+6. Nein
+7. Weitere Funktionalitäten
+    - Mehrere Neuronen auf einmal modifizieren und trainieren
+    - Error Rate/Allowance einfügen
+    - Loss als Kriterium
+    - 6 Layer Modelle nicht mehr benutzen
+8. Implementierung in der Funtion zum Testen
+
+#### Notizen
