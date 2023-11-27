@@ -1,15 +1,30 @@
 import nn_modification as nn_modification
 import nn_modification.utilities as utilities
 import time
+import tensorflow.keras.datasets.fashion_mnist as fashion_mnist
+from sklearn.model_selection import train_test_split
+
+(train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
+train_images = train_images / 255.0
+test_images = test_images / 255.0
+train_images_half, _, train_labels_half, _ = train_test_split(train_images, train_labels, test_size=0.5, random_state=42)
+train_images_quarter, _, train_labels_quarter, _ = train_test_split(train_images, train_labels, test_size=0.75, random_state=42)
 
 full_start = time.time()
-modelnames = ["dnn_hid1_relu_1epoch", "dnn_hid1_gelu_1epoch", "dnn_hid1_relu_6epoch", "dnn_hid1_gelu_6epoch"]
+modelnames = [("cnn1_1epoch",train_images,train_labels,test_images,test_labels),("cnn1_1epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("cnn1_6epoch_half",train_images_half,train_labels_half,test_images,test_labels),("cnn2_1epoch",train_images,train_labels,test_images,test_labels),("cnn2_1epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("cnn2_6epoch_half",train_images_half,train_labels_half,test_images,test_labels),("dnn1_1epoch",train_images,train_labels,test_images,test_labels),("dnn1_1epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("dnn1_6epoch_half",train_images_half,train_labels_half,test_images,test_labels),("dnn2_1epoch",train_images,train_labels,test_images,test_labels),("dnn2_1epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("dnn2_6epoch_half",train_images_half,train_labels_half,test_images,test_labels),("dnn3_1epoch",train_images,train_labels,test_images,test_labels),("dnn3_1epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("dnn3_6epoch_half",train_images_half,train_labels_half,test_images,test_labels),("cnn1_1epoch_half",train_images_half,train_labels_half,test_images,test_labels),("cnn1_6epoch",train_images,train_labels,test_images,test_labels),("cnn1_6epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("cnn2_1epoch_half",train_images_half,train_labels_half,test_images,test_labels),("cnn2_6epoch",train_images,train_labels,test_images,test_labels),("cnn2_6epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("dnn1_1epoch_half",train_images_half,train_labels_half,test_images,test_labels),("dnn1_6epoch",train_images,train_labels,test_images,test_labels),("dnn1_6epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("dnn2_1epoch_half",train_images_half,train_labels_half,test_images,test_labels),("dnn2_6epoch",train_images,train_labels,test_images,test_labels),("dnn2_6epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("dnn3_1epoch_half",train_images_half,train_labels_half,test_images,test_labels),("dnn3_6epoch",train_images,train_labels,test_images,test_labels),("dnn3_6epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels)]
 analysis_approach = ["tarantula", "ochiai", "dstar", "random"]
-mutation_function = [utilities.modify_weight_one_random, utilities.modify_weight_all_random, utilities.modify_bias,
-                     utilities.modify_bias_random, utilities.modify_all_weights]
+mutation_function = [utilities.modify_weight_one_random_gauss, utilities.modify_weight_all_random_gauss, utilities.modify_bias,
+                     utilities.modify_bias_random_gauss, utilities.modify_all_weights, utilities.modify_weight_all_random_uniform, utilities.modify_weight_one_random_uniform, utilities.modify_bias_random_uniform]
 train_between_iterations = [False, True]
-value = [-1, -0.5, 0, 0.5, 1]
-for i in range(10):
+value = [-1, -0.5, -0.25, 0, 0.25, 0.5, 1]
+compare_loss = [False, True]
+compare_accuracy = [False, True]
+compare_and_both = [False, True]
+regression_loss_offset = [False, True]
+regression_accuracy_offset = [False, True]
+loss_offset = [0, 1, 2 , 0.1, 0.01, 0.001]
+accuracy_offset = [0, 0.1, 0.01, 0.001]
+for i in range(3):
     iteration_start = time.time()
     for model in modelnames:
         for approach in analysis_approach:
@@ -18,9 +33,17 @@ for i in range(10):
                 mutation_start = time.time()
                 for train in train_between_iterations:
                     for val in value:
-                        if val <= 0 and mutation.__name__ in ["modify_weight_one_random", "modify_weight_all_random",
-                                                              "modify_bias_random"]: continue
-                        nn_modification.run_modification_algorithm(model, approach, mutation, train, val)
+                        if val <= 0 and mutation.__name__ in ["modify_weight_one_random_gauss", "modify_weight_all_random_gauss",
+                                                              "modify_bias_random_gauss", "modify_all_weights_random_uniform", "modify_weight_one_random_uniform", "modify_bias_random_uniform"]: continue
+                        for cop_loss in compare_loss:
+                            for cop_acc in compare_accuracy:
+                                for cop_and_both in compare_and_both:
+                                    for reg_loss in regression_loss_offset:
+                                        for reg_acc in regression_accuracy_offset:
+                                            for loss_off in loss_offset:
+                                                for acc_off in accuracy_offset:
+                                                    if cop_and_both and (cop_loss or cop_acc): continue
+                                                    nn_modification.run_modification_algorithm(model[0], model[1], model[2], model[3], model[4], approach, mutation, train, val, i, loss_off, acc_off, reg_loss, reg_acc, cop_loss, cop_acc, cop_and_both)
                 mutation_end = time.time()
                 print("Mutation " + mutation.__name__ + " done.")
                 print("Mutation time: " + str(mutation_end - mutation_start))

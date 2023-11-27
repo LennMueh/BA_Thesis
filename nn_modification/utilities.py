@@ -26,7 +26,7 @@ def delete_neuron(model, coordinate):
     """
     return modify_all_weights(model, coordinate, 0)
 
-def modify_weight_one_random(model, coordinate, sigma=0.5):
+def modify_weight_one_random_gauss(model, coordinate, sigma=0.5):
     """
     Modify a weight of a neuron to a random value.
 
@@ -37,7 +37,7 @@ def modify_weight_one_random(model, coordinate, sigma=0.5):
     random_value = random.gauss(0, sigma)
     return modify_all_weights(model, coordinate, random_value)
 
-def modify_weight_all_random(model, coordinate, sigma=0.5):
+def modify_weight_all_random_gauss(model, coordinate, sigma=0.5):
     """
     Modify all weights of a neuron to random values.
 
@@ -69,7 +69,7 @@ def modify_bias(model, coordinate, new_value):
     layer.set_weights(layer_weights)
     return model
 
-def modify_bias_random(model, coordinate, sigma=0.5):
+def modify_bias_random_gauss(model, coordinate, sigma=0.5):
     """
     Modify the bias of a neuron to a random value.
 
@@ -78,4 +78,42 @@ def modify_bias_random(model, coordinate, sigma=0.5):
         coordinate: A tuple of 2 integers, representing the coordinate of the bias to be modified.
     """
     random_value = random.gauss(0, sigma)
+    return modify_bias(model, coordinate, random_value)
+
+def modify_weight_one_random_uniform(model, coordinate, area=1):
+    """
+    Modify a weight of a neuron to a random value.
+
+    Args:
+        model: A tf.keras.Model object.
+        coordinate: A tuple of 2 integers, representing the coordinate of the weight to be modified.
+    """
+    random_value = random.uniform(-area, area)
+    return modify_all_weights(model, coordinate, random_value)
+
+def modify_weight_all_random_uniform(model, coordinate, area=1):
+    """
+    Modify all weights of a neuron to random values.
+
+    Args:
+        model: A tf.keras.Model object.
+        coordinate: A tuple of 2 integers, representing the coordinate of the weight to be modified.
+    """
+    index_layer, index_neuron = coordinate
+    layer = model.get_layer(index=index_layer)
+    layer_weights = layer.get_weights()
+    for i in range(len(layer_weights[0][index_neuron])):
+        layer_weights[0][index_neuron][i] = random.uniform(-area, area)
+    layer.set_weights(layer_weights)
+    return model
+
+def modify_bias_random_uniform(model, coordinate, area=1):
+    """
+    Modify the bias of a neuron to a random value.
+
+    Args:
+        model: A tf.keras.Model object.
+        coordinate: A tuple of 2 integers, representing the coordinate of the bias to be modified.
+    """
+    random_value = random.uniform(-area, area)
     return modify_bias(model, coordinate, random_value)

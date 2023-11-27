@@ -17,123 +17,161 @@ if __name__ == '__main__':
 
 
 
-    dnn_model1_relu = keras.Sequential([
+    dnn_model1 = keras.Sequential([
         keras.layers.Flatten(input_shape=(28, 28)),
         keras.layers.Dense(128, activation='relu'),
         keras.layers.Dense(10, activation='softmax')
     ])
-    dnn_model1_relu_half = keras.models.clone_model(dnn_model1_relu)
-    dnn_model1_relu_quarter = keras.models.clone_model(dnn_model1_relu)
+    dnn_model1_half = keras.models.clone_model(dnn_model1)
+    dnn_model1_quarter = keras.models.clone_model(dnn_model1)
 
-    dnn_model1_relu.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    dnn_model1_relu_half.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    dnn_model1_relu_quarter.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    dnn_model1.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    dnn_model1_half.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    dnn_model1_quarter.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    dnn_model1_relu.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
-    dnn_model1_relu_half.fit(half_train_images, half_train_labels , epochs=1, validation_data=(test_images, test_labels))
-    dnn_model1_relu_quarter.fit(quarter_train_images, quarter_train_labels, epochs=1, validation_data=(test_images, test_labels))
-    keras.saving.save_model(dnn_model1_relu, "../models/dnn_hid1_relu_1epoch")
-    keras.saving.save_model(dnn_model1_relu_half, "../models/dnn_hid1_relu_1epoch_half")
-    keras.saving.save_model(dnn_model1_relu_quarter, "../models/dnn_hid1_relu_1epoch_quarter")
+    dnn_model1.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    dnn_model1_half.fit(half_train_images, half_train_labels , epochs=1, validation_data=(test_images, test_labels))
+    dnn_model1_quarter.fit(quarter_train_images, quarter_train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model1, "../models/dnn1_1epoch")
+    keras.saving.save_model(dnn_model1_half, "../models/dnn1_1epoch_half")
+    keras.saving.save_model(dnn_model1_quarter, "../models/dnn1_1epoch_quarter")
 
-    dnn_model1_relu.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
-    dnn_model1_relu_half.fit(half_train_images, half_train_labels, epochs=5, validation_data=(test_images, test_labels))
-    dnn_model1_relu_quarter.fit(quarter_train_images, quarter_train_labels, epochs=5, validation_data=(test_images, test_labels))
-    keras.saving.save_model(dnn_model1_relu, "../models/dnn_hid1_relu_6epoch")
-    keras.saving.save_model(dnn_model1_relu_half, "../models/dnn_hid1_relu_6epoch_half")
-    keras.saving.save_model(dnn_model1_relu_quarter, "../models/dnn_hid1_relu_6epoch_quarter")
+    dnn_model1.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    dnn_model1_half.fit(half_train_images, half_train_labels, epochs=5, validation_data=(test_images, test_labels))
+    dnn_model1_quarter.fit(quarter_train_images, quarter_train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model1, "../models/dnn1_6epoch")
+    keras.saving.save_model(dnn_model1_half, "../models/dnn1_6epoch_half")
+    keras.saving.save_model(dnn_model1_quarter, "../models/dnn1_6epoch_quarter")
 
-    plot_history(dnn_model1_relu.history, path="../models/dnn_hid1_relu.png")
-    plot_history(dnn_model1_relu_half.history, path="../models/dnn_hid1_relu_half.png")
-    plot_history(dnn_model1_relu_quarter.history, path="../models/dnn_hid1_relu_quarter.png")
+    plot_history(dnn_model1.history, path="../models/dnn.png")
+    plot_history(dnn_model1_half.history, path="../models/dnn1_half.png")
+    plot_history(dnn_model1_quarter.history, path="../models/dnn1_quarter.png")
 
-    dnn_model2_relu = keras.Sequential([
+    dnn_model2 = keras.Sequential([
         keras.layers.Flatten(input_shape=(28, 28)),
-        keras.layers.Dense(128, activation='relu'),
-        keras.layers.Dense(64, activation='relu'),
+        keras.layers.Dense(16, activation='relu'),
         keras.layers.Dense(10, activation='softmax')
     ])
-    dnn_model2_relu_half = keras.models.clone_model(dnn_model2_relu)
-    dnn_model2_relu_quarter = keras.models.clone_model(dnn_model2_relu)
+    dnn_model2_half = keras.models.clone_model(dnn_model2)
+    dnn_model2_quarter = keras.models.clone_model(dnn_model2)
+    
+    dnn_model2.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    dnn_model2_half.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    dnn_model2_quarter.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    
+    dnn_model2.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    dnn_model2_half.fit(half_train_images, half_train_labels , epochs=1, validation_data=(test_images, test_labels))
+    dnn_model2_quarter.fit(quarter_train_images, quarter_train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model2, "../models/dnn2_1epoch")
+    keras.saving.save_model(dnn_model2_half, "../models/dnn2_1epoch_half")
+    keras.saving.save_model(dnn_model2_quarter, "../models/dnn2_1epoch_quarter")
 
-    dnn_model2_relu.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    dnn_model2_relu_half.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    dnn_model2_relu_quarter.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    dnn_model2.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    dnn_model2_half.fit(half_train_images, half_train_labels, epochs=5, validation_data=(test_images, test_labels))
+    dnn_model2_quarter.fit(quarter_train_images, quarter_train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model2, "../models/dnn2_6epoch")
+    keras.saving.save_model(dnn_model2_half, "../models/dnn2_6epoch_half")
+    keras.saving.save_model(dnn_model2_quarter, "../models/dnn2_6epoch_quarter")
 
-    dnn_model2_relu.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
-    dnn_model2_relu_half.fit(half_train_images, half_train_labels, epochs=1, validation_data=(test_images, test_labels))
-    dnn_model2_relu_quarter.fit(quarter_train_images, quarter_train_labels, epochs=1, validation_data=(test_images, test_labels))
-    keras.saving.save_model(dnn_model2_relu, "../models/dnn_hid2_relu_1epoch")
-    keras.saving.save_model(dnn_model2_relu_half, "../models/dnn_hid2_relu_1epoch_half")
-    keras.saving.save_model(dnn_model2_relu_quarter, "../models/dnn_hid2_relu_1epoch_quarter")
+    plot_history(dnn_model2.history, path="../models/dnn2.png")
+    plot_history(dnn_model2_half.history, path="../models/dnn2_half.png")
+    plot_history(dnn_model2_quarter.history, path="../models/dnn2_quarter.png")
 
-    dnn_model2_relu.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
-    dnn_model2_relu_half.fit(half_train_images, half_train_labels, epochs=5, validation_data=(test_images, test_labels))
-    dnn_model2_relu_quarter.fit(quarter_train_images, quarter_train_labels, epochs=5, validation_data=(test_images, test_labels))
-    keras.saving.save_model(dnn_model2_relu, "../models/dnn_hid2_relu_6epoch")
-    keras.saving.save_model(dnn_model2_relu_half, "../models/dnn_hid2_relu_6epoch_half")
-    keras.saving.save_model(dnn_model2_relu_quarter, "../models/dnn_hid2_relu_6epoch_quarter")
-
-    plot_history(dnn_model2_relu.history, path="../models/dnn_hid2_relu.png")
-    plot_history(dnn_model2_relu_half.history, path="../models/dnn_hid2_relu_half.png")
-    plot_history(dnn_model2_relu_quarter.history, path="../models/dnn_hid2_relu_quarter.png")
-
-    cnn_model1_relu = keras.Sequential([
-        keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
-        keras.layers.MaxPool2D((2, 2)),
-        keras.layers.Flatten(),
-        keras.layers.Dense(64, activation='relu'),
+    dnn_model3 = keras.Sequential([
+        keras.layers.Flatten(input_shape=(28, 28)),
+        keras.layers.Dense(16, activation='relu'),
+        keras.layers.Dense(16, activation='relu'),
+        keras.layers.Dense(16, activation='relu'),
+        keras.layers.Dense(16, activation='relu'),
         keras.layers.Dense(10, activation='softmax')
     ])
-    cnn_model1_relu_half = keras.models.clone_model(cnn_model1_relu)
-    cnn_model1_relu_quarter = keras.models.clone_model(cnn_model1_relu)
+    dnn_model3_half = keras.models.clone_model(dnn_model3)
+    dnn_model3_quarter = keras.models.clone_model(dnn_model3)
 
-    cnn_model1_relu.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    cnn_model1_relu_half.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    cnn_model1_relu_quarter.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    dnn_model3.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    dnn_model3_half.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    dnn_model3_quarter.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    cnn_model1_relu.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
-    cnn_model1_relu_half.fit(half_train_images, half_train_labels, epochs=1, validation_data=(test_images, test_labels))
-    cnn_model1_relu_quarter.fit(quarter_train_images, quarter_train_labels, epochs=1, validation_data=(test_images, test_labels))
-    keras.saving.save_model(cnn_model1_relu, "../models/cnn_conv1_relu_1epoch")
-    keras.saving.save_model(cnn_model1_relu_half, "../models/cnn_conv1_relu_1epoch_half")
-    keras.saving.save_model(cnn_model1_relu_quarter, "../models/cnn_conv1_relu_1epoch_quarter")
+    dnn_model3.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    dnn_model3_half.fit(half_train_images, half_train_labels , epochs=1, validation_data=(test_images, test_labels))
+    dnn_model3_quarter.fit(quarter_train_images, quarter_train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model3, "../models/dnn3_1epoch")
+    keras.saving.save_model(dnn_model3_half, "../models/dnn3_1epoch_half")
+    keras.saving.save_model(dnn_model3_quarter, "../models/dnn3_1epoch_quarter")
 
-    cnn_model1_relu.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
-    cnn_model1_relu_half.fit(half_train_images, half_train_labels, epochs=5, validation_data=(test_images, test_labels))
-    cnn_model1_relu_quarter.fit(quarter_train_images, quarter_train_labels, epochs=5, validation_data=(test_images, test_labels))
-    keras.saving.save_model(cnn_model1_relu, "../models/cnn_conv1_relu_6epoch")
-    keras.saving.save_model(cnn_model1_relu_half, "../models/cnn_conv1_relu_6epoch_half")
-    keras.saving.save_model(cnn_model1_relu_quarter, "../models/cnn_conv1_relu_6epoch_quarter")
-    plot_history(dnn_model2_relu.history, path="../models/cnn_hid1_relu.png")
-    plot_history(dnn_model2_relu_half.history, path="../models/cnn_hid1_relu_half.png")
-    plot_history(dnn_model2_relu_quarter.history, path="../models/cnn_hid1_relu_quarter.png")
+    dnn_model3.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    dnn_model3_half.fit(half_train_images, half_train_labels, epochs=5, validation_data=(test_images, test_labels))
+    dnn_model3_quarter.fit(quarter_train_images, quarter_train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(dnn_model3, "../models/dnn3_6epoch")
+    keras.saving.save_model(dnn_model3_half, "../models/dnn3_6epoch_half")
+    keras.saving.save_model(dnn_model3_quarter, "../models/dnn3_6epoch_quarter")
 
-    cnn_model2_relu = keras.Sequential([
-        keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+    plot_history(dnn_model3.history, path="../models/dnn3.png")
+    plot_history(dnn_model3_half.history, path="../models/dnn3_half.png")
+    plot_history(dnn_model3_quarter.history, path="../models/dnn3_quarter.png")
+
+    cnn_model1 = keras.Sequential([
+        keras.layers.Conv2D(8, (3, 3), activation='relu', input_shape=(28, 28, 1)),
         keras.layers.MaxPooling2D((2, 2)),
-        keras.layers.Conv2D(64, (3, 3), activation='relu'),  # Additional convolutional layer
-        keras.layers.MaxPooling2D((2, 2)),
         keras.layers.Flatten(),
-        keras.layers.Dense(128, activation='relu'),  # Additional fully connected layer
+        keras.layers.Dense(4, activation='relu'),
         keras.layers.Dense(10, activation='softmax')
     ])
-    cnn_model2_relu_half = keras.models.clone_model(cnn_model2_relu)
-    cnn_model2_relu_quarter = keras.models.clone_model(cnn_model2_relu)
+    cnn_model1_half = keras.models.clone_model(cnn_model1)
+    cnn_model1_quarter = keras.models.clone_model(cnn_model1)
 
-    cnn_model2_relu.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    cnn_model2_relu_half.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    cnn_model2_relu_quarter.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    cnn_model1.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    cnn_model1_half.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    cnn_model1_quarter.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    cnn_model2_relu.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
-    cnn_model2_relu_half.fit(half_train_images, half_train_labels, epochs=1, validation_data=(test_images, test_labels))
-    cnn_model2_relu_quarter.fit(quarter_train_images, quarter_train_labels, epochs=1, validation_data=(test_images, test_labels))
-    keras.saving.save_model(cnn_model2_relu, "../models/cnn_conv2_relu_1epoch")
-    keras.saving.save_model(cnn_model2_relu_half, "../models/cnn_conv2_relu_1epoch_half")
-    keras.saving.save_model(cnn_model2_relu_quarter, "../models/cnn_conv2_relu_1epoch_quarter")
+    cnn_model1.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    cnn_model1_half.fit(half_train_images, half_train_labels, epochs=1, validation_data=(test_images, test_labels))
+    cnn_model1_quarter.fit(quarter_train_images, quarter_train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(cnn_model1, "../models/cnn1_1epoch")
+    keras.saving.save_model(cnn_model1_half, "../models/cnn1_1epoch_half")
+    keras.saving.save_model(cnn_model1_quarter, "../models/cnn1_1epoch_quarter")
 
-    cnn_model2_relu.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
-    cnn_model2_relu_half.fit(half_train_images, half_train_labels, epochs=5, validation_data=(test_images, test_labels))
-    cnn_model2_relu_quarter.fit(quarter_train_images, quarter_train_labels, epochs=5, validation_data=(test_images, test_labels))
-    keras.saving.save_model(cnn_model2_relu, "../models/cnn_conv2_relu_6epoch")
-    plot_history(cnn_model2_relu.history, path="../models/cnn_hid2_relu.png")
+    cnn_model1.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    cnn_model1_half.fit(half_train_images, half_train_labels, epochs=5, validation_data=(test_images, test_labels))
+    cnn_model1_quarter.fit(quarter_train_images, quarter_train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(cnn_model1, "../models/cnn1_6epoch")
+    keras.saving.save_model(cnn_model1_half, "../models/cnn1_6epoch_half")
+    keras.saving.save_model(cnn_model1_quarter, "../models/cnn1_6epoch_quarter")
+
+    plot_history(cnn_model1.history, path="../models/cnn1.png")
+    plot_history(cnn_model1_half.history, path="../models/cnn1_half.png")
+    plot_history(cnn_model1_quarter.history, path="../models/cnn1_quarter.png")
+
+    cnn_model2 = keras.Sequential([
+        keras.layers.Conv2D(8, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+        keras.layers.MaxPooling2D((2, 2)),
+        keras.layers.Conv2D(8, (3, 3), activation='relu'),
+        keras.layers.MaxPooling2D((2, 2)),
+        keras.layers.Flatten(),
+        keras.layers.Dense(4, activation='relu'),
+        keras.layers.Dense(10, activation='softmax')
+    ])
+    cnn_model2_half = keras.models.clone_model(cnn_model2)
+    cnn_model2_quarter = keras.models.clone_model(cnn_model2)
+
+    cnn_model2.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    cnn_model2_half.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    cnn_model2_quarter.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+    cnn_model2.fit(train_images, train_labels, epochs=1, validation_data=(test_images, test_labels))
+    cnn_model2_half.fit(half_train_images, half_train_labels, epochs=1, validation_data=(test_images, test_labels))
+    cnn_model2_quarter.fit(quarter_train_images, quarter_train_labels, epochs=1, validation_data=(test_images, test_labels))
+    keras.saving.save_model(cnn_model2, "../models/cnn2_1epoch")
+    keras.saving.save_model(cnn_model2_half, "../models/cnn2_1epoch_half")
+    keras.saving.save_model(cnn_model2_quarter, "../models/cnn2_1epoch_quarter")
+
+    cnn_model2.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+    cnn_model2_half.fit(half_train_images, half_train_labels, epochs=5, validation_data=(test_images, test_labels))
+    cnn_model2_quarter.fit(quarter_train_images, quarter_train_labels, epochs=5, validation_data=(test_images, test_labels))
+    keras.saving.save_model(cnn_model2, "../models/cnn2_6epoch")
+    keras.saving.save_model(cnn_model2_half, "../models/cnn2_6epoch_half")
+    keras.saving.save_model(cnn_model2_quarter, "../models/cnn2_6epoch_quarter")
+
+    plot_history(cnn_model2.history, path="../models/cnn2.png")
+    plot_history(cnn_model2_half.history, path="../models/cnn2_half.png")
+    plot_history(cnn_model2_quarter.history, path="../models/cnn2_quarter.png")
