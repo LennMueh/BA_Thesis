@@ -70,9 +70,11 @@ Nächste Woche alten Projektplan finden und aktualisieren (24.11.2023)
 
 #### Notizen
 Ideen für Experimente:
-- Versuche Convolutions zu prüfen
-- Faktor multiplizieren Weight und Bias `{-1,-0.5,-0.25,0.25,0.5,1}`
-- Kleinere Datensätze fürs Training
-- Remove the gelu models, add models with less neurons per layer, with more layers
-- Dann, verdächtigsten Layer herausfinden und diesen Löschen
-- Dann, verdächtigsten Layer herausfinden und diesen einen neuen Layer hinterstellen/vorstellen (dense, convolution)
+1. [ ] Versuche Convolutions zu prüfen
+2. [ ] Faktor multiplizieren Weight und Bias `{-1,-0.5,-0.25,0.25,0.5,1}`
+3. [ ] Kleinere Datensätze fürs Training
+4. [x] Remove the gelu models
+5. [ ] add models with less neurons per layer, with more layers
+6. [ ] Dann, verdächtigsten Layer herausfinden und diesen Löschen
+7. [ ] Dann, verdächtigsten Layer herausfinden und diesen einen neuen Layer hinterstellen/vorstellen (dense, convolution)
+8. [ ] Normal and uniform distribution in random neuron bias and weight modification
