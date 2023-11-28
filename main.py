@@ -2,8 +2,10 @@ import nn_modification as nn_modification
 import nn_modification.utilities as utilities
 import time
 import tensorflow.keras.datasets.fashion_mnist as fashion_mnist
+from faker import Faker
 from sklearn.model_selection import train_test_split
 
+fake = Faker(['de_DE', 'en_US', 'fr_FR', 'es_ES'])
 (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
 train_images = train_images / 255.0
 test_images = test_images / 255.0
@@ -13,28 +15,60 @@ train_images_quarter, _, train_labels_quarter, _ = train_test_split(train_images
                                                                     random_state=42)
 
 full_start = time.time()
-modelnames = [("cnn1_1epoch",train_images,train_labels,test_images,test_labels),("cnn1_1epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("cnn1_6epoch_half",train_images_half,train_labels_half,test_images,test_labels),("cnn2_1epoch",train_images,train_labels,test_images,test_labels),("cnn2_1epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("cnn2_6epoch_half",train_images_half,train_labels_half,test_images,test_labels),("dnn1_1epoch",train_images,train_labels,test_images,test_labels),("dnn1_1epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("dnn1_6epoch_half",train_images_half,train_labels_half,test_images,test_labels),("dnn2_1epoch",train_images,train_labels,test_images,test_labels),("dnn2_1epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("dnn2_6epoch_half",train_images_half,train_labels_half,test_images,test_labels),("dnn3_1epoch",train_images,train_labels,test_images,test_labels),("dnn3_1epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("dnn3_6epoch_half",train_images_half,train_labels_half,test_images,test_labels),("cnn1_1epoch_half",train_images_half,train_labels_half,test_images,test_labels),("cnn1_6epoch",train_images,train_labels,test_images,test_labels),("cnn1_6epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("cnn2_1epoch_half",train_images_half,train_labels_half,test_images,test_labels),("cnn2_6epoch",train_images,train_labels,test_images,test_labels),("cnn2_6epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("dnn1_1epoch_half",train_images_half,train_labels_half,test_images,test_labels),("dnn1_6epoch",train_images,train_labels,test_images,test_labels),("dnn1_6epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("dnn2_1epoch_half",train_images_half,train_labels_half,test_images,test_labels),("dnn2_6epoch",train_images,train_labels,test_images,test_labels),("dnn2_6epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels),("dnn3_1epoch_half",train_images_half,train_labels_half,test_images,test_labels),("dnn3_6epoch",train_images,train_labels,test_images,test_labels),("dnn3_6epoch_quarter",train_images_quarter,train_labels_quarter,test_images,test_labels)]
-analysis_approach = ["tarantula", "ochiai", "dstar", "random"]
+modelnames = [("cnn1_1epoch", train_images, train_labels, test_images, test_labels),
+              ("cnn1_1epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels),
+              ("cnn1_6epoch_half", train_images_half, train_labels_half, test_images, test_labels),
+              ("cnn2_1epoch", train_images, train_labels, test_images, test_labels),
+              ("cnn2_1epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels),
+              ("cnn2_6epoch_half", train_images_half, train_labels_half, test_images, test_labels),
+              ("dnn1_1epoch", train_images, train_labels, test_images, test_labels),
+              ("dnn1_1epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels),
+              ("dnn1_6epoch_half", train_images_half, train_labels_half, test_images, test_labels),
+              ("dnn2_1epoch", train_images, train_labels, test_images, test_labels),
+              ("dnn2_1epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels),
+              ("dnn2_6epoch_half", train_images_half, train_labels_half, test_images, test_labels),
+              ("dnn3_1epoch", train_images, train_labels, test_images, test_labels),
+              ("dnn3_1epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels),
+              ("dnn3_6epoch_half", train_images_half, train_labels_half, test_images, test_labels),
+              ("cnn1_1epoch_half", train_images_half, train_labels_half, test_images, test_labels),
+              ("cnn1_6epoch", train_images, train_labels, test_images, test_labels),
+              ("cnn1_6epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels),
+              ("cnn2_1epoch_half", train_images_half, train_labels_half, test_images, test_labels),
+              ("cnn2_6epoch", train_images, train_labels, test_images, test_labels),
+              ("cnn2_6epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels),
+              ("dnn1_1epoch_half", train_images_half, train_labels_half, test_images, test_labels),
+              ("dnn1_6epoch", train_images, train_labels, test_images, test_labels),
+              ("dnn1_6epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels),
+              ("dnn2_1epoch_half", train_images_half, train_labels_half, test_images, test_labels),
+              ("dnn2_6epoch", train_images, train_labels, test_images, test_labels),
+              ("dnn2_6epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels),
+              ("dnn3_1epoch_half", train_images_half, train_labels_half, test_images, test_labels),
+              ("dnn3_6epoch", train_images, train_labels, test_images, test_labels),
+              ("dnn3_6epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels)]
+filter_models = [model for model in modelnames if 'dnn2_1epoch' in model[0]]
+analysis_approach = ["tarantula", "random"]  # ["tarantula", "ochiai", "dstar", "random"]
 mutation_function = [utilities.modify_weight_one_random_gauss, utilities.modify_weight_all_random_gauss,
                      utilities.modify_bias,
                      utilities.modify_bias_random_gauss, utilities.modify_all_weights,
                      utilities.modify_weight_all_random_uniform, utilities.modify_weight_one_random_uniform,
                      utilities.modify_bias_random_uniform, utilities.modify_all_weights_by_scalar,
-                     utilities.modify_all_weights_by_scalar_random_gauss, utilities.modify_all_weights_by_scalar_random_uniform,
+                     utilities.modify_all_weights_by_scalar_random_gauss,
+                     utilities.modify_all_weights_by_scalar_random_uniform,
                      utilities.modify_bias, utilities.modify_bias_random_gauss, utilities.modify_bias_random_uniform,
-                     utilities.modify_weight_all_random_by_scalar_uniform, utilities.modify_weight_all_random_by_scalar_gauss]
-train_between_iterations = [False, True]
-value = [-1, -0.5, -0.25, 0, 0.25, 0.5, 1]
+                     utilities.modify_weight_all_random_by_scalar_uniform,
+                     utilities.modify_weight_all_random_by_scalar_gauss]
+train_between_iterations = [True]  # , False]
+value = [0, 0.25, 0.5, 1]  # [-1, -0.5, -0.25, 0, 0.25, 0.5, 1]
 compare_loss = [False, True]
 compare_accuracy = [False, True]
 compare_and_both = [False, True]
-regression_loss_offset = [False, True]
-regression_accuracy_offset = [False, True]
-loss_offset = [0, 1, 2, 0.5, 0.25]
+regression_loss_offset = [True]  # , False]
+regression_accuracy_offset = [True]  # , False]
+loss_offset = [0, 1, 0.5, 0.25]  # [,2]
 accuracy_offset = [0, 0.1, 0.01, 0.001]
 for i in range(3):
     iteration_start = time.time()
-    for model in modelnames:
+    for model in filter_models:
         for approach in analysis_approach:
             approach_start = time.time()
             for mutation in mutation_function:
@@ -63,7 +97,8 @@ for i in range(3):
                                             for loss_off in loss_offset:
                                                 for acc_off in accuracy_offset:
                                                     if cop_and_both and (cop_loss or cop_acc): continue
-                                                    nn_modification.run_modification_algorithm(model[0], model[1],
+                                                    run = fake.city() + '_' + fake.password(6, special_chars=False)
+                                                    nn_modification.run_modification_algorithm(run ,model[0], model[1],
                                                                                                model[2], model[3],
                                                                                                model[4], approach,
                                                                                                mutation, train, val, -1,
@@ -74,15 +109,12 @@ for i in range(3):
                 mutation_end = time.time()
                 print("Mutation " + mutation.__name__ + " done.")
                 print("Mutation time: " + str(mutation_end - mutation_start))
-                print("\a")
             approach_end = time.time()
             print("Approach " + approach + " done.")
             print("Approach time: " + str(approach_end - approach_start))
-            print("\a")
     iteration_end = time.time()
     print("Iteration " + str(i) + " done.")
     print("Iteration time: " + str(iteration_end - iteration_start))
-    print("\a")
 
 full_end = time.time()
 print("Total time: " + str(full_end - full_start))
