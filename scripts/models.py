@@ -1,6 +1,5 @@
 import tensorflow as tf
 from tensorflow import keras
-from plot_keras_history import plot_history
 from sklearn.model_selection import train_test_split
 
 if __name__ == '__main__':
@@ -43,10 +42,6 @@ if __name__ == '__main__':
     keras.saving.save_model(dnn_model1_half, "../models/dnn1_6epoch_half")
     keras.saving.save_model(dnn_model1_quarter, "../models/dnn1_6epoch_quarter")
 
-    plot_history(dnn_model1.history, path="../models/dnn.png")
-    plot_history(dnn_model1_half.history, path="../models/dnn1_half.png")
-    plot_history(dnn_model1_quarter.history, path="../models/dnn1_quarter.png")
-
     dnn_model2 = keras.Sequential([
         keras.layers.Flatten(input_shape=(28, 28)),
         keras.layers.Dense(16, activation='relu'),
@@ -72,10 +67,6 @@ if __name__ == '__main__':
     keras.saving.save_model(dnn_model2, "../models/dnn2_6epoch")
     keras.saving.save_model(dnn_model2_half, "../models/dnn2_6epoch_half")
     keras.saving.save_model(dnn_model2_quarter, "../models/dnn2_6epoch_quarter")
-
-    plot_history(dnn_model2.history, path="../models/dnn2.png")
-    plot_history(dnn_model2_half.history, path="../models/dnn2_half.png")
-    plot_history(dnn_model2_quarter.history, path="../models/dnn2_quarter.png")
 
     dnn_model3 = keras.Sequential([
         keras.layers.Flatten(input_shape=(28, 28)),
@@ -106,10 +97,6 @@ if __name__ == '__main__':
     keras.saving.save_model(dnn_model3_half, "../models/dnn3_6epoch_half")
     keras.saving.save_model(dnn_model3_quarter, "../models/dnn3_6epoch_quarter")
 
-    plot_history(dnn_model3.history, path="../models/dnn3.png")
-    plot_history(dnn_model3_half.history, path="../models/dnn3_half.png")
-    plot_history(dnn_model3_quarter.history, path="../models/dnn3_quarter.png")
-
     cnn_model1 = keras.Sequential([
         keras.layers.Conv2D(8, (3, 3), activation='relu', input_shape=(28, 28, 1)),
         keras.layers.MaxPooling2D((2, 2)),
@@ -137,10 +124,6 @@ if __name__ == '__main__':
     keras.saving.save_model(cnn_model1, "../models/cnn1_6epoch")
     keras.saving.save_model(cnn_model1_half, "../models/cnn1_6epoch_half")
     keras.saving.save_model(cnn_model1_quarter, "../models/cnn1_6epoch_quarter")
-
-    plot_history(cnn_model1.history, path="../models/cnn1.png")
-    plot_history(cnn_model1_half.history, path="../models/cnn1_half.png")
-    plot_history(cnn_model1_quarter.history, path="../models/cnn1_quarter.png")
 
     cnn_model2 = keras.Sequential([
         keras.layers.Conv2D(8, (3, 3), activation='relu', input_shape=(28, 28, 1)),
@@ -171,7 +154,3 @@ if __name__ == '__main__':
     keras.saving.save_model(cnn_model2, "../models/cnn2_6epoch")
     keras.saving.save_model(cnn_model2_half, "../models/cnn2_6epoch_half")
     keras.saving.save_model(cnn_model2_quarter, "../models/cnn2_6epoch_quarter")
-
-    plot_history(cnn_model2.history, path="../models/cnn2.png")
-    plot_history(cnn_model2_half.history, path="../models/cnn2_half.png")
-    plot_history(cnn_model2_quarter.history, path="../models/cnn2_quarter.png")
