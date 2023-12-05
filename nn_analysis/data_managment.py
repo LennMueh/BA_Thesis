@@ -15,6 +15,6 @@ def get_data():
     return train_images, train_labels, test_images, test_labels
 
 def get_model(model_name):
-    model_path = "models/" + model_name
+    model_path = "/mnt/c/Users/lenna/PycharmProjects/BA_Thesis/models/" + model_name
     model = tf.keras.saving.load_model(model_path)
     return model

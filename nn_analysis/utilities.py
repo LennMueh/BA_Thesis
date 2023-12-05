@@ -10,7 +10,7 @@ import traceback
 
 def create_experiment_dir(model_name):
     # Create experiment directory
-    experiment_path = 'experiments/' + model_name + '/'
+    experiment_path = '/mnt/c/Users/lenna/PycharmProjects/BA_Thesis/experiments/' + model_name + '/'
     if not os.path.exists(experiment_path):
         os.makedirs(experiment_path)
     return experiment_path + model_name

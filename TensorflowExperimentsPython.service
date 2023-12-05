@@ -1,0 +1,11 @@
+[Unit]
+Description=PythonExperiments
+
+[Service]
+ExecStart= /home/ubu/.virtualenvs/BA_Thesis/bin/python /mnt/c/Users/lenna/PycharmProjects/BA_Thesis/main.py 2>&1 | tee /mnt/c/Users/lenna/PycharmProjects/BA_Thesis/main.log
+Restart=On-abnormal
+User=ubu
+Group=ubu
+
+[Install]
+WantedBy=multi-user.target
