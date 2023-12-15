@@ -16,9 +16,9 @@ train_images_half, _, train_labels_half, _ = train_test_split(train_images, trai
                                                               random_state=42)
 train_images_quarter, _, train_labels_quarter, _ = train_test_split(train_images, train_labels, test_size=0.75,
                                                                     random_state=42)
-
+#select = "cnn1_1epoch_full"
 full_start = time.time()
-modelnames = [(" ", train_images, train_labels, test_images, test_labels),
+modelnames = [("cnn1_1epoch_full", train_images, train_labels, test_images, test_labels),
               ("cnn1_1epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels),
               ("cnn1_6epoch_half", train_images_half, train_labels_half, test_images, test_labels),
               ("cnn2_1epoch_full", train_images, train_labels, test_images, test_labels),
@@ -49,13 +49,14 @@ modelnames = [(" ", train_images, train_labels, test_images, test_labels),
               ("dnn3_6epoch_full", train_images, train_labels, test_images, test_labels),
               ("dnn3_6epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels)]
 filter_models = [model for model in modelnames if sys.argv[1] in model[0]]
-analysis_approach = ["tarantula", "random"]  # , "ochiai", "dstar", "random"]
+#filter_models = [model for model in modelnames if select in model[0]]
+analysis_approach = ["tarantula"]#, "random"]  # , "ochiai", "dstar", "random"]
 mutation_function = [utilities.modify_weight_one_random_gauss, utilities.modify_weight_all_random_gauss,
                      utilities.modify_bias,
                      utilities.modify_bias_random_gauss, utilities.modify_all_weights,
                      utilities.modify_all_weights_by_scalar,
-                     utilities.modify_all_weights_by_scalar_random_gauss,
-                     utilities.modify_weight_all_random_by_scalar_gauss]
+                     utilities.modify_all_weights_by_scalar_random_gauss]
+#,utilities.modify_weight_all_random_by_scalar_gauss]
 """[utilities.modify_weight_one_random_gauss, utilities.modify_weight_all_random_gauss,
                  utilities.modify_bias,
                  utilities.modify_bias_random_gauss, utilities.modify_all_weights,
@@ -67,14 +68,14 @@ mutation_function = [utilities.modify_weight_one_random_gauss, utilities.modify_
                  utilities.modify_weight_all_random_by_scalar_uniform,
                  utilities.modify_weight_all_random_by_scalar_gauss]"""
 train_between_iterations = [True, False]
-value = [-1, -0.5, -0.25, 0, 0.25, 0.5, 1]
+value = [-1, -0.5, 0, 0.5, 1]  # [-1, -0.5, -0.25, 0, 0.25, 0.5, 1]
 compare_loss = [False, True]
 compare_accuracy = [False, True]
 compare_and_both = [False, True]
 regression_loss_offset = [True]  # , False]
 regression_accuracy_offset = [True]  # , False]
-loss_offset = [0.05, 0.005]
-accuracy_offset = [0.01, 0.001, 0.0001]  # [0, 0.1, 0.01, 0.001]
+loss_offset = [0.005]  # [0.05, 0.005]
+accuracy_offset = [0.01]  # [0, 0.1, 0.01, 0.001]
 for i in range(1):
     iteration_start = time.time()
     for model in filter_models:
@@ -97,7 +98,10 @@ for i in range(1):
                                                               "modify_bias_random_gauss",
                                                               "modify_bias_random_uniform",
                                                               "modify_weight_all_random_by_scalar_uniform",
-                                                              "modify_weight_one_random_by_scalar_gauss"]: continue
+                                                              "modify_weight_one_random_by_scalar_gauss",
+                                                              "modify_bias_random_gauss", "modify_bias_random_uniform",
+                                                              "modify_weight_all_random_by_scalar_uniform",
+                                                              "modify_weight_all_random_by_scalar_gauss"]: continue
                         for cop_loss in compare_loss:
                             for cop_acc in compare_accuracy:
                                 for cop_and_both in compare_and_both:

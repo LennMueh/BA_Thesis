@@ -103,6 +103,71 @@ history3_quarter_df['epoch'] = history3_quarter_df.index + 1
 history3_quarter_df['model'] = 'dnn_model3_quarter'
 
 history3_df = pandas.concat([history3_full_df, history3_half_df, history3_quarter_df])
-fullhistory_df = pandas.concat([history1_df, history2_df, history3_df])
+
+cnn_model1 = keras.Sequential([
+    keras.layers.Conv2D(8, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+    keras.layers.MaxPooling2D((2, 2)),
+    keras.layers.Flatten(),
+    keras.layers.Dense(4, activation='relu'),
+    keras.layers.Dense(10, activation='softmax')
+])
+cnn_model1_half = keras.models.clone_model(cnn_model1)
+cnn_model1_quarter = keras.models.clone_model(cnn_model1)
+
+cnn_model1.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+cnn_model1_half.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+cnn_model1_quarter.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+history4_full = cnn_model1.fit(train_images, train_labels, epochs=20, validation_data=(test_images, test_labels))
+history4_full_df = pandas.DataFrame(history4_full.history)
+history4_full_df['epoch'] = history4_full_df.index + 1
+history4_full_df['model'] = 'cnn_model1_full'
+
+history4_half = cnn_model1_half.fit(half_train_images, half_train_labels, epochs=20, validation_data=(test_images, test_labels))
+history4_half_df = pandas.DataFrame(history4_half.history)
+history4_half_df['epoch'] = history4_half_df.index + 1
+history4_half_df['model'] = 'cnn_model1_half'
+
+history4_quarter = cnn_model1_quarter.fit(quarter_train_images, quarter_train_labels, epochs=20, validation_data=(test_images, test_labels))
+history4_quarter_df = pandas.DataFrame(history4_quarter.history)
+history4_quarter_df['epoch'] = history4_quarter_df.index + 1
+history4_quarter_df['model'] = 'cnn_model1_quarter'
+
+history4_df = pandas.concat([history4_full_df, history4_half_df, history4_quarter_df])
+
+cnn_model2 = keras.Sequential([
+    keras.layers.Conv2D(8, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+    keras.layers.MaxPooling2D((2, 2)),
+    keras.layers.Conv2D(8, (3, 3), activation='relu'),
+    keras.layers.MaxPooling2D((2, 2)),
+    keras.layers.Flatten(),
+    keras.layers.Dense(4, activation='relu'),
+    keras.layers.Dense(10, activation='softmax')
+])
+cnn_model2_half = keras.models.clone_model(cnn_model2)
+cnn_model2_quarter = keras.models.clone_model(cnn_model2)
+
+cnn_model2.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+cnn_model2_half.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+cnn_model2_quarter.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+history5_full = cnn_model2.fit(train_images, train_labels, epochs=20, validation_data=(test_images, test_labels))
+history5_full_df = pandas.DataFrame(history5_full.history)
+history5_full_df['epoch'] = history5_full_df.index + 1
+history5_full_df['model'] = 'cnn_model2_full'
+
+history5_half = cnn_model2_half.fit(half_train_images, half_train_labels, epochs=20, validation_data=(test_images, test_labels))
+history5_half_df = pandas.DataFrame(history5_half.history)
+history5_half_df['epoch'] = history5_half_df.index + 1
+history5_half_df['model'] = 'cnn_model2_half'
+
+history5_quarter = cnn_model2_quarter.fit(quarter_train_images, quarter_train_labels, epochs=20, validation_data=(test_images, test_labels))
+history5_quarter_df = pandas.DataFrame(history5_quarter.history)
+history5_quarter_df['epoch'] = history5_quarter_df.index + 1
+history5_quarter_df['model'] = 'cnn_model2_quarter'
+
+history5_df = pandas.concat([history5_full_df, history5_half_df, history5_quarter_df])
+
+fullhistory_df = pandas.concat([history1_df, history2_df, history3_df, history4_df, history5_df])
 
 fullhistory_df.to_excel('/mnt/c/Users/lenna/PycharmProjects/BA_Thesis/data/validation_data.xlsx', index=False)
