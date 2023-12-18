@@ -16,7 +16,7 @@ train_images_half, _, train_labels_half, _ = train_test_split(train_images, trai
                                                               random_state=42)
 train_images_quarter, _, train_labels_quarter, _ = train_test_split(train_images, train_labels, test_size=0.75,
                                                                     random_state=42)
-#select = "cnn1_1epoch_full"
+# select = "cnn1_1epoch_full"
 full_start = time.time()
 modelnames = [("cnn1_1epoch_full", train_images, train_labels, test_images, test_labels),
               ("cnn1_1epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels),
@@ -49,14 +49,14 @@ modelnames = [("cnn1_1epoch_full", train_images, train_labels, test_images, test
               ("dnn3_6epoch_full", train_images, train_labels, test_images, test_labels),
               ("dnn3_6epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels)]
 filter_models = [model for model in modelnames if sys.argv[1] in model[0]]
-#filter_models = [model for model in modelnames if select in model[0]]
-analysis_approach = ["tarantula"]#, "random"]  # , "ochiai", "dstar", "random"]
+# filter_models = [model for model in modelnames if select in model[0]]
+analysis_approach = ["tarantula"]  # , "random"]  # , "ochiai", "dstar", "random"]
 mutation_function = [utilities.modify_weight_one_random_gauss, utilities.modify_weight_all_random_gauss,
                      utilities.modify_bias,
                      utilities.modify_bias_random_gauss, utilities.modify_all_weights,
                      utilities.modify_all_weights_by_scalar,
-                     utilities.modify_all_weights_by_scalar_random_gauss]
-#,utilities.modify_weight_all_random_by_scalar_gauss]
+                     utilities.modify_all_weights_by_scalar_random_gauss,
+                     utilities.modify_weight_all_random_by_scalar_gauss]
 """[utilities.modify_weight_one_random_gauss, utilities.modify_weight_all_random_gauss,
                  utilities.modify_bias,
                  utilities.modify_bias_random_gauss, utilities.modify_all_weights,

@@ -78,3 +78,10 @@ Ideen für Experimente:
 6. [ ] Dann, verdächtigsten Layer herausfinden und diesen Löschen
 7. [ ] Dann, verdächtigsten Layer herausfinden und diesen einen neuen Layer hinterstellen/vorstellen (dense, convolution)
 8. [x] Normal and uniform distribution in random neuron bias and weight modification
+
+### 16.12.2023
+
+Themen für nächste Woche:
+Approach für die Experimentelle Evaluation
+Forschungsfragen beantworten
+One-Shot Modelle
