@@ -85,3 +85,25 @@ Themen für nächste Woche:
 Approach für die Experimentelle Evaluation
 Forschungsfragen beantworten
 One-Shot Modelle
+
+### Approach für die Experimentelle Evaluation
+- Ideen für Evaluation:
+  - Abstand in Prozent zum Original(Python einfügen zum Vergleich)
+
+- RQ1. Could the mutation of faulty neurons improve the quality and reliability of a
+Deep Neural Network?
+- RQ2. Could the mutation of faulty neurons during training improve the quality and
+reliability of a Deep Neural Network?
+- RQ3. Which mutations are the most promising for improvement?
+- RQ5. Which suspiciousness measure is the most promising for improving a Deep
+Neural Network?
+- RQ6. Are the suspiciousness measures more accurate than random choosing?
+
+### Setup
+- Prozessor: AMD Ryzen 9 3900X 12-Core Processor 3.8 GHz
+- RAM: 64 GB
+- GPU: NVIDIA GeForce RTX 4070 Ti 12 GB
+- OS: Windows 10 Pro 64-bit
+- WSL: Ubuntu 22.04.3 LTS
+- Python: 3.10.12
+- Tensorflow: 2.14.1
