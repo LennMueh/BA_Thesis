@@ -7,4 +7,5 @@ files = files[files != "validation_data.xlsx"]
 for file in files:
     df = pd.read_excel("../data/" + file)
     print(file + " has max epoch " + str(df["epoch"].max()))
+    print(file + " has approaches " + str(df["approach_analysis"].unique()))
 print("Stop")

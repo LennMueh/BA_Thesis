@@ -55,30 +55,25 @@ fancyheadings, % headings with seplines and logo
 \maketitle
 
 \chapter*{\centering \begin{normalsize}Abstract\end{normalsize}}
-\begin{quotation}
-\lipsum[1-3]
-\end{quotation}
+\input{chapters/abstract.tex}
 
 \tableofcontents
 \listoffigures{}
 \mainmatter
 \chapter{Introduction}
-\lipsum[1-19]\cite{eniser_deepfault_2019}
+\input{chapters/introduction.tex}
+\chapter{Related Work}
+\input{chapters/relatedWork.tex}
 \chapter{Background}
-\section{asdf}
-\lipsum[10-19]
-\section{sdfg}
-\lipsum[20-39]
-\chapter{Thinking}
-\lipsum[40-69]
-\chapter{Experiments}
-\lipsum[70-89]
+\input{chapters/background.tex}
+\chapter{Mutation-Based Accuracy Improvements}
+\input{chapters/mainChapter.tex}
+\chapter{Results}
+\input{chapters/results.tex}
 
 \chapter{Conclusion}
-\lipsum[80-99]
+\input{chapters/conclusion.tex}
 \appendix
-\chapter{Listings}
-\lipsum[90-99]
 \backmatter
 \chapter{Bibliography}
 \lipsum[100-110]

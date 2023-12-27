@@ -11,15 +11,15 @@
 2. Related Work
    1. Neural Networks Testing
    2. Improving Neural Networks
-2. Background
+3. Background
    1. Neural Networks
    3. Mutation-based Testing
    4. Spectrum Analysis
    5. DeepFault
-3. Mutation-Based Accuracy Improvements in Neural Networks using Spectrum-Based Fault Localization (Titel verkürzen)
-4. Experimental Results
+4. Mutation-Based Accuracy Improvements
+5. Experimental Results
    1. Research Questions
    2. Experimental Setup (Hardware/Software Versionen/NNs)
    3. Results
    4. Summary
-5. Conclusion
+6. Conclusion
