@@ -46,6 +46,14 @@ fancyheadings, % headings with seplines and logo
 \usepackage{biblatex}
 \addbibresource{Bachelorarbeit.bib}
 \usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{listofitems} % for \readlist to create arrays
+\tikzstyle{mynode}=[thick,draw=blue,fill=blue!20,circle,minimum size=22]
+\pgfplotsset{compat=1.17}
 
 % to generate some dummy text
 \usepackage{lipsum}
@@ -62,8 +70,6 @@ fancyheadings, % headings with seplines and logo
 \mainmatter
 \chapter{Introduction}
 \input{chapters/introduction.tex}
-\chapter{Related Work}
-\input{chapters/relatedWork.tex}
 \chapter{Background}
 \input{chapters/background.tex}
 \chapter{Mutation-Based Accuracy Improvements}
