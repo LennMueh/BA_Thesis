@@ -1,8 +1,71 @@
-\section{Neural Networks}
+\section{Neural Networks}\label{sec:neural-networks}
+Without further ado, we will discuss what neural networks are and how they are composed.
+We describe what a layer is and what types there are.
+For what do we need optimizers and activation functions and what types are there.
+Neural Networks are useful in a multitude of fields like classification, regression, transcription, or machine translation. \cite{goodfellow_deep_2016}
+Neuronal networks are composed of layers, which are composed of neurons.
+The neuron is the computational component in a deep neural network.\\
+A neuron transforms a vector of inputs $\mathbf{x}$ to the output $y$, $\mathbb{R}^n \to \mathbb{R}$
+by using a vector of weights $\mathbf{w}$, a bias $b$ and an activation function $f$ \ref{eq: NeuralFunction}.
+\begin{equation}
+    y = f\left( \sum^n_{i=1} w_i\cdot x_i + b\right)
+    \label{eq: NeuralFunction}
+\end{equation}
+For Example, in the machine learning software library TensorFlow, which is based on Keras, uses by default Glorot uniform initializer\cite{noauthor_tfkeraslayersdense_nodate,glorot_understanding_2010},
+also called Xavier uniform initializer for the weights and initializes the bias with zeros.\\
+Another important component, are the activation functions, one of the most common ones is the sigmoid function, which is today mostly used in output layers.
+The rectified linear unit, short ReLU \ref{eq: relu} which was first used 1975 by Fukushima\cite{fukushima_cognitron_1975} and shown in 2011 by Glorot et al. \cite{glorot_deep_2011}
+that it enables a better training for a neural network compared to the till then common sigmoid function.
+\begin{equation}
+    f(x) =
+    \begin{cases}
+        x& x > 0\\
+        0& x <= 0
+    \end{cases}
+    \label{eq: relu}
+\end{equation}
+Another even more promising activation function is the Gaussian Error Linear Unit, short GELU \ref{eq: relu} which was proposed by Hendrycks and Gimpel in 2016\cite{hendrycks_gaussian_2016} is used by natural language processing models like BERT\cite{devlin_bert_2019}.
+It does not just set all negative values to zero like ReLU but weights them.
+The differences can be seen in the figure. \ref{fig: activation function}
+\begin{equation}
+    f(x) = 0.5x\left ( 1+\tanh\left [ \sqrt{\frac{2}{\pi}}\left ( x+0.044715x^3 \right ) \right ] \right )
+    \label{eq: gelu}
+\end{equation}
+\input{figures/activationfunction.tikz}
+The neurons are then combined into layers, in a Deep Neural Network (DNN) we have three types of Layers:
+Input layers, output layers and the hidden layers.
+In general are there is only one input and one output layer \ref{fig: neural network}, but there is a plurality of hidden layers.
+The input layer, is pretty straightforward, it processes the input for the hidden layers, for example, it converts a 2-dimensional picture to a 1-dimensonal array,
+which can then be processed by the subsequent layers.
+The hidden layer does most of the heavy lifting, it performs most of the computational work of a DNN, it works based on the formula from above.
+The output layer, takes the output of the last hidden layer, transforms it so that we get a meaningful output.
+For a regression or binary classification, we have mostly just one neuron, but for a multi-class classification the number of neurons corresponds with the number of classes that shall be classified.
+The output layer also works after the same principle of the formula above, but not a “normal” activation function is used.
+Either a no activation function is used or a linear activation function is used for a regression or the softmax \ref{eq: softmax} function for a classification model.
+\begin{equation}
+    f(x_i) = \frac{e^{x_i}}{\sum^n_{j=1}e^{x_j}}
+    \label{eq: softmax}
+\end{equation}
+\input{figures/neuralnetwork.tikz}
+But, how are deep neural networks trained? \cite{lecun_deep_2015}
+The first step is forward propagation, the training data is fed in to the network and flows through the layers, where each neuron performs it operation. \ref{eq: NeuralFunction}
+Then the output is compared to the desired outcome of the training data, hence, if the predicted outcome of the network matches the actual outcome.
+If it doesn't match, it calculates how far off the prediction is.
+Subsequently, the process of backpropagation is initiated, wherein the error determined in the preceding step is propagated through the network.
+Then the weights are updated, often a process called stochastic gradient descent (SGD) is used.
+In SGD, a few examples of the input are used, to compute the output and the error, then the average gradient for the examples is used, to adjust the weights.
+Then this process is repeated until we are gone through the whole training set, which is called an epoch.
+\subsection{Core Layers in Neural Networks}\label{subsec:core-layers-in-neural-networks}
+\subsubsection{Dense Layers}
+\subsubsection{Flatten Layer}
+\subsubsection{Max Pooling Layer}
+\subsubsection{Convolutional Layer}
+\subsection{Optimization in Neural Networks}\label{subsec:optimization-in-neural-networks}
+\section{Neural Network Testing}\label{sec:neural-network-testing}
 \lipsum[21-25]
-\section{Mutation-based Testing}
+\section{Mutation-based Testing}\label{sec:mutation-based-testing}
 \lipsum[26-30]
-\section{Spectrum Analysis}
+\section{Spectrum Analysis}\label{sec:spectrum-analysis}
 \lipsum[31-35]
-\section{DeepFault}
+\section{DeepFault}\label{sec:deepfault}\cite{wong_dstar_2014}
 \lipsum[36-40]

@@ -1,0 +1,23 @@
+\begin{figure}
+    \centering
+\begin{tikzpicture}
+    \begin{axis}[
+        title={Activation Functions},
+        xlabel={$x$},
+        ylabel={$y$},
+        domain=-3:3, % Adjust the domain for a narrower x-axis range
+        ymin=-1, % Set y-minimum
+        ymax=2.5, % Set y-maximum
+        samples=400, % Increase the number of samples for a smoother curve
+        grid=both,
+        legend style={at={(0.5,-0.15)}, anchor=north,legend columns=3},
+      ]
+      \addplot[blue, thick] {1/(1 + exp(-x))};
+      \addplot[red, thick] {max(0, x)};
+      \addplot[green, thick] {0.5*x*(1 + tanh(sqrt(2/pi)*(x + 0.044715*x^3)))};
+      \legend{Sigmoid, ReLU, GELU}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Activation Functions}
+  \label{fig: activation function}
+\end{figure}
