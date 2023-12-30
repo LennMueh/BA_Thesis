@@ -50,7 +50,7 @@ modelnames = [("cnn1_1epoch_full", train_images, train_labels, test_images, test
               ("dnn3_6epoch_quarter", train_images_quarter, train_labels_quarter, test_images, test_labels)]
 filter_models = [model for model in modelnames if sys.argv[1] in model[0]]
 # filter_models = [model for model in modelnames if select in model[0]]
-analysis_approach = ["tarantula"]#,"random", "ochiai", "dstar"]
+analysis_approach = ["dstar"]#,"tarantula", "random", "ochiai"]
 mutation_function = [utilities.modify_weight_one_random_gauss, utilities.modify_weight_all_random_gauss,
                      utilities.modify_bias,
                      utilities.modify_bias_random_gauss, utilities.modify_all_weights,
