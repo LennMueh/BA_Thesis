@@ -1,0 +1,127 @@
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    2d-arr/.style={matrix of nodes, row sep=-\pgflinewidth, column sep=-\pgflinewidth, nodes={draw}}
+  ]
+
+  \matrix (mtr) [2d-arr] {
+  |[fill=red!30]| 3 & |[fill=red!30]| 4 & |[fill=blue!30]| 6 & |[fill=blue!30]| 7\\
+  |[fill=red!30]| 4 & |[fill=red!30]| 1 & |[fill=blue!30]| 2 & |[fill=blue!30]| 9\\
+  |[fill=green!30]| 6 & |[fill=green!30]| 6 & |[fill=yellow!30]| 2 & |[fill=yellow!30]| 3\\
+  |[fill=green!30]| 7 & |[fill=green!30]| 1 & |[fill=yellow!30]| 6 & |[fill=yellow!30]| 5\\
+  };
+
+  \node[right=0.2em of mtr] (str) {$\Longrightarrow$};
+
+  \matrix (K) [2d-arr, right=0.2em of str] {
+    |[fill=red!30]| 4 & |[fill=blue!30]| 9 \\
+    |[fill=green!30]| 7 & |[fill=yellow!30]| 6 \\
+  };
+
+\end{tikzpicture}
+\begin{tikzpicture}[
+    2d-arr/.style={matrix of nodes, row sep=-\pgflinewidth, column sep=-\pgflinewidth, nodes={draw}}
+  ]
+
+  \matrix (mtr) [2d-arr] {
+  |[fill=red!30]| 3 & |[fill=red!30]| 4 & |[fill=blue!30]| 6 & |[fill=blue!30]| 7\\
+  |[fill=red!30]| 4 & |[fill=red!30]| 1 & |[fill=blue!30]| 2 & |[fill=blue!30]| 9\\
+  |[fill=green!30]| 6 & |[fill=green!30]| 6 & |[fill=yellow!30]| 2 & |[fill=yellow!30]| 3\\
+  |[fill=green!30]| 7 & |[fill=green!30]| 1 & |[fill=yellow!30]| 6 & |[fill=yellow!30]| 5\\
+  };
+
+  \node[right=0.2em of mtr] (str) {$\Longrightarrow$};
+
+  \matrix (K) [2d-arr, right=0.2em of str] {
+    |[fill=gray!30]| 9\\
+  };
+\end{tikzpicture}
+\caption{Max Pooling}
+\label{fig: Max Pooling}
+Left: Max Pooling, Filter: (2,2) Stride: 2 Right: Max Global Pooling
+\end{figure}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    2d-arr/.style={matrix of nodes, row sep=-\pgflinewidth, column sep=-\pgflinewidth, nodes={draw}}
+  ]
+
+  \matrix (mtr) [2d-arr] {
+  |[fill=red!30]| 3 & |[fill=red!30]| 4 & |[fill=blue!30]| 6 & |[fill=blue!30]| 7\\
+  |[fill=red!30]| 4 & |[fill=red!30]| 1 & |[fill=blue!30]| 2 & |[fill=blue!30]| 9\\
+  |[fill=green!30]| 6 & |[fill=green!30]| 6 & |[fill=yellow!30]| 2 & |[fill=yellow!30]| 3\\
+  |[fill=green!30]| 7 & |[fill=green!30]| 1 & |[fill=yellow!30]| 6 & |[fill=yellow!30]| 5\\
+  };
+
+  \node[right=0.2em of mtr] (str) {$\Longrightarrow$};
+
+  \matrix (K) [2d-arr, right=0.2em of str] {
+    |[fill=red!30]| 1 & |[fill=blue!30]| 2 \\
+    |[fill=green!30]| 1 & |[fill=yellow!30]| 2 \\
+  };
+
+\end{tikzpicture}
+\begin{tikzpicture}[
+    2d-arr/.style={matrix of nodes, row sep=-\pgflinewidth, column sep=-\pgflinewidth, nodes={draw}}
+  ]
+
+  \matrix (mtr) [2d-arr] {
+  |[fill=red!30]| 3 & |[fill=red!30]| 4 & |[fill=blue!30]| 6 & |[fill=blue!30]| 7\\
+  |[fill=red!30]| 4 & |[fill=red!30]| 1 & |[fill=blue!30]| 2 & |[fill=blue!30]| 9\\
+  |[fill=green!30]| 6 & |[fill=green!30]| 6 & |[fill=yellow!30]| 2 & |[fill=yellow!30]| 3\\
+  |[fill=green!30]| 7 & |[fill=green!30]| 1 & |[fill=yellow!30]| 6 & |[fill=yellow!30]| 5\\
+  };
+  
+  \node[right=0.2em of mtr] (str) {$\Longrightarrow$};
+
+  \matrix (K) [2d-arr, right=0.2em of str] {
+    |[fill=gray!30]| 1\\
+  };
+\end{tikzpicture}
+\caption{Min Pooling}
+\label{fig: Min Pooling}
+Left: Min Pooling, Filter: (2,2) Stride: 2 Right: Min Global Pooling
+\end{figure}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    2d-arr/.style={matrix of nodes, row sep=-\pgflinewidth, column sep=-\pgflinewidth, nodes={draw}}
+  ]
+
+  \matrix (mtr) [2d-arr] {
+  |[fill=red!30]| 3 & |[fill=red!30]| 4 & |[fill=blue!30]| 6 & |[fill=blue!30]| 7\\
+  |[fill=red!30]| 4 & |[fill=red!30]| 1 & |[fill=blue!30]| 2 & |[fill=blue!30]| 9\\
+  |[fill=green!30]| 6 & |[fill=green!30]| 6 & |[fill=yellow!30]| 2 & |[fill=yellow!30]| 3\\
+  |[fill=green!30]| 7 & |[fill=green!30]| 1 & |[fill=yellow!30]| 6 & |[fill=yellow!30]| 5\\
+  };
+
+  \node[right=0.2em of mtr] (str) {$\Longrightarrow$};
+
+  \matrix (K) [2d-arr, right=0.2em of str] {
+    |[fill=red!30]| 3 & |[fill=blue!30]| 6 \\
+    |[fill=green!30]| 5 & |[fill=yellow!30]| 4 \\
+  };
+
+\end{tikzpicture}
+\begin{tikzpicture}[
+    2d-arr/.style={matrix of nodes, row sep=-\pgflinewidth, column sep=-\pgflinewidth, nodes={draw}}
+  ]
+
+  \matrix (mtr) [2d-arr] {
+  |[fill=red!30]| 3 & |[fill=red!30]| 4 & |[fill=blue!30]| 6 & |[fill=blue!30]| 7\\
+  |[fill=red!30]| 4 & |[fill=red!30]| 1 & |[fill=blue!30]| 2 & |[fill=blue!30]| 9\\
+  |[fill=green!30]| 6 & |[fill=green!30]| 6 & |[fill=yellow!30]| 2 & |[fill=yellow!30]| 3\\
+  |[fill=green!30]| 7 & |[fill=green!30]| 1 & |[fill=yellow!30]| 6 & |[fill=yellow!30]| 5\\
+  };
+
+  \node[right=0.2em of mtr] (str) {$\Longrightarrow$};
+
+  \matrix (K) [2d-arr, right=0.2em of str] {
+    |[fill=gray!30]| 4.5\\
+  };
+
+\end{tikzpicture}
+\caption{Average Pooling}
+\label{fig: Average Pooling}
+Left: Average Pooling, Filter: (2,2) Stride: 2 Right: Average Global Pooling
+\end{figure}

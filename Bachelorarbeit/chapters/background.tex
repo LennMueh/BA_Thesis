@@ -49,6 +49,7 @@ Either a no activation function is used or a linear activation function is used 
 \input{figures/neuralnetwork.tikz}
 But, how are deep neural networks trained? \cite{lecun_deep_2015}
 The first step is forward propagation, the training data is fed in to the network and flows through the layers, where each neuron performs it operation. \ref{eq: NeuralFunction}
+Afterwards the backpropagation or backpropagation of error is performed. \cite{rumelhart_learning_1986}
 Then the output is compared to the desired outcome of the training data, hence, if the predicted outcome of the network matches the actual outcome.
 If it doesn't match, it calculates how far off the prediction is.
 Subsequently, the process of backpropagation is initiated, wherein the error determined in the preceding step is propagated through the network.
@@ -57,9 +58,34 @@ In SGD, a few examples of the input are used, to compute the output and the erro
 Then this process is repeated until we are gone through the whole training set, which is called an epoch.
 \subsection{Core Layers in Neural Networks}\label{subsec:core-layers-in-neural-networks}
 \subsubsection{Dense Layers}
-\subsubsection{Flatten Layer}
-\subsubsection{Max Pooling Layer}
+Dense Layers are the backbone of neural networks.
+They do most of the computational work of a neural network.
+It's characterized by its fully connected architecture, like seen in the figure \ref{fig: neural network}, meaning every node of the layer is connected to every node of the predecessor layer and every node of the successor layer.
+Dense layers are pivotal in learning intricate patterns from data, their versatility allows them to be stacked where each layer captures different levels of data abstraction.
+They work internally, like in the function above \ref{eq: NeuralFunction}.
 \subsubsection{Convolutional Layer}
+Convolutional layers, are used in image processing\cite{lecun_backpropagation_1989,szegedy_going_2014,krizhevsky_imagenet_2012}, unlike dense layers that try to analyse an image as a whole, but uses the concept of convolution to get a set of smaller pictures which depict isolated features of a picture.
+A convolution describes how a function f is modified by a function g, for example in the discrete case: \ref{eq: convolution}.
+\begin{equation}
+(f \ast g)[n] = sum_{m=-\inf}^{\inf}f[m]\cdot g[n - m]
+    \label{eq: convolution}]
+\end{equation}
+But how does this correspond to neural networks and image processing, foremost, we have not 1Dimensional data, but 2Dimensional pictures. \ref{eq: 2Dconvolution} \ref{fig: convolution matrix}
+\begin{equation}
+(f \ast g)[x,y] = \sum^{\inf}_{m=-\inf} \sum^{\inf}_{n=-\inf} f[m,n]\cdot g[x-m,y-n]
+    \label{eq: 2Dconvolution}
+\end{equation}
+\input{figures/convolution.tikz}
+For this, the singular weights are replaced by matrices of weights, so-called kernels or filters.
+The output of the convolutional layer, are so-called feature maps, each of these contains the result of applying one filter to the input data.
+These capture different aspects, like edges or textures.
+There are two other variables in a convolutional layer, apart from the number of the number and size of filters and the activation function.
+They are the stride and the padding, the stride describes how many steps the filter moves between successive convolutions.
+The larger stride, the smaller the resulting filter map, and vice versa.
+Of course, a larger stride results in less detail in a map.
+Padding is an optional parameter which aids in maintaining information on the edge of an input and helps to keep the scale of a picture.
+\subsubsection{Pooling Layer}
+\input{figures/pooling.tikz}
 \subsection{Optimization in Neural Networks}\label{subsec:optimization-in-neural-networks}
 \section{Neural Network Testing}\label{sec:neural-network-testing}
 \lipsum[21-25]
