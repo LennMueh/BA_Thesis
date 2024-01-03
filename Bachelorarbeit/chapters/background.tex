@@ -11,7 +11,7 @@ by using a vector of weights $\mathbf{w}$, a bias $b$ and an activation function
     y = f\left( \sum^n_{i=1} w_i\cdot x_i + b\right)
     \label{eq: NeuralFunction}
 \end{equation}
-For Example, in the machine learning software library TensorFlow, which is based on Keras, uses by default Glorot uniform initializer\cite{noauthor_tfkeraslayersdense_nodate,glorot_understanding_2010},
+For Example, in the machine learning software library TensorFlow, which is based on Keras, uses by default Glorot uniform initializer\cite{noauthor_tfkeraslayersdense_2023,glorot_understanding_2010},
 also called Xavier uniform initializer for the weights and initializes the bias with zeros.\\
 Another important component, are the activation functions, one of the most common ones is the sigmoid function, which is today mostly used in output layers.
 The rectified linear unit, short ReLU \ref{eq: relu} which was first used 1975 by Fukushima\cite{fukushima_cognitron_1975} and shown in 2011 by Glorot et al. \cite{glorot_deep_2011}
@@ -52,9 +52,7 @@ The first step is forward propagation, the training data is fed in to the networ
 Afterwards the backpropagation or backpropagation of error is performed. \cite{rumelhart_learning_1986}
 Then the output is compared to the desired outcome of the training data, hence, if the predicted outcome of the network matches the actual outcome.
 If it doesn't match, it calculates how far off the prediction is.
-Subsequently, the process of backpropagation is initiated, wherein the error determined in the preceding step is propagated through the network.
-Then the weights are updated, often a process called stochastic gradient descent (SGD) is used.
-In SGD, a few examples of the input are used, to compute the output and the error, then the average gradient for the examples is used, to adjust the weights.
+Subsequently, the process of backpropagation is initiated, wherein the error determined is propagated through the net, here the gradient is calculated by using an algorithm like Stochastic Gradient Descent (SGD) or it modern successors \ref{subsec:optimization-in-neural-networks} and used for learning in the network, to get the weights to the optimum, for each weight.
 Then this process is repeated until we are gone through the whole training set, which is called an epoch.
 \subsection{Core Layers in Neural Networks}\label{subsec:core-layers-in-neural-networks}
 \subsubsection{Dense Layers}
@@ -85,8 +83,17 @@ The larger stride, the smaller the resulting filter map, and vice versa.
 Of course, a larger stride results in less detail in a map.
 Padding is an optional parameter which aids in maintaining information on the edge of an input and helps to keep the scale of a picture.
 \subsubsection{Pooling Layer}
+Pooling is an often used concept in Convolutional Neural Networks to reduce the size of the individual feature map produced by the convolutional layer, while conserving important details of the feature map.
+Especially to produce an output which has a similar size as the input, a pooling layer can be avoided \cite{jain_supervised_2007}.
+There are multiple types of pooling operations, but the most used ones are Max-Pooling \ref{fig: Max Pooling} and Average-Pooling \ref{fig: Average Pooling}.
+Which operation is best depends on the type of data to be analysed and its pooling cardinality, which describes the number of extracted features.
+There can be said, for smaller cardinalities a Max-Pooling should be used, for larger ones Average-Pooling \cite{boureau_theoretical_2010}.
+In the complex layer terminology \cite{goodfellow_deep_2016} there are, the convolution stage, the detector stage (Which is just the usage of a nonlinear activation function) and the pool stage, these stages are sublayers of the large convolutional layer.
+In the simple layer terminology, those three are all individual layers.
 \input{figures/pooling.tikz}
-\subsection{Optimization in Neural Networks}\label{subsec:optimization-in-neural-networks}
+
+Now, with the usage of the convolutional layer and the pooling layer, we can preprocess data to get better results with the dense layers, which we still need to classify our data.
+\subsection{Optimization algorithms in Neural Networks}\label{subsec:optimization-in-neural-networks}
 \section{Neural Network Testing}\label{sec:neural-network-testing}
 \lipsum[21-25]
 \section{Mutation-based Testing}\label{sec:mutation-based-testing}
