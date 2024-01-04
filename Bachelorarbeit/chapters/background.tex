@@ -49,11 +49,17 @@ Either a no activation function is used or a linear activation function is used 
 \input{figures/neuralnetwork.tikz}
 But, how are deep neural networks trained? \cite{lecun_deep_2015}
 The first step is forward propagation, the training data is fed in to the network and flows through the layers, where each neuron performs it operation. \ref{eq: NeuralFunction}
-Afterwards the backpropagation or backpropagation of error is performed. \cite{rumelhart_learning_1986}
+Afterward the backpropagation or backpropagation of error is performed. \cite{rumelhart_learning_1986}
 Then the output is compared to the desired outcome of the training data, hence, if the predicted outcome of the network matches the actual outcome.
 If it doesn't match, it calculates how far off the prediction is.
-Subsequently, the process of backpropagation is initiated, wherein the error determined is propagated through the net, here the gradient is calculated by using an algorithm like Stochastic Gradient Descent (SGD) or it modern successors \ref{subsec:optimization-in-neural-networks} and used for learning in the network, to get the weights to the optimum, for each weight.
-Then this process is repeated until we are gone through the whole training set, which is called an epoch.
+The process of backpropagation is initiated, which uses an algorithm like Stochastic Gradient Descent (SGD) or one of its modern successors like Adam.
+SGD updates the model parameters by using the gradient of the loss function concerning the parameter.
+This isn't done for the whole dataset but just some data points.
+The learning rate describes how far a parameter is changed in the direction of a derivation for one iteration, in SGD this Learning Rate is constant and manually set.
+
+Adaptive Moment Estimation (Adam)\cite{kingma_adam_2017} is one of the successors of SGD. Adam, uses a variable learning rate which is adapted for each parameter, which uses the estimation of the first moment, the mean, and the second moment, the variance to change the learning rate.
+
+Then this process is repeated until we are gone through the entire training set, which is called an epoch.
 \subsection{Core Layers in Neural Networks}\label{subsec:core-layers-in-neural-networks}
 \subsubsection{Dense Layers}
 Dense Layers are the backbone of neural networks.
@@ -93,12 +99,7 @@ In the simple layer terminology, those three are all individual layers.
 \input{figures/pooling.tikz}
 
 Now, with the usage of the convolutional layer and the pooling layer, we can preprocess data to get better results with the dense layers, which we still need to classify our data.
-\subsection{Optimization algorithms in Neural Networks}\label{subsec:optimization-in-neural-networks}
 \section{Neural Network Testing}\label{sec:neural-network-testing}
-\lipsum[21-25]
 \section{Mutation-based Testing}\label{sec:mutation-based-testing}
-\lipsum[26-30]
 \section{Spectrum Analysis}\label{sec:spectrum-analysis}
-\lipsum[31-35]
 \section{DeepFault}\label{sec:deepfault}\cite{wong_dstar_2014}
-\lipsum[36-40]
