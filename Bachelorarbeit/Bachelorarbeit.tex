@@ -50,12 +50,31 @@ fancyheadings, % headings with seplines and logo
 \usepackage{amsfonts}
 \usepackage{pgfplots}
 \usepackage{tikz}
+\usepackage{multirow}
+\usepackage{listings}
 \usetikzlibrary{matrix, positioning}
 \usepackage{xcolor}
 \usepackage{listofitems} % for \readlist to create arrays
 \tikzstyle{mynode}=[thick,draw=blue,fill=blue!20,circle,minimum size=22]
 \pgfplotsset{compat=1.17}
-
+\lstset{
+    language=C,
+    basicstyle=\ttfamily,
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+    title=\lstname,
+    escapeinside={\%*}{*)},
+}
 % to generate some dummy text
 \usepackage{lipsum}
 

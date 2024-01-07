@@ -60,23 +60,28 @@ The learning rate describes how far a parameter is changed in the direction of a
 Adaptive Moment Estimation (Adam)\cite{kingma_adam_2017} is one of the successors of SGD. Adam, uses a variable learning rate which is adapted for each parameter, which uses the estimation of the first moment, the mean, and the second moment, the variance to change the learning rate.
 
 Then this process is repeated until we are gone through the entire training set, which is called an epoch.
+
 \subsection{Core Layers in Neural Networks}\label{subsec:core-layers-in-neural-networks}
+
 \subsubsection{Dense Layers}
 Dense Layers are the backbone of neural networks.
 They do most of the computational work of a neural network.
 It's characterized by its fully connected architecture, like seen in the figure \ref{fig: neural network}, meaning every node of the layer is connected to every node of the predecessor layer and every node of the successor layer.
 Dense layers are pivotal in learning intricate patterns from data, their versatility allows them to be stacked where each layer captures different levels of data abstraction.
 They work internally, like in the function above \ref{eq: NeuralFunction}.
+
 \subsubsection{Convolutional Layer}
 Convolutional layers, are used in image processing\cite{lecun_backpropagation_1989,szegedy_going_2014,krizhevsky_imagenet_2012}, unlike dense layers that try to analyse an image as a whole, but uses the concept of convolution to get a set of smaller pictures which depict isolated features of a picture.
 A convolution describes how a function f is modified by a function g, for example in the discrete case: \ref{eq: convolution}.
 \begin{equation}
-(f \ast g)[n] = sum_{m=-\inf}^{\inf}f[m]\cdot g[n - m]
+(f \ast g)[n]
+    = \sum_{m=-\infty}^{\infty}f[m]\cdot g[n - m]
     \label{eq: convolution}]
 \end{equation}
 But how does this correspond to neural networks and image processing, foremost, we have not 1Dimensional data, but 2Dimensional pictures. \ref{eq: 2Dconvolution} \ref{fig: convolution matrix}
 \begin{equation}
-(f \ast g)[x,y] = \sum^{\inf}_{m=-\inf} \sum^{\inf}_{n=-\inf} f[m,n]\cdot g[x-m,y-n]
+(f \ast g)[x,y]
+    = \sum^{\infty}_{m=-\infty} \sum^{\infty}_{n=-\infty} f[m,n]\cdot g[x-m,y-n]
     \label{eq: 2Dconvolution}
 \end{equation}
 \input{figures/convolution.tikz}
@@ -88,6 +93,7 @@ They are the stride and the padding, the stride describes how many steps the fil
 The larger stride, the smaller the resulting filter map, and vice versa.
 Of course, a larger stride results in less detail in a map.
 Padding is an optional parameter which aids in maintaining information on the edge of an input and helps to keep the scale of a picture.
+
 \subsubsection{Pooling Layer}
 Pooling is an often used concept in Convolutional Neural Networks to reduce the size of the individual feature map produced by the convolutional layer, while conserving important details of the feature map.
 Especially to produce an output which has a similar size as the input, a pooling layer can be avoided \cite{jain_supervised_2007}.
@@ -99,7 +105,105 @@ In the simple layer terminology, those three are all individual layers.
 \input{figures/pooling.tikz}
 
 Now, with the usage of the convolutional layer and the pooling layer, we can preprocess data to get better results with the dense layers, which we still need to classify our data.
+
+
 \section{Neural Network Testing}\label{sec:neural-network-testing}
+The testing methods can be categorized into two distinct categories, which are akin to testing in conventional software.
+They are coverage criteria and test case generation.
+In the subsequent section, we shall examine various methodologies employed for testing singular deep neural networks.\cite{huang_survey_2020}
+
+But first, how do we define an erroneous behaviour of a neural network? \ref{eq: erroneous behaviour}
+
+Where $f: \mathbb{R}^{s_1} \to \mathbb{R}^{s_K}$ is a trained neural network, $\mathcal{H}: \mathbb{R}^{s_1} \to \mathbb{R}^{s_K}$ and a legitimate input $x \in \mathbb{R}^{s_1}$, then we define the erroneous behaviour as:
+\begin{equation}
+    \arg \max_{j} f_j (x) \neq \arg \max_{j} \mathcal{H}_j (x)
+    \label{eq: erroneous behaviour}
+\end{equation}
+
+\subsection{Coverage Criteria}\label{subsec:coverage-criteria}
+We need the coverage criteria to get a quantitative basis for deciding how thoroughly our neural network is tested and to ensure that in our network key aspects aren't overlooked.
+Of course, the criteria used in neural network testing differ from those in software testing.
+
+\subsubsection{Neuron Coverage}
+Neuron coverage is the most basic coverage criteria, it is the ratio of the number of neurons activated by the test cases to the total number of neurons in the network.
+A neuron is activated if the output of the neuron is greater than zero.
+The neuron coverage is equivalent to the statement coverage in software testing, it helps to measure the thoroughness of the test cases.
+
+\subsubsection{Safety Coverage}
+The Safety Coverage is derived, by discretizing the input space into a set of hyper-rectangles, each of these hyper-rectangles exhibit the same pattern of activations of neurons, because it has a similar feature set.
+A hyper-rectangle is considered safely covered if a test case is classified correctly for all points in the hyper-rectangle.
+\subsubsection{Modified Condition/Decision Coverage}
+Modified Condition/Decision Coverage (MC/DC) is a method in software testing, which requires that each condition in a decision is tested independently and that each condition is shown to affect the decision outcome independently.
+This is done by varying the input of the condition while holding the other conditions constant.
+The method is particularly useful in identifying cases where multiple conditions contribute to a decision's outcome.
+By using a sign change and a value change to change, it's tried to exploit the relationship between those and use these as a coverage criterion.
+\subsubsection{Quantitative Projection}
+Quantitative Projection Coverage, is based on the assumption that the input differs on some kind of operation condition.
+For example, for self-driving cars: weather, landscape or impeding items.
+
+\subsection{Test Case Generation}
+But how do we now generate our test case, to get some useful information?
+We have, of course, multiple methods to generate our test cases:
+
+\subsubsection{Input Mutation}
+Input Mutation, is a method where we take one of the inputs and transform it, by some predefined rules, to generate our test cases.
+For example, in combination with safety coverage, we try to mutate the input in that way so that we cover every hyper-rectangle.
+\subsubsection{Fuzzing}
+Fuzzing, is a method where we generate random inputs, which are modified from the input set, those are then fed into the network.
+There by, we try to cover as much of the input space as possible.
+This can help us because a neural network, is designed for high-dimensional data, aim is to find cases where these small changes to the input cause the DNN to fail or behave unexpectedly.
+
+\subsubsection{Symbolic Execution}
+Despite the efficacy of input mutation and fuzzing in generating a substantial quantity of random data, it is uncertain whether certain test objectives will be fulfilled.
+With Symbolic Execution, we try to find out which input causes a part of a program to execute.
+One approach in Symbolic Execution is concolic testing, which is a hybrid testing technique which is adapted for neural networks with DeepConcolic.
+Concolic testing combines the concrete execution of a program, with random input generation, hence symbolic data.
+There by, the findings of the first step are used to generate the second set of inputs.
 \section{Mutation-based Testing}\label{sec:mutation-based-testing}
+
+
 \section{Spectrum Analysis}\label{sec:spectrum-analysis}
+Another important detail that requires introduction, Spectrum-Based Fault Localization (SBFL)\cite{wong_handbook_2023}, it is a technique to identify the source of faults in software.
+The term spectrum, describes in this context the execution profile of the program, which is collected during the execution of a test suite.
+During the execution, the coverage of each statement by a test case is recorded and if this test case is a success or a failure.
+\input{tables/symbols.tex}
+First, only failed test cases were recorded for SBFL, but later also successful test cases were recorded, which provide us with the information of the contrast between failure and success, which aids us to identify truly faulty statements.
+For example, in the first case, code that is often executed or every time, would be marked faulty simply for being in a programme.
+In the second case, the code wouldn't be marked faulty because it is also executed frequently in successful test cases.
+The term “code coverage” is frequently referred to as “executable statement hit spectrum” (ESHS), which denotes the extent to which certain components of the program under testing have been covered during execution.
+Some popular ESHS-based are based on a similarity coefficient, for example Tarantula\cite{jones_empirical_2005} \ref{eq: tarantula} , Ochiai\cite{ochiai_zoogeographical_1957} \ref{eq: ochiai} or Dstar\cite{wong_dstar_2014} \ref{eq: dstar} (Often also called $D^*$, where $*$ denotes the used exponent).
+\begin{equation}
+    \frac{\frac{a_{ef}}{a_{ef} + a_{nf}}}{\frac{a_{ef}}{a_{ef} + a_{nf}}+\frac{a_{es}}{a_{es} + a_{ns}}}
+    \label{eq: tarantula}
+\end{equation}
+\begin{equation}
+    \frac{a_{ef}}{\sqrt{(a_{ef}+a_{nf})\cdot(a_{ef}+a_{es})}}
+    \label{eq: ochiai}
+\end{equation}
+\begin{equation}
+    \frac{{a_{ef}}^*}{a_{es}+a_{nf}}
+    \label{eq: dstar}
+\end{equation}
+By the work of Lee et al. \cite{hua_jie_lee_study_2009} \ref{eq: simple_tarantula} the formula for Tarantula could even be more simplified.
+Yoo et al. \cite{yoo_human_2017}said that using genetic programming to create ranking metrics can consistently exceed many human-designed ranking metrics, like the once discussed above.
+\begin{equation}
+    \frac{a_{ef}}{a_{ef}+a_{es}}
+    \label{eq: simple_tarantula}
+\end{equation}
+In the following, you can see an Example \cite{parsa_software_2023} to see what spectrum analysis is, and what a pitfall of this method is.
+The code \ref{lst:code_snippet sfl} depicts some simple calculation program, which takes the two integers a and b as input and an integer c for the branching of the calculation.
+At line 11, the Max value is wrongly set, this is the fault that needs to be found.
+In the table \ref{tab: sfl}, you can see the suspiciousness values calculated with ochiai and tarantula.
+
+But because line 8, is always executed with line 11 and is overall less executed than line 11, it is the more suspicious statement.
+Hence, we can see that spectrum analysis isn't the silver bullet, for eradicating faults in programs.
+\input{figures/ExampleSfl.tex}
+
+There are even more similarity coefficients, to an extent which wouldn't be feasible to be covered in this work, an extensive can be referred to by Wong et al. \cite{wong_survey_2016}.
+
+There are some other examples of SBFL, which don't use ESHS, for example Program Invariants Hit Spectrum, which the coverage of program invariants.
+Those individuals attempt to identify violations of program properties in failed program executions to locate bugs.
+Another one would be the Method Calls Sequence Hit Spectrum, which collects information about the sequence of method calls, during a test-case.
+
+
 \section{DeepFault}\label{sec:deepfault}\cite{wong_dstar_2014}
