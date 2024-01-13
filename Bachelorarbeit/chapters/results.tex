@@ -1,1 +1,15 @@
-\lipsum[70-89]
+\section{Research Questions}\label{sec:research-questions}
+\begin{enumerate}
+    \renewcommand{\labelenumi}{RQ\theenumi}
+    \item Could the mutation of faulty neurons improve the quality and reliability of a Deep Neural Network?
+    \item Could the mutation of faulty neurons during training improve the quality and reliability of a Deep Neural Network?
+    \item Which mutations are the most promising for improvement?
+    \item Which combinations of mutations are the most promising?
+    \item Which suspiciousness measure is the most promising for improving a Deep Neural Network?
+    \item Are the suspiciousness measures more accurate than random choosing?
+\end{enumerate}
+\section{Experiment Setup}\label{sec:experiment-setup}
+We evaluated our approach on a Workstation consisting of an AMD Ryzen 9 3900X 12-Core Processor 4,6 GHz, with 32 GB of RAM and an NVIDIA GeForce RTX 4070Ti GPU with 12 GB of VRAM and 7680 CUDA Cores.
+The setup is running Ubuntu release 22.04, running with Windows Subsystem for Linux, on Microsoft Windows 11 Pro, we use it because since version 2.11\cite{noauthor_build_2023} TensorFlow doesn't support GPU acceleration natively any more.
+Regarding the Software, we are using Python version 3.10.12 and using TensorFlow version 2.14.1, with CUDA version 12.3.
+\section{Results}\label{sec:results}

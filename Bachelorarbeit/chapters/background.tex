@@ -159,8 +159,6 @@ With Symbolic Execution, we try to find out which input causes a part of a progr
 One approach in Symbolic Execution is concolic testing, which is a hybrid testing technique which is adapted for neural networks with DeepConcolic.
 Concolic testing combines the concrete execution of a program, with random input generation, hence symbolic data.
 There by, the findings of the first step are used to generate the second set of inputs.
-\section{Mutation-based Testing}\label{sec:mutation-based-testing}
-
 
 \section{Spectrum Analysis}\label{sec:spectrum-analysis}
 Another important detail that requires introduction, Spectrum-Based Fault Localization (SBFL)\cite{wong_handbook_2023}, it is a technique to identify the source of faults in software.
@@ -205,5 +203,30 @@ There are some other examples of SBFL, which don't use ESHS, for example Program
 Those individuals attempt to identify violations of program properties in failed program executions to locate bugs.
 Another one would be the Method Calls Sequence Hit Spectrum, which collects information about the sequence of method calls, during a test-case.
 
-
 \section{DeepFault}\label{sec:deepfault}\cite{wong_dstar_2014}
+DeepFault\cite{eniser_deepfault_2019} is a white-box testing approach for neural networks, developed by Eniser et al. which is according to the Authors.
+\begin{quote}
+    ... the first fault localization-based white-box testing approach for DNNs.
+\end{quote}
+There are two objectives to the approach, the identification of suspicious neurons, which have undesirable behaviour, where the respective neuron is suspected to lead to an undesirable outcome in the whole network.
+And the synthesis of new inputs for the neural network, to specially retrain the (most) suspicious values.
+
+\subsection{Identification of suspicious neurons}\label{subsec:identification-of-suspicious-neurons}
+In this First Part, DeepFault is establishing a Hit Spectrum($HS$) \ref{eq:hit_spectrum} for all neurons, which take the form of a tuple.
+Of course, the input, and output layers are left out because they are considered inherently correct.
+\begin{equation}
+    HS_n = (attr_n^{as}, attr_n^{af}, attr_n^{ns}, attr_n^{nf}\label{eq:hit_spectrum}
+\end{equation}
+\begin{itemize}
+    \item $attr^{as}_n$ is the number of times the neuron $n$ is activated in successful test cases.
+    \item $attr^{af}_n$ is the number of times the neuron $n$ is activated in failed test cases.
+    \item $attr^{ns}_n$ is the number of times the neuron $n$ is not activated in successful test cases.
+    \item $attr^{nf}_n$ is the number of times the neuron $n$ is not activated in failed test cases.
+\end{itemize}
+Then the hit spectra are in a suspiciousness measures, in DeepFault Tarantula \ref{eq: tarantula}, Ochiai \ref{eq: ochiai}, $D^3$ \ref{eq: dstar} are used.
+These are not used to identify one wrong neuron, but rather a set of wrong neurons.
+For that, the suspiciousness values of the neurons are used to sort the neurons in decreasing order of suspiciousness, if multiple neurons happen to get the same value, the neuron in a deeper layer is used.
+
+\subsection{Synthesis of new inputs}\label{subsec:synthesis-of-new-inputs}
+Guided by the suspiciousness measures, DeepFault modifies the input, for which the neural network has made the correct decision, in a targeted way.
+The synthesis task is supported by a gradient ascent algorithm that aims to determine the degree to which an appropriately classified input should and could be modified to enhance the activation values of suspicious neurons.

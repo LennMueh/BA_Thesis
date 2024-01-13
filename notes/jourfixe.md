@@ -102,7 +102,7 @@ Neural Network?
 ### Setup
 - Prozessor: AMD Ryzen 9 3900X 12-Core Processor 3.8 GHz
 - RAM: 64 GB
-- GPU: NVIDIA GeForce RTX 4070 Ti 12 GB
+- GPU: NVIDIA GeForce RTX 4070, with  Ti 12 GB
 - OS: Windows 10 Pro 64-bit
 - WSL: Ubuntu 22.04.3 LTS
 - Python: 3.10.12

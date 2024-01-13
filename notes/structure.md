@@ -21,5 +21,4 @@
    1. Research Questions
    2. Experimental Setup (Hardware/Software Versionen/NNs)
    3. Results
-   4. Summary
 6. Conclusion
