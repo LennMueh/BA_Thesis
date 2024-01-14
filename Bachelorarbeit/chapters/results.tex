@@ -1,15 +1,17 @@
-\section{Research Questions}\label{sec:research-questions}
-\begin{enumerate}
-    \renewcommand{\labelenumi}{RQ\theenumi}
-    \item Could the mutation of faulty neurons improve the quality and reliability of a Deep Neural Network?
-    \item Could the mutation of faulty neurons during training improve the quality and reliability of a Deep Neural Network?
-    \item Which mutations are the most promising for improvement?
-    \item Which combinations of mutations are the most promising?
-    \item Which suspiciousness measure is the most promising for improving a Deep Neural Network?
-    \item Are the suspiciousness measures more accurate than random choosing?
-\end{enumerate}
-\section{Experiment Setup}\label{sec:experiment-setup}
 We evaluated our approach on a Workstation consisting of an AMD Ryzen 9 3900X 12-Core Processor 4,6 GHz, with 32 GB of RAM and an NVIDIA GeForce RTX 4070Ti GPU with 12 GB of VRAM and 7680 CUDA Cores.
 The setup is running Ubuntu release 22.04, running with Windows Subsystem for Linux, on Microsoft Windows 11 Pro, we use it because since version 2.11\cite{noauthor_build_2023} TensorFlow doesn't support GPU acceleration natively any more.
 Regarding the Software, we are using Python version 3.10.12 and using TensorFlow version 2.14.1, with CUDA version 12.3.
-\section{Results}\label{sec:results}
+
+We are using the Fashion-MNIST dataset\cite{xiao_fashion-mnist_2017} for our experiments, which consists of 60,000 training images and 10,000 test images, each of size 28×28 pixels, with 10 classes.
+For the evaluation we haven't used not only the whole, but also a half and a quarter of the training data, which are derived from the original training data, by using Scikit-learn's\cite{pedregosa_scikit-learn_2011} \texttt{train\_test\_split} function, with a test size of 0.5 and 0.75 respectively.
+
+We used 2 DNNs and 2 CNNs, in the following table \ref{tab:architecture} a plain number describes the number of neurons in a dense layer. $CL$ describes a combination of a convolutional layer with a stride of $(1,1)$ and a kernel size of $(3,3)$ and a pooling layer with a pool size of $(2,2)$. We used.
+Adam as our optimizer with a learning rate of 0.001.
+For each model, we used 0 offset for loss and accuracy, and we used a loss offset of 0.005 and an accuracy offset of 0.01, with regression.
+
+\input{tables/architecture_table.tex}
+\section{Could the mutation of faulty neurons improve the quality and reliability of a Deep Neural Network?}\label{sec:could-the-mutation-of-faulty-neurons-improve-the-quality-and-reliability-of-a-deep-neural-network?}
+\section{Could the mutation of faulty neurons during training improve the quality and reliability of a Deep Neural Network?}\label{sec:could-the-mutation-of-faulty-neurons-during-training-improve-the-quality-and-reliability-of-a-deep-neural-network?}
+\section{Which mutations are the most promising for improvement?}\label{sec:which-mutations-are-the-most-promising-for-improvement?}
+\section{Which suspiciousness measure is the most promising for improving a Deep Neural Network?}\label{sec:which-suspiciousness-measure-is-the-most-promising-for-improving-a-deep-neural-network?}
+\section{Are the suspiciousness measures more accurate than random choosing?}\label{sec:are-the-suspiciousness-measures-more-accurate-than-random-choosing?}

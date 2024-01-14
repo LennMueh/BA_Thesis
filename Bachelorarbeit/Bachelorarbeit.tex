@@ -52,36 +52,46 @@ fancyheadings, % headings with seplines and logo
 \usepackage{tikz}
 \usepackage{multirow}
 \usepackage{listings}
+\usepackage{lscape}
 \usetikzlibrary{matrix, positioning}
 \usepackage{xcolor}
 \usepackage{listofitems} % for \readlist to create arrays
 \tikzstyle{mynode}=[thick,draw=blue,fill=blue!20,circle,minimum size=22]
 \pgfplotsset{compat=1.17}
-\lstset{
-    language=C,
-    basicstyle=\ttfamily,
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
     numbers=left,
-    numberstyle=\tiny,
-    stepnumber=1,
     numbersep=5pt,
     showspaces=false,
     showstringspaces=false,
     showtabs=false,
-    frame=single,
-    tabsize=2,
-    captionpos=b,
-    breaklines=true,
-    breakatwhitespace=false,
-    title=\lstname,
-    escapeinside={\%*}{*)},
+    tabsize=2
 }
+
+\lstset{style=mystyle}
 % to generate some dummy text
 \usepackage{lipsum}
 
 \begin{document}
 \frontmatter
 \maketitle
-
+\chapter*{Declaration}
+\input{chapters/declaration.tex}
 \chapter*{\centering \begin{normalsize}Abstract\end{normalsize}}
 \input{chapters/abstract.tex}
 

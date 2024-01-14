@@ -1,24 +1,5 @@
-\begin{lstlisting}[caption={Example code snippet}, label={lst:code_snippet sfl}]
-int getImpact()
-{
-    scanf("%d %d %d", &a, &b, &c);
-    Impact = 0;
-    Division = 1;
-    Sum = a + b;
-    if ((a > 0) && (b > 0))
-        Division = a / b;
-    Max = b;
-    if (a > b)
-        Max = b; // Correct: Max = a;
-    if (c == 1)
-        Impact = Sum;
-    if (c == 2)
-        Impact = Division;
-    if (c == 3)
-        Impact = Max;
-    return Impact;
-}
-\end{lstlisting}
+\lstinputlisting[language=C, caption={Example code snippet}, label={lst:code_snippet sfl}]{figures/example.c}
+
 \begin{table}[!h]
 \centering
 \begin{tabular}{|c|c|c|c|c|}
