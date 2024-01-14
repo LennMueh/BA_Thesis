@@ -5,9 +5,8 @@ import nn_analysis.analysis as an
 import os
 
 
-def run_analysis(model_name, approach, susp_num=-1, star=3, group_index=1):
+def run_analysis(model_name, approach, test_images, test_labels ,susp_num=-1, star=3, group_index=1):
     model = dm.get_model(model_name)
-    train_images, train_labels, test_images, test_labels = dm.get_data()
     experiment_path = ut.create_experiment_dir(model_name)
 
     file_path_classification = experiment_path + '_classifications.h5'

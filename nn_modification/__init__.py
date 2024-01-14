@@ -22,7 +22,7 @@ def run_modification_algorithm(run, modelname, train_images, train_labels, test_
                  'new_loss', 'loss_offset'])
     tf.random.set_seed(42)
     model = data_managment.get_model(modelname)
-    suspicous_neurons = nn_analysis.run_analysis(modelname, analysis_approach, max_num_iterations)
+    suspicous_neurons = nn_analysis.run_analysis(modelname, analysis_approach,test_images,test_labels,max_num_iterations)
     epoch = 0
     data_to_append = []
 
