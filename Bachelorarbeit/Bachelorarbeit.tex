@@ -93,25 +93,25 @@ fancyheadings, % headings with seplines and logo
 \chapter*{Declaration}
 \input{chapters/declaration.tex}
 \chapter*{\centering \begin{normalsize}Abstract\end{normalsize}}
-\input{chapters/abstract.tex}
+%\input{chapters/abstract.tex}
 
 \tableofcontents
 \listoffigures{}
 \mainmatter
-\chapter{Introduction}
-\input{chapters/introduction.tex}
-\chapter{Background}
+\chapter{Introduction}\label{ch:introduction}
+%\input{chapters/introduction.tex}
+\chapter{Background}\label{ch:background}
 \input{chapters/background.tex}
-\chapter{Mutation-Based Accuracy Improvements}
-\input{chapters/mainChapter.tex}
-\chapter{Results}
+\chapter{Mutation-Based Accuracy Improvements}\label{ch:mutation-based-accuracy-improvements}
+%\input{chapters/mainChapter.tex}
+\chapter{Results}\label{ch:results}
 \input{chapters/results.tex}
 
-\chapter{Conclusion}
-\input{chapters/conclusion.tex}
+\chapter{Conclusion}\label{ch:conclusion}
+%\input{chapters/conclusion.tex}
 \appendix
+\chapter{Source Code}\label{ch:source-code}
+\input{chapters/source-code.tex}
 \backmatter
-\chapter{Bibliography}
-\lipsum[100-110]
 \printbibliography
 \end{document}
