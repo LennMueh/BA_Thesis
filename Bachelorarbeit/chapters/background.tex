@@ -1,21 +1,22 @@
+In this chapter, we are going to present the background information that is necessary for our approach.
+What are neural networks?
+How can we test them, and what is spectrum-based fault localisation?
 \section{Neural Networks}\label{sec:neural-networks}
 Without further ado, we will discuss what neural networks are and how they are composed.
 We describe what a layer is and what types there are.
 For what do we need optimizers and activation functions and what types are there.
-Neural Networks are useful in a multitude of fields like classification, regression, transcription, or machine translation. \cite{goodfellow_deep_2016}
+Neural Networks are useful in a multitude of fields like classification, regression, transcription, or machine translation \cite{goodfellow_deep_2016}.
 Neuronal networks are composed of layers, which are composed of neurons.
 The neuron is the computational component in a deep neural network.\\
 A neuron transforms a vector of inputs $\mathbf{x}$ to the output $y$, $\mathbb{R}^n \to \mathbb{R}$
-by using a vector of weights $\mathbf{w}$, a bias $b$ and an activation function $f$ \ref{eq: NeuralFunction}.
+by using a vector of weights $\mathbf{w}$, a bias $b$ and an activation function $f$ as seen in equation \ref{eq: NeuralFunction}.
 \begin{equation}
     y = f\left( \sum^n_{i=1} w_i\cdot x_i + b\right)
     \label{eq: NeuralFunction}
 \end{equation}
-For Example, in the machine learning software library TensorFlow, which is based on Keras, uses by default Glorot uniform initializer\cite{noauthor_tfkeraslayersdense_2023,glorot_understanding_2010},
-also called Xavier uniform initializer for the weights and initializes the bias with zeros.\\
+For example the machine learning software library TensorFlow, which is based on Keras, uses by default Glorot uniform initializer\cite{noauthor_tfkeraslayersdense_2023,glorot_understanding_2010}, for the weights and initializes the bias with zeros.\\
 Another important component, are the activation functions, one of the most common ones is the sigmoid function, which is today mostly used in output layers.
-The rectified linear unit, short ReLU \ref{eq: relu} which was first used 1975 by Fukushima\cite{fukushima_cognitron_1975} and shown in 2011 by Glorot et al. \cite{glorot_deep_2011}
-that it enables a better training for a neural network compared to the till then common sigmoid function.
+The rectified linear unit, short ReLU \ref{eq: relu}\cite{fukushima_cognitron_1975,glorot_deep_2011} enables a better training for a neural network compared to the formerly common sigmoid function.
 \begin{equation}
     f(x) =
     \begin{cases}
@@ -34,14 +35,13 @@ The differences can be seen in the figure. \ref{fig: activation function}
 \input{figures/activationfunction.tikz}
 The neurons are then combined into layers, in a Deep Neural Network (DNN) we have three types of Layers:
 Input layers, output layers and the hidden layers.
-In general are there is only one input and one output layer \ref{fig: neural network}, but there is a plurality of hidden layers.
-The input layer, is pretty straightforward, it processes the input for the hidden layers, for example, it converts a 2-dimensional picture to a 1-dimensonal array,
-which can then be processed by the subsequent layers.
-The hidden layer does most of the heavy lifting, it performs most of the computational work of a DNN, it works based on the formula from above.
-The output layer, takes the output of the last hidden layer, transforms it so that we get a meaningful output.
-For a regression or binary classification, we have mostly just one neuron, but for a multi-class classification the number of neurons corresponds with the number of classes that shall be classified.
-The output layer also works after the same principle of the formula above, but not a “normal” activation function is used.
-Either a no activation function is used or a linear activation function is used for a regression or the softmax \ref{eq: softmax} function for a classification model.
+There is one input and one output layer \ref{fig: neural network}, but there is a plurality of hidden layers.
+The input layer, processes the input for the hidden layers, for example, it converts a 2-dimensional picture to a 1-dimensonal array, which can then be processed by the subsequent hidden layers.
+The hidden layer performs most of the computational work of a DNN, it works based on the neural equation. \ref{eq: NeuralFunction}
+The output layer takes the output of the last hidden layer and transforms it to produce a meaningful output.
+In the case of regression or binary classification, there is usually only one neuron, but for multi-class classification, the number of neurons corresponds to the number of classes to be classified.
+The output layer follows the same principle as the formula above, but it does not use a 'normal' activation function.
+Either a linear activation function or no activation function is used for regression, or the softmax \ref{eq: softmax} function is used for classification models.
 \begin{equation}
     f(x_i) = \frac{e^{x_i}}{\sum^n_{j=1}e^{x_j}}
     \label{eq: softmax}
@@ -58,17 +58,23 @@ This isn't done for the whole dataset but just some data points.
 The learning rate describes how far a parameter is changed in the direction of a derivation for one iteration, in SGD this Learning Rate is constant and manually set.
 
 Adaptive Moment Estimation (Adam)\cite{kingma_adam_2017} is one of the successors of SGD. Adam, uses a variable learning rate which is adapted for each parameter, which uses the estimation of the first moment, the mean, and the second moment, the variance to change the learning rate.
-
 Then this process is repeated until we are gone through the entire training set, which is called an epoch.
 
-\subsection{Core Layers in Neural Networks}\label{subsec:core-layers-in-neural-networks}
+\subsection*{Core Layers in Neural Networks}\label{subsec:core-layers-in-neural-networks}
 
 \subsubsection{Dense Layers}
-Dense Layers are the backbone of neural networks.
-They do most of the computational work of a neural network.
 It's characterized by its fully connected architecture, like seen in the figure \ref{fig: neural network}, meaning every node of the layer is connected to every node of the predecessor layer and every node of the successor layer.
 Dense layers are pivotal in learning intricate patterns from data, their versatility allows them to be stacked where each layer captures different levels of data abstraction.
-They work internally, like in the function above \ref{eq: NeuralFunction}.
+\ref{eq: DenseLayer}.
+Where $x = (x_1,x_2,\dots,x_n)^T$ is the input vector,
+$W = \left(\begin{smallmatrix}w_{11} & w_{12} & \dots & w_{1j}\\w_{21} & w_{22} & \dots & w_{2j}\\\vdots & \vdots & \ddots & \vdots\\w_{i1} & w_{i2} & \dots & w_{ij}\end{smallmatrix}\right)$
+is the weight vector and $b = (b_1,b_2,\dots,b_n)^T$ is the bias and $f$ is the activation function and the output function $y = (y_1,y_2,\dots,y_n)^T$.
+\begin{gather}
+    y_j = f\left( \sum^n_{i=1} w_{ij}\cdot x_i + b_j\right)\\
+    y = \left[ f\left( \sum^n_{i=1} w_{i1} \cdot x_i + b_1\right),f\left( \sum^n_{i=1} w_{i2} \cdot x_i + b_2\right),\dots,f\left( \sum^n_{i=1} w_{ij} \cdot x_i + b_j\right) \right]^T\\
+    y = f(W^T x+b)
+    \label{eq: DenseLayer}
+\end{gather}
 
 \subsubsection{Convolutional Layer}
 Convolutional layers, are used in image processing\cite{lecun_backpropagation_1989,szegedy_going_2014,krizhevsky_imagenet_2012}, unlike dense layers that try to analyse an image as a whole, but uses the concept of convolution to get a set of smaller pictures which depict isolated features of a picture.
@@ -111,18 +117,16 @@ Now, with the usage of the convolutional layer and the pooling layer, we can pre
 The testing methods can be categorized into two distinct categories, which are akin to testing in conventional software.
 They are coverage criteria and test case generation.
 In the subsequent section, we shall examine various methodologies employed for testing singular deep neural networks.\cite{huang_survey_2020}
-
 But first, how do we define an erroneous behaviour of a neural network? \ref{eq: erroneous behaviour}
-
 Where $f: \mathbb{R}^{s_1} \to \mathbb{R}^{s_K}$ is a trained neural network, $\mathcal{H}: \mathbb{R}^{s_1} \to \mathbb{R}^{s_K}$ and a legitimate input $x \in \mathbb{R}^{s_1}$, then we define the erroneous behaviour as:
 \begin{equation}
     \arg \max_{j} f_j (x) \neq \arg \max_{j} \mathcal{H}_j (x)
     \label{eq: erroneous behaviour}
 \end{equation}
 
-\subsection{Coverage Criteria}\label{subsec:coverage-criteria}
+\subsection*{Coverage Criteria}\label{subsec:coverage-criteria}
 We need the coverage criteria to get a quantitative basis for deciding how thoroughly our neural network is tested and to ensure that in our network key aspects aren't overlooked.
-Of course, the criteria used in neural network testing differ from those in software testing.
+The criteria used in neural network testing differ from those in software testing.
 
 \subsubsection{Neuron Coverage}
 Neuron coverage is the most basic coverage criteria, it is the ratio of the number of neurons activated by the test cases to the total number of neurons in the network.
@@ -141,7 +145,7 @@ By using a sign change and a value change to change, it's tried to exploit the r
 Quantitative Projection Coverage, is based on the assumption that the input differs on some kind of operation condition.
 For example, for self-driving cars: weather, landscape or impeding items.
 
-\subsection{Test Case Generation}
+\subsection*{Test Case Generation}
 But how do we now generate our test case, to get some useful information?
 We have, of course, multiple methods to generate our test cases:
 
@@ -160,12 +164,13 @@ One approach in Symbolic Execution is concolic testing, which is a hybrid testin
 Concolic testing combines the concrete execution of a program, with random input generation, hence symbolic data.
 There by, the findings of the first step are used to generate the second set of inputs.
 
-\section{Spectrum Analysis}\label{sec:spectrum-analysis}
+\section{Spectrum-Based Fault Localization}\label{sec:spectrum-analysis}
 Another important detail that requires introduction, Spectrum-Based Fault Localization (SBFL)\cite{wong_handbook_2023}, it is a technique to identify the source of faults in software.
 The term spectrum, describes in this context the execution profile of the program, which is collected during the execution of a test suite.
 During the execution, the coverage of each statement by a test case is recorded and if this test case is a success or a failure.
 \input{tables/symbols.tex}
-First, only failed test cases were recorded for SBFL, but later also successful test cases were recorded, which provide us with the information of the contrast between failure and success, which aids us to identify truly faulty statements.
+SBFL records not only failed test cases but also successful ones.
+This provides information on the contrast between failure and success, aiding in the identification of truly faulty statements.
 For example, in the first case, code that is often executed or every time, would be marked faulty simply for being in a programme.
 In the second case, the code wouldn't be marked faulty because it is also executed frequently in successful test cases.
 The term “code coverage” is frequently referred to as “executable statement hit spectrum” (ESHS), which denotes the extent to which certain components of the program under testing have been covered during execution.
@@ -189,9 +194,9 @@ Yoo et al. \cite{yoo_human_2017}said that using genetic programming to create ra
     \label{eq: simple_tarantula}
 \end{equation}
 In the following, you can see an Example \cite{parsa_software_2023} to see what spectrum analysis is, and what a pitfall of this method is.
-The code \ref{lst:code_snippet sfl} depicts some simple calculation program, which takes the two integers a and b as input and an integer c for the branching of the calculation.
+The Listing \ref{lst:code_snippet sfl} depicts some simple calculation program, which takes the two integers a and b as input and an integer c for the branching of the calculation.
 At line 11, the Max value is wrongly set, this is the fault that needs to be found.
-In the table \ref{tab: sfl}, you can see the suspiciousness values calculated with ochiai and tarantula.
+In the Table \ref{tab: sfl}, you can see the suspiciousness values calculated with ochiai and tarantula.
 
 But because line 8, is always executed with line 11 and is overall less executed than line 11, it is the more suspicious statement.
 Hence, we can see that spectrum analysis isn't the silver bullet, for eradicating faults in programs.
@@ -202,31 +207,3 @@ There are even more similarity coefficients, to an extent which wouldn't be feas
 There are some other examples of SBFL, which don't use ESHS, for example Program Invariants Hit Spectrum, which the coverage of program invariants.
 Those individuals attempt to identify violations of program properties in failed program executions to locate bugs.
 Another one would be the Method Calls Sequence Hit Spectrum, which collects information about the sequence of method calls, during a test-case.
-
-\section{DeepFault}\label{sec:deepfault}
-DeepFault\cite{eniser_deepfault_2019} is a white-box testing approach for neural networks, developed by Eniser et al. which is according to the Authors.
-\begin{quote}
-    ... the first fault localization-based white-box testing approach for DNNs.
-\end{quote}
-There are two objectives to the approach, the identification of suspicious neurons, which have undesirable behaviour, where the respective neuron is suspected to lead to an undesirable outcome in the whole network.
-And the synthesis of new inputs for the neural network, to specially retrain the (most) suspicious values.
-
-\subsection{Identification of suspicious neurons}\label{subsec:identification-of-suspicious-neurons}
-In this First Part, DeepFault is establishing a Hit Spectrum($HS$) \ref{eq:hit_spectrum} for all neurons, which take the form of a tuple.
-Of course, the input, and output layers are left out because they are considered inherently correct.
-\begin{equation}
-    HS_n = (attr_n^{as}, attr_n^{af}, attr_n^{ns}, attr_n^{nf}\label{eq:hit_spectrum}
-\end{equation}
-\begin{itemize}
-    \item $attr^{as}_n$ is the number of times the neuron $n$ is activated in successful test cases.
-    \item $attr^{af}_n$ is the number of times the neuron $n$ is activated in failed test cases.
-    \item $attr^{ns}_n$ is the number of times the neuron $n$ is not activated in successful test cases.
-    \item $attr^{nf}_n$ is the number of times the neuron $n$ is not activated in failed test cases.
-\end{itemize}
-Then the hit spectra are in a suspiciousness measures, in DeepFault Tarantula \ref{eq: tarantula}, Ochiai \ref{eq: ochiai}, $D^3$ \ref{eq: dstar} are used.
-These are not used to identify one wrong neuron, but rather a set of wrong neurons.
-For that, the suspiciousness values of the neurons are used to sort the neurons in decreasing order of suspiciousness, if multiple neurons happen to get the same value, the neuron in a deeper layer is used.
-
-\subsection{Synthesis of new inputs}\label{subsec:synthesis-of-new-inputs}
-Guided by the suspiciousness measures, DeepFault modifies the input, for which the neural network has made the correct decision, in a targeted way.
-The synthesis task is supported by a gradient ascent algorithm that aims to determine the degree to which an appropriately classified input should and could be modified to enhance the activation values of suspicious neurons.

@@ -1,0 +1,25 @@
+\section{DeepFault}\label{sec:deepfault}
+DeepFault\cite{eniser_deepfault_2019} is a white-box testing approach for neural networks, developed by Eniser et al. which is according to the Authors.
+\begin{quote}
+    ... the first fault localization-based white-box testing approach for DNNs.
+\end{quote}
+There are two objectives to the approach, the identification of suspicious neurons, which have undesirable behaviour, where the respective neuron is suspected to lead to an undesirable outcome in the whole network.
+And the synthesis of new inputs for the neural network, to specially retrain the (most) suspicious values.
+
+In this First Part, DeepFault is establishing a Hit Spectrum($HS$) \ref{eq:hit_spectrum} for all neurons, which take the form of a tuple.
+The input, and output layers are left out because they are considered inherently correct.
+\begin{equation}
+    HS_n = (attr_n^{as}, attr_n^{af}, attr_n^{ns}, attr_n^{nf})\label{eq:hit_spectrum}
+\end{equation}
+\begin{itemize}
+    \item $attr^{as}_n$ is the number of times the neuron $n$ is activated in successful test cases.
+    \item $attr^{af}_n$ is the number of times the neuron $n$ is activated in failed test cases.
+    \item $attr^{ns}_n$ is the number of times the neuron $n$ is not activated in successful test cases.
+    \item $attr^{nf}_n$ is the number of times the neuron $n$ is not activated in failed test cases.
+\end{itemize}
+Then the hit spectra are in a suspiciousness measures, in DeepFault Tarantula \ref{eq: tarantula}, Ochiai \ref{eq: ochiai}, $D^3$ \ref{eq: dstar} are used.
+These are not used to identify one wrong neuron, but rather a set of wrong neurons.
+For that, the suspiciousness values of the neurons are used to sort the neurons in decreasing order of suspiciousness, if multiple neurons happen to get the same value, the neuron in a deeper layer is used.
+
+Guided by the suspiciousness measures, DeepFault modifies the input, for which the neural network has made the correct decision, in a targeted way.
+The synthesis task is supported by a gradient ascent algorithm that aims to determine the degree to which an appropriately classified input should and could be modified to enhance the activation values of suspicious neurons.
