@@ -1,0 +1,27 @@
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[node distance=2cm]
+        \node (start) [startstop] {Start};
+        \node (pro1) [process, below of=start] {Spectrum analysis};
+        \node (pro2) [process, below of=pro1] {Pop, head node};
+        \node (pro3) [process, below of=pro2] {Mutate node};
+        \node (dec1) [decision, below of=pro3, yshift=-0.5cm] {Training?};
+        \node (pro4a) [process, below of=dec1, yshift=-0.5cm] {Evaluate};
+        \node (pro4b) [process, right of=dec1, xshift=2cm] {Fit model};
+        \node (dec2) [decision, below of=pro4a, yshift=-0.5cm] {Break?};
+        \node (stop) [startstop, below of=dec2, yshift=-0.5cm] {Stop};
+
+        \draw [arrow] (start) -- (pro1);
+        \draw [arrow] (pro1) -- (pro2);
+        \draw [arrow] (pro2) -- (pro3);
+        \draw [arrow] (pro3) -- (dec1);
+        \draw [arrow] (dec1) -- node[anchor=north] {yes} (pro4b);
+        \draw [arrow] (pro4b) |- (pro4a);
+        \draw [arrow] (dec1) -- node[anchor=west] {no} (pro4a);
+        \draw [arrow] (pro4a) -- (dec2);
+        \draw [arrow] (dec2) -- node[anchor=west] {yes} (stop);
+        \draw [arrow] (dec2) -- node[anchor=south, above=1pt] {no} ++(-3.5,0) |- (pro2);
+    \end{tikzpicture}
+    \caption{Flowchart of the \texttt{run\_modification} algorithm.}
+    \label{fig:flowchart}
+\end{figure}

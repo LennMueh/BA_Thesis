@@ -53,7 +53,8 @@ Afterward the backpropagation or backpropagation of error is performed. \cite{ru
 Then the output is compared to the desired outcome of the training data, hence, if the predicted outcome of the network matches the actual outcome.
 If it doesn't match, it calculates how far off the prediction is.
 The process of backpropagation is initiated, which uses an algorithm like Stochastic Gradient Descent (SGD) or one of its modern successors like Adam.
-SGD updates the model parameters by using the gradient of the loss function concerning the parameter.
+SGD is an iterative method used to optimize an objective function, making it particularly advantageous for high-dimensional optimization problems.
+With each iteration SGD updates the model parameters by using the gradient of the loss function concerning the parameter.
 This isn't done for the whole dataset but just some data points.
 The learning rate describes how far a parameter is changed in the direction of a derivation for one iteration, in SGD this Learning Rate is constant and manually set.
 
@@ -61,7 +62,8 @@ Adaptive Moment Estimation (Adam)\cite{kingma_adam_2017} is one of the successor
 Then this process is repeated until we are gone through the entire training set, which is called an epoch.
 
 \subsection*{Core Layers in Neural Networks}\label{subsec:core-layers-in-neural-networks}
-
+In the following, we will discuss the core layers in neural networks, which are the dense layer, the convolutional layer and the pooling layer.
+We use them in our evaluation, hence, we will discuss them in detail.
 \subsubsection{Dense Layers}
 It's characterized by its fully connected architecture, like seen in the figure \ref{fig: neural network}, meaning every node of the layer is connected to every node of the predecessor layer and every node of the successor layer.
 Dense layers are pivotal in learning intricate patterns from data, their versatility allows them to be stacked where each layer captures different levels of data abstraction.
@@ -91,14 +93,13 @@ But how does this correspond to neural networks and image processing, foremost, 
     \label{eq: 2Dconvolution}
 \end{equation}
 \input{figures/convolution.tikz}
-For this, the singular weights are replaced by matrices of weights, so-called kernels or filters.
-The output of the convolutional layer, are so-called feature maps, each of these contains the result of applying one filter to the input data.
-These capture different aspects, like edges or textures.
-There are two other variables in a convolutional layer, apart from the number of the number and size of filters and the activation function.
-They are the stride and the padding, the stride describes how many steps the filter moves between successive convolutions.
-The larger stride, the smaller the resulting filter map, and vice versa.
-Of course, a larger stride results in less detail in a map.
-Padding is an optional parameter which aids in maintaining information on the edge of an input and helps to keep the scale of a picture.
+In convolutional neural networks, matrices of weights called kernels or filters replace singular weights in dense layers.
+The output of the convolutional layer consists of feature maps, each representing the result of applying one filter to the input data.
+These maps capture different aspects such as edges or textures.
+A convolutional layer has two other variables: the number and size of filters and the activation function.
+The terms "stride" and "padding" are used to describe the movement of the filter and the preservation of information on the edge of an input, respectively.
+The stride determines the number of steps the filter takes between convolutions, with a larger stride resulting in a smaller filter map and less detail.
+Padding is an optional parameter that helps to maintain information on the edge of an input and preserve the scale of a picture.
 
 \subsubsection{Pooling Layer}
 Pooling is an often used concept in Convolutional Neural Networks to reduce the size of the individual feature map produced by the convolutional layer, while conserving important details of the feature map.
@@ -129,20 +130,20 @@ We need the coverage criteria to get a quantitative basis for deciding how thoro
 The criteria used in neural network testing differ from those in software testing.
 
 \subsubsection{Neuron Coverage}
-Neuron coverage is the most basic coverage criteria, it is the ratio of the number of neurons activated by the test cases to the total number of neurons in the network.
+Neuron coverage is the most basic coverage criteria, it is the ratio of the number of neurons activated by the test cases to the total number of neurons in the network \cite{pei_deepxplore_2017}.
 A neuron is activated if the output of the neuron is greater than zero.
 The neuron coverage is equivalent to the statement coverage in software testing, it helps to measure the thoroughness of the test cases.
 
 \subsubsection{Safety Coverage}
-The Safety Coverage is derived, by discretizing the input space into a set of hyper-rectangles, each of these hyper-rectangles exhibit the same pattern of activations of neurons, because it has a similar feature set.
+The Safety Coverage is derived, by discretizing the input space into a set of hyper-rectangles \cite{beyer_feature-guided_2018}, each of these hyper-rectangles exhibit the same pattern of activations of neurons, because it has a similar feature set.
 A hyper-rectangle is considered safely covered if a test case is classified correctly for all points in the hyper-rectangle.
 \subsubsection{Modified Condition/Decision Coverage}
-Modified Condition/Decision Coverage (MC/DC) is a method in software testing, which requires that each condition in a decision is tested independently and that each condition is shown to affect the decision outcome independently.
-This is done by varying the input of the condition while holding the other conditions constant.
+Modified Condition/Decision Coverage (MC/DC) is a method in software testing \cite{hayhurst_practical_2001}, which requires that each condition in a decision is tested independently and that each condition is shown to affect the decision outcome independently.
+This is done by varying the input of the condition while holding the other conditions constant \cite{sun_deepconcolic_2019}.
 The method is particularly useful in identifying cases where multiple conditions contribute to a decision's outcome.
 By using a sign change and a value change to change, it's tried to exploit the relationship between those and use these as a coverage criterion.
 \subsubsection{Quantitative Projection}
-Quantitative Projection Coverage, is based on the assumption that the input differs on some kind of operation condition.
+Quantitative Projection Coverage, is based on the assumption that the input differs on some kind of operation condition \cite{cheng_manifesting_2018}.
 For example, for self-driving cars: weather, landscape or impeding items.
 
 \subsection*{Test Case Generation}
@@ -150,17 +151,17 @@ But how do we now generate our test case, to get some useful information?
 We have, of course, multiple methods to generate our test cases:
 
 \subsubsection{Input Mutation}
-Input Mutation, is a method where we take one of the inputs and transform it, by some predefined rules, to generate our test cases.
+Input Mutation, is a method where we take one of the inputs and transform it, by some predefined rules, to generate our test cases .
 For example, in combination with safety coverage, we try to mutate the input in that way so that we cover every hyper-rectangle.
 \subsubsection{Fuzzing}
-Fuzzing, is a method where we generate random inputs, which are modified from the input set, those are then fed into the network.
+Fuzzing, is a method where we generate random inputs, which are modified from the input set, those are then fed into the network \cite{beyer_feature-guided_2018}.
 There by, we try to cover as much of the input space as possible.
 This can help us because a neural network, is designed for high-dimensional data, aim is to find cases where these small changes to the input cause the DNN to fail or behave unexpectedly.
 
 \subsubsection{Symbolic Execution}
 Despite the efficacy of input mutation and fuzzing in generating a substantial quantity of random data, it is uncertain whether certain test objectives will be fulfilled.
 With Symbolic Execution, we try to find out which input causes a part of a program to execute.
-One approach in Symbolic Execution is concolic testing, which is a hybrid testing technique which is adapted for neural networks with DeepConcolic.
+One approach in Symbolic Execution is concolic testing, which is a hybrid testing technique which is adapted for neural networks with DeepConcolic \cite{sun_deepconcolic_2019}.
 Concolic testing combines the concrete execution of a program, with random input generation, hence symbolic data.
 There by, the findings of the first step are used to generate the second set of inputs.
 

@@ -1,0 +1,28 @@
+Our approach is based on the code presented in the previous paper DeepFault by Eniser et al. \cite{eniser_deepfault_2019}
+We adapted their source code from their GitHub \cite{eniser_deepfault_2023} repository and implemented the \texttt{run\_analysis} \ref{lst:main analysis} function.
+This function takes the model, approach for suspiciousness measures, test data, and labels as inputs.
+The desired number of neurons to be obtained should be specified.
+If a measure involving a factor such as $\text{D}^*$ is used, the symbol should be clearly defined.
+The save functions \ref{lst:saving} were adapted to the latest h5py \cite{collette_h5pyh5py_2022} version.
+Additionally, save functions were added for the spectrum matrices and the suspiciousness ranked neurons.
+This helped us achieve faster execution times.
+Additionally, we modified the \texttt{get\_layer\_outs} \ref{lst:layer outs} function from Keras \cite{chollet_keras_2015} to TensorFlow \cite{martin_abadi_tensorflow_2015}.
+The function \texttt{construct\_spectrum\_matrices} \ref{lst:spectrum matrice} has been optimized in terms of its control structure.
+The function \texttt{scores\_with\_foo} \ref{lst:analysis_function}, which is used to calculate the suspiciousness measures and rank the neurons, now utilizes NumPy.
+Also we added the \texttt{random\_choosing} \ref{lst:random_choosing} function, which is used to randomly select neurons.
+
+For the modification of the nodes, we first implemented the \texttt{run\_modification} algorithm \ref{lst:mutation}\ref{fig:flowchart}.
+This function takes the model, the model data, for both training and evaluation, the approach for suspiciousness measures, the values of the first evaluation, the maximum number of iterations, which comparison function to use, the offset of loss and accuracy, and if regression of loss and accuracy is enabled.
+The values of the first evaluation were only added for performance gains during evaluation, in production the first evaluation would be done by the function itself.
+We have multiple comparisons for the loss and accuracy, ever we only use one of them, or both need to be larger then the last time for the loss or smaller for the accuracy.
+We can also break if one of them breaks.
+Other wise we have implemented the usage of an offset, which is used to prevent the algorithm from breaking to early, if the model is just slightly worst performing than before.
+The regression is used to lower the offset over time, so that the algorithm can break earlier.
+\input{figures/flowchart.tikz}
+
+The function also takes a mutation function, which is used to mutate the weights \ref{lst:weight_mod} or biases \ref{lst:bias_mod} of the model.
+We implemented multiple mutation functions, which can be categorized into scalar and non-scalar mutations.
+These functions either mutate the weights or biases of the model.
+Either by adding a value, scaling a value \ref{lst:scalar_weight_mod} \ref{lst:scalar_bias_mod}, or setting a value.
+The values are either randomly chosen by uniform distribution or by a normal distribution, or by a defined value.
+Where of course the value of 0 in a weight mutation is behaving like a deletion of the neuron or filter.

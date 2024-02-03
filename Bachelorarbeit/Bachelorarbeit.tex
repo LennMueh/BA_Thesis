@@ -53,7 +53,7 @@ fancyheadings, % headings with seplines and logo
 \usepackage{multirow}
 \usepackage{listings}
 \usepackage{lscape}
-\usetikzlibrary{matrix, positioning}
+\usetikzlibrary{matrix, positioning, shapes.geometric, arrows}
 \usepackage{xcolor}
 \usepackage{listofitems} % for \readlist to create arrays
 \tikzstyle{mynode}=[thick,draw=blue,fill=blue!20,circle,minimum size=22]
@@ -82,6 +82,29 @@ fancyheadings, % headings with seplines and logo
     showtabs=false,
     tabsize=2
 }
+\tikzstyle{startstop} = [rectangle, rounded corners,
+minimum width=3cm,
+minimum height=1cm,
+text centered,
+draw=black,
+fill=red!30]
+
+\tikzstyle{process} = [rectangle,
+minimum width=3cm,
+minimum height=1cm,
+text centered,
+text width=3cm,
+draw=black,
+fill=orange!30]
+
+\tikzstyle{decision} = [diamond,
+minimum width=2.5cm,
+minimum height=2cm,
+text width=1.5cm,
+text centered,
+draw=black,
+fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
 
 \lstset{style=mystyle}
 % to generate some dummy text

@@ -91,8 +91,8 @@ def save_suspicious_neurons(suspicious_neurons, filename, approach, susp_num, gr
     filename = filename + '_' + approach + '_SN' + str(susp_num) + '_suspicious_neurons.h5'
     with h5py.File(filename, 'a') as hf:
         group = hf.create_group('group' + str(group_index))
-        #for i in range(len(suspicious_neurons)):
-            #group.create_dataset("suspicious_neurons_" + str(i), data=suspicious_neurons[i])
+        # for i in range(len(suspicious_neurons)):
+        # group.create_dataset("suspicious_neurons_" + str(i), data=suspicious_neurons[i])
         for i, tuple_data in enumerate(suspicious_neurons):
             list_data = list(tuple_data)
             group.create_dataset(f'suspicious_neurons_{i}', data=list_data)
@@ -108,7 +108,7 @@ def load_suspicious_neurons(filename, approach, susp_num, group_index=1):
             group = hf.get('group' + str(group_index))
             i = 0
             suspicious_neurons = []
-            #while f'suspicious_neurons_{i}' in group:
+            # while f'suspicious_neurons_{i}' in group:
             #    suspicious_neurons.append(group[f'suspicious_neurons_{i}'][:])
             #    i += 1
             while f'suspicious_neurons_{i}' in group:

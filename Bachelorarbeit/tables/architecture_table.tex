@@ -1,105 +1,40 @@
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}
 % \usepackage{lscape}
-\begin{landscape}
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
 \begin{table}[htbp]
-\begin{tabular}{|cccc|ccc|ccc|}
-\hline
-\multicolumn{4}{|c|}{Model} &
-  \multicolumn{3}{c|}{Accuracy} &
-  \multicolumn{3}{c|}{Loss} \\ \hline
-\multicolumn{1}{|c|}{Model Name} &
-  \multicolumn{1}{c|}{Mod. Param.} &
-  \multicolumn{1}{c|}{Architecture} &
-  Initial Epochs &
-  \multicolumn{1}{c|}{Full} &
-  \multicolumn{1}{c|}{Half} &
-  Quarter &
-  \multicolumn{1}{c|}{Full} &
-  \multicolumn{1}{c|}{Half} &
-  Quarter \\ \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{DNN1}} &
-  \multicolumn{1}{c|}{\multirow{2}{*}{16}} &
-  \multicolumn{1}{c|}{\multirow{2}{*}{$<16>$}} &
-  1 &
-  \multicolumn{1}{c|}{82.84\%} &
-  \multicolumn{1}{c|}{81.49\%} &
-  78.65\% &
-  \multicolumn{1}{c|}{49.11\%} &
-  \multicolumn{1}{c|}{53.46\%} &
-  62.00\% \\ \cline{4-10}
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} &
-  6 &
-  \multicolumn{1}{c|}{84.23\%} &
-  \multicolumn{1}{c|}{83.76\%} &
-  83.57\% &
-  \multicolumn{1}{c|}{44.42\%} &
-  \multicolumn{1}{c|}{44.48\%} &
-  46.94\% \\ \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{DNN2}} &
-  \multicolumn{1}{c|}{\multirow{2}{*}{64}} &
-  \multicolumn{1}{c|}{\multirow{2}{*}{$<4x16>$}} &
-  1 &
-  \multicolumn{1}{c|}{80.46\%} &
-  \multicolumn{1}{c|}{79.20\%} &
-  75.97\% &
-  \multicolumn{1}{c|}{54.05\%} &
-  \multicolumn{1}{c|}{57.90\%} &
-  66.21\% \\ \cline{4-10}
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} &
-  6 &
-  \multicolumn{1}{c|}{83.52\%} &
-  \multicolumn{1}{c|}{83.04\%} &
-  82.74\% &
-  \multicolumn{1}{c|}{44.23\%} &
-  \multicolumn{1}{c|}{46.79\%} &
-  48.88\% \\ \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{CNN1}} &
-  \multicolumn{1}{c|}{\multirow{2}{*}{12}} &
-  \multicolumn{1}{c|}{\multirow{2}{*}{$<CL,4>$}} &
-  1 &
-  \multicolumn{1}{c|}{74.34\%} &
-  \multicolumn{1}{c|}{77.31\%} &
-  42.62\% &
-  \multicolumn{1}{c|}{72.88\%} &
-  \multicolumn{1}{c|}{66.83\%} &
-  147.63\% \\ \cline{4-10}
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} &
-  6 &
-  \multicolumn{1}{c|}{83.69\%} &
-  \multicolumn{1}{c|}{82.14\%} &
-  61.06\% &
-  \multicolumn{1}{c|}{48.44\%} &
-  \multicolumn{1}{c|}{47.35\%} &
-  95.61\% \\ \hline
-\multicolumn{1}{|c|}{\multirow{2}{*}{CNN2}} &
-  \multicolumn{1}{c|}{\multirow{2}{*}{20}} &
-  \multicolumn{1}{c|}{\multirow{2}{*}{$<CL,CL,4>$}} &
-  1 &
-  \multicolumn{1}{c|}{70.49\%} &
-  \multicolumn{1}{c|}{54.52\%} &
-  63.20\% &
-  \multicolumn{1}{c|}{80.13\%} &
-  \multicolumn{1}{c|}{111.68\%} &
-  100.31\% \\ \cline{4-10}
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} &
-  6 &
-  \multicolumn{1}{c|}{78.43\%} &
-  \multicolumn{1}{c|}{77.37\%} &
-  74.56\% &
-  \multicolumn{1}{c|}{60.28\%} &
-  \multicolumn{1}{c|}{59.29\%} &
-  65.74\% \\ \hline
-\end{tabular}
-\caption{Overview of Neural Networks used for evaluation}
-\label{tab:architecture}
+    \centering
+    \caption{Overview of Neural Network Architectures used for evaluation}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Model Name            & Mod. Param.         & Architecture                 \\ \hline
+        \multirow{2}{*}{DNN1} & \multirow{2}{*}{16} & \multirow{2}{*}{$<16>$}      \\
+        &                     &                              \\ \hline
+        \multirow{2}{*}{DNN2} & \multirow{2}{*}{64} & \multirow{2}{*}{$<4x16>$}    \\
+        &                     &                              \\ \hline
+        \multirow{2}{*}{CNN1} & \multirow{2}{*}{12} & \multirow{2}{*}{$<CL,4>$}    \\
+        &                     &                              \\ \hline
+        \multirow{2}{*}{CNN2} & \multirow{2}{*}{20} & \multirow{2}{*}{$<CL,CL,4>$} \\
+        &                     &                              \\ \hline
+    \end{tabular}
+    \label{tab:archi}
 \end{table}
-\end{landscape}
+\begin{table}[htbp]
+    \centering
+    \caption{Results of the initial Training of the different models}
+    \begin{tabular}{|cc|ccc|ccc|}
+        \hline
+        \multicolumn{2}{|c|}{Model} & \multicolumn{3}{c|}{Accuracy} & \multicolumn{3}{c|}{Loss} \\ \hline
+        \multicolumn{1}{|c|}{Name}                  & Init. Epochs & \multicolumn{1}{c|}{Full}    & \multicolumn{1}{c|}{Half}    & Quarter & \multicolumn{1}{c|}{Full}    & \multicolumn{1}{c|}{Half}     & Quarter  \\ \hline
+        \multicolumn{1}{|c|}{\multirow{2}{*}{DNN1}} & 1              & \multicolumn{1}{c|}{82.84\%} & \multicolumn{1}{c|}{81.49\%} & 78.65\% & \multicolumn{1}{c|}{49.11\%} & \multicolumn{1}{c|}{53.46\%}  & 62.00\%  \\ \cline{2-8}
+        \multicolumn{1}{|c|}{}                      & 6              & \multicolumn{1}{c|}{84.23\%} & \multicolumn{1}{c|}{83.76\%} & 83.57\% & \multicolumn{1}{c|}{44.42\%} & \multicolumn{1}{c|}{44.48\%}  & 46.94\%  \\ \hline
+        \multicolumn{1}{|c|}{\multirow{2}{*}{DNN2}} & 1              & \multicolumn{1}{c|}{80.46\%} & \multicolumn{1}{c|}{79.20\%} & 75.97\% & \multicolumn{1}{c|}{54.05\%} & \multicolumn{1}{c|}{57.90\%}  & 66.21\%  \\ \cline{2-8}
+        \multicolumn{1}{|c|}{}                      & 6              & \multicolumn{1}{c|}{83.52\%} & \multicolumn{1}{c|}{83.04\%} & 82.74\% & \multicolumn{1}{c|}{44.23\%} & \multicolumn{1}{c|}{46.79\%}  & 48.88\%  \\ \hline
+        \multicolumn{1}{|c|}{\multirow{2}{*}{CNN1}} & 1              & \multicolumn{1}{c|}{74.34\%} & \multicolumn{1}{c|}{77.31\%} & 42.62\% & \multicolumn{1}{c|}{72.88\%} & \multicolumn{1}{c|}{66.83\%}  & 147.63\% \\ \cline{2-8}
+        \multicolumn{1}{|c|}{}                      & 6              & \multicolumn{1}{c|}{83.69\%} & \multicolumn{1}{c|}{82.14\%} & 61.06\% & \multicolumn{1}{c|}{48.44\%} & \multicolumn{1}{c|}{47.35\%}  & 95.61\%  \\ \hline
+        \multicolumn{1}{|c|}{\multirow{2}{*}{CNN2}} & 1              & \multicolumn{1}{c|}{70.49\%} & \multicolumn{1}{c|}{54.52\%} & 63.20\% & \multicolumn{1}{c|}{80.13\%} & \multicolumn{1}{c|}{111.68\%} & 100.31\% \\ \cline{2-8}
+        \multicolumn{1}{|c|}{}                      & 6              & \multicolumn{1}{c|}{78.43\%} & \multicolumn{1}{c|}{77.37\%} & 74.56\% & \multicolumn{1}{c|}{60.28\%} & \multicolumn{1}{c|}{59.29\%}  & 65.74\%  \\ \hline
+    \end{tabular}
+    \label{tab:results}
+\end{table}
