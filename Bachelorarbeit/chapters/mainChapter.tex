@@ -1,28 +1,72 @@
-Our approach is based on the code presented in the previous paper DeepFault by Eniser et al. \cite{eniser_deepfault_2019}
-We adapted their source code from their GitHub \cite{eniser_deepfault_2023} repository and implemented the \texttt{run\_analysis} \ref{lst:main analysis} function.
-This function takes the model, approach for suspiciousness measures, test data, and labels as inputs.
-The desired number of neurons to be obtained should be specified.
-If a measure involving a factor such as $\text{D}^*$ is used, the symbol should be clearly defined.
-The save functions \ref{lst:saving} were adapted to the latest h5py \cite{collette_h5pyh5py_2022} version.
-Additionally, save functions were added for the spectrum matrices and the suspiciousness ranked neurons.
-This helped us achieve faster execution times.
-Additionally, we modified the \texttt{get\_layer\_outs} \ref{lst:layer outs} function from Keras \cite{chollet_keras_2015} to TensorFlow \cite{martin_abadi_tensorflow_2015}.
-The function \texttt{construct\_spectrum\_matrices} \ref{lst:spectrum matrice} has been optimized in terms of its control structure.
-The function \texttt{scores\_with\_foo} \ref{lst:analysis_function}, which is used to calculate the suspiciousness measures and rank the neurons, now utilizes NumPy.
-Also we added the \texttt{random\_choosing} \ref{lst:random_choosing} function, which is used to randomly select neurons.
+In the following chapter, we describe our approach for our "mutation-based accuracy improvements", starting with the adaptation of DeepFault's \cite{eniser_deepfault_2019} spectrum fault localisation, which we adapted to the latest versions of the libraries used and optimised for faster execution time and elimination of redundant operations that are often used across operations, such as the creation of the spectrum matrices that aggregate all analysis values for each neuron in a network.
+We used the source code from the GitHub repository of Eniser et al \cite{eniser_deepfault_2023}.
 
-For the modification of the nodes, we first implemented the \texttt{run\_modification} algorithm \ref{lst:mutation}\ref{fig:flowchart}.
-This function takes the model, the model data, for both training and evaluation, the approach for suspiciousness measures, the values of the first evaluation, the maximum number of iterations, which comparison function to use, the offset of loss and accuracy, and if regression of loss and accuracy is enabled.
-The values of the first evaluation were only added for performance gains during evaluation, in production the first evaluation would be done by the function itself.
-We have multiple comparisons for the loss and accuracy, ever we only use one of them, or both need to be larger then the last time for the loss or smaller for the accuracy.
-We can also break if one of them breaks.
-Other wise we have implemented the usage of an offset, which is used to prevent the algorithm from breaking to early, if the model is just slightly worst performing than before.
-The regression is used to lower the offset over time, so that the algorithm can break earlier.
+The functions adapted from the DeepFault paper have been invoked in the \texttt{run\_analysis} \ref{lst:main analysis} function.
+The function manages the model loading and the experiment or working paths.
+The program checks if the necessary data, such as classifications, layer outputs, or spectrum matrices, is already available before executing the analysis functions and saving the outputs.
+The network's neuron count is aggregated, and if the number of selected neurons \texttt{susp\_num} is less than the number of modifiable neurons, the \texttt{susp\_num} most suspicious neurons are returned.
+Otherwise, all modifiable neurons are returned, ranked by their level of suspicion.
+To determine the suspiciousness, we use the $\text{D}^*$, Tarantula, and Ochiai methods.
+The option to return a specified number of random neurons has also been included \ref{lst:random_choosing}.
+The function returns a list of tuples in the format of $(layer, layer\_index)$, ranked by relevance.
+
+\lstinputlisting[language=Python, linerange={8-64}, caption={Main analysis function}, label={lst:main analysis}]{source_analysis/__init__.py}
+\lstinputlisting[language=Python, linerange={59-71}, caption={Random Choosing, of neurons}, label={lst:random_choosing}]{source_analysis/analysis.py}
+
+The saving and loading functions \ref{lst:saving} required adaptation due to the depreciation of the \texttt{.value} property in h5py \cite{collette_h5pyh5py_2022}.
+Therefore, every loading function needs to use indexing instead of the property used by the old DeepFault code.
+Save and load functions were added for the spectrum matrices and ranked neurons.
+These functions are constant since the analysis is only executed once at the start of the algorithm before any model modifications are made.
+This improves execution times by preventing multiple executions.
+
+\lstinputlisting[language=Python, linerange={19-81,90-123,154-195}, caption={Saving and loading data}, label={lst:saving}]{source_analysis/utilities.py}
+
+Additionally, we modified the \texttt{get\_layer\_outs} \ref{lst:layer outs} function from native Keras \cite{chollet_keras_2015} calls to TensorFlow \cite{martin_abadi_tensorflow_2015} via \texttt{tf.keras}, which uses Keras as its backend, as recommended by the release notes of Keras 2.13.0. .
+Because of its better integration with the rest of the TensorFlow library.
+
+\lstinputlisting[language=Python, linerange={82-87}, caption={Layer outs}, label={lst:layer outs}]{source_analysis/utilities.py}
+
+The \texttt{construct\_spectrum\_matrices} \ref{lst:spectrum matrice} function has been modified to use \texttt{enumerate} in the loops, allowing for the value and index to be obtained in a single loop.
+This modification has resulted in a reduction in the function's runtime.
+
+\lstinputlisting[language=Python, linerange={56-90}, caption={Construct spectrum matrice}, label={lst:spectrum matrice}]{source_analysis/test_network.py}
+
+
+\section*{Mutation of the neural network}
+Now we move on to the second step in our approach: modifying our network.
+We designed the function \texttt{run\_modification\_algorithm} \ref{lst:mutation}\ref{fig:flowchart} for this purpose.
+Our model and the associated dataset are used, along with a chosen similarity coefficient and modification function.
+In addition, we can specify whether to train the model and set an offset for the loss and accuracy.
+We can also indicate if we intend to regress the loss and accuracy, which is used as a break condition.
+The four break conditions that were introduced require both loss and accuracy to be compared and both to break, or one of them to break, if we want to compare each individually, we can also just compare one individually.
+At line 15, \texttt{tf.random.set\_seed(42)} is included for evaluation purposes, to enable comparison of results from different runs.
+
+The evaluation process utilises certain values that are not required in production code.
+The \texttt{run} parameter, which simply sets the name of the data analysis run to distinguish between different runs.
+In addition, we introduced \texttt{old\_loss} and \texttt{old\_accuracy} to save time by outsourcing the initial model evaluation.
+This evaluation is necessary at the start of the function and now only needs to be performed once, rather than every time the function is used.
+The pandas functions are also included to gather evaluation data.
+
+\lstinputlisting[language=Python, linerange={9-58}, caption={Modification Algorithm}, label={lst:mutation}]{source_mutation/__init__.py}
 \input{figures/flowchart.tikz}
 
-The function also takes a mutation function, which is used to mutate the weights \ref{lst:weight_mod} or biases \ref{lst:bias_mod} of the model.
-We implemented multiple mutation functions, which can be categorized into scalar and non-scalar mutations.
-These functions either mutate the weights or biases of the model.
-Either by adding a value, scaling a value \ref{lst:scalar_weight_mod} \ref{lst:scalar_bias_mod}, or setting a value.
-The values are either randomly chosen by uniform distribution or by a normal distribution, or by a defined value.
-Where of course the value of 0 in a weight mutation is behaving like a deletion of the neuron or filter.
+Now, let's discuss the mutation functions that we pass to our main function.
+These functions allow us to modify the weights and biases of a neuron, which is similar to the theoretical representation of a neuron \ref{eq: DenseLayer}.
+The basic functionality of the mutation functions is mostly the same.
+We first isolate the layer from the model, which is the first entry in the coordinate tuple. \ref{lst:weight_mod} \ref{lst:bias_mod}
+Then, we obtain the weights, where the first entry represents the weights of the neuron and the second entry represents the biases.
+The matrix can be mutated according to specific requirements.
+To do this, isolate the entries that represent the specified neuron in the second entry of the coordinate and modify them accordingly.
+Finally, reassign the weights back to the layer and return the model, which must then be recompiled.
+
+\lstinputlisting[language=Python, linerange={4-33}, caption={Weight Modification Functions}, label={lst:weight_mod}]{source_mutation/utilities.py}
+\lstinputlisting[language=Python, linerange={35-45}, caption={Bias Modification Functions}, label={lst:bias_mod}]{source_mutation/utilities.py}
+
+Multiple mutation functions have been implemented for not only dense layers but also 2D Convolution Layers.
+Mutation functions are used to assign a singular value to all weights or the bias of a neuron.
+This value can either be fixed or random, derived from a uniform or Gaussian normal distribution.
+For random values, each weight value can be assigned a new random number individually.
+Additionally, scalar mutation functions \ref{lst:scalar_weight_mod} \ref{lst:scalar_bias_mod} can modify the existing values without assigning new ones.
+
+\lstinputlisting[language=Python, linerange={68-81,115-127}, caption={Scalar Weight Modification Functions}, label={lst:scalar_weight_mod}]{source_mutation/utilities.py}
+\lstinputlisting[language=Python, linerange={87-97}, caption={Scalar Bias Modification Functions}, label={lst:scalar_bias_mod}]{source_mutation/utilities.py}
