@@ -37,14 +37,58 @@ Fo our evaluation we used the following parameters:
     \item[]\textbf{Sigma for random:} 0.5, 1
 \end{enumerate}
 \section{Impact of Training on Mutated Models}\label{sec:impact-of-training-on-mutated-models}
-
-
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{plots/Trained_Change_Acc.png}
+    \includegraphics[width=\textwidth]{plots/Trained_Change_Loss.png}
+    \caption{Loss and accuracy of the models, with training}
+    \label{fig:loss-accuracy-training}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{plots/Trained_Points_perEpoch.png}
+    \caption{Decay of data points, per epoch, with training}
+    \label{fig:decay_training}
+\end{figure}
 \section{Effects of Mutation Without Training}\label{sec:effects-of-mutation-without-training}
-
-
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{plots/NotTrained_Change_Acc.png}
+    \includegraphics[width=\textwidth]{plots/NotTrained_Change_Loss.png}
+    \caption{Loss and accuracy of the models, without training}
+    \label{fig:loss-accuracy-Notraining}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{plots/NotTrained_Points_perEpoch.png}
+    \caption{Decay of data points, per epoch, without training}
+    \label{fig:decay_Notraining}
+\end{figure}
 \section{Training Dataset Size and Model Performance}\label{sec:training-dataset-size-and-model-performance}
-
-
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Dataset_NotTrained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Dataset_NotTrained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, without training, with different dataset sizes}
+    \label{fig:dataset-size-notraining}
+\end{figure}
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Dataset_Trained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Dataset_Trained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, with training, with different dataset sizes}
+    \label{fig:dataset-size-training}
+\end{figure}
 \section{Influence of Suspiciousness Measures}\label{sec:influence-of-suspiciousness-measures}
 
 
