@@ -2,36 +2,41 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import time
 
+# Timing the reading of the hdf file
 start = time.time()
 df = pd.read_hdf("../processed_data/concatenated_data.h5", key="df")
 end = time.time()
 print("Time to read the hdf file: ", end - start)
 
+# Filtering the dataframe
 df_not_trained = df[(df.trained_between_iterations == False) & (df.epoch <= 20)]
 df_trained = df[(df.trained_between_iterations == True) & (df.epoch <= 20)]
 
+# Grouping by epoch
 df_not_trained = df_not_trained.groupby('epoch')
 df_trained = df_trained.groupby('epoch')
 
-fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 18))
+# First plot: Trained Models Delta Accuracy
+plt.figure(figsize=(10, 6))
+plt.boxplot(df_not_trained['change_accuracy'].apply(list), showfliers=False)
+plt.xlabel('Epoch')
+plt.ylabel('Change Accuracy')
+plt.grid()
+plt.show()  # Show the first plot
 
-ax1.boxplot(df_not_trained['change_accuracy'].apply(list), showfliers=False)
-ax1.set_title('Trained Models Delta Accuracy')
-ax1.set_xlabel('Epoch')
-ax1.set_ylabel('Change Accuracy')
-ax1.grid()
+# Second plot: Trained Models Delta Loss
+plt.figure(figsize=(10, 6))
+plt.boxplot(df_not_trained['change_loss'].apply(list), showfliers=False)
+plt.xlabel('Epoch')
+plt.ylabel('Change Loss')
+plt.grid()
+plt.show()  # Show the second plot
 
-ax2.boxplot(df_not_trained['change_loss'].apply(list), showfliers=False)
-ax2.set_title('Trained Models Delta Loss')
-ax2.set_xlabel('Epoch')
-ax2.set_ylabel('Change Loss')
-ax2.grid()
-
-ax3.plot(df_not_trained.count(), label='Trained Models')
-ax3.set_title('Trained Models Count')
-ax3.set_xlabel('Epoch')
-ax3.set_ylabel('Count')
-ax3.grid()
-
-# Show the plot
-plt.show()
+# Third plot: Trained Models Count
+plt.figure(figsize=(10, 4))
+plt.plot(df_not_trained.size().index, df_not_trained.size(), label='Trained Models')  # Corrected to use .size() for accurate counts
+plt.xlabel('Epoch')
+plt.ylabel('Number of Data Points')
+plt.legend()
+plt.grid()
+plt.show()  # Show the third plot

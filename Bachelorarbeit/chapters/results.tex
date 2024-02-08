@@ -1,17 +1,60 @@
+In this chapter, we will discuss the performance of our approach towards neural networks.
+We will explore various options available through our approach to elicit optimal results.
+To achieve this, the evaluation will be based on the following research questions:
+\begin{enumerate}
+    \item[]\textbf{RQ1: Impact of Training on Mutated Models} How does training a mutated pre-trained model impact its performance metrics?
+    \item[]\textbf{RQ2: Effects of Mutation Without Training} What is the effect on performance metrics when a pre-trained model is mutated without further training?
+    \item[]\textbf{RQ3: Training Dataset Size and Approach Performance} What is the impact of the size of the training dataset on the approach's effectiveness?
+    \item[]\textbf{RQ4: Influence of Suspiciousness Measures} How do different suspiciousness measures influence the outcomes of the experiments?
+    \item[]\textbf{RQ5: CNN vs. DNN Architectural Efficiency} Which architecture yields better results for our approach: CNN or DNN?
+    \item[]\textbf{RQ6: Offset Variations in Loss and Accuracy} How do variations in offset for loss and accuracy affect the approach's performance?
+    \item[]\textbf{RQ7: Break Conditions and Algorithm Performance} What is the effect of different break conditions on the efficiency and effectiveness of the algorithm?
+    \item[]\textbf{RQ8: Contributions of Different Mutation Functions} How do different mutation functions contribute to the model's performance with our Algorithm?
+\end{enumerate}
+\section{Setup}\label{sec:setup}
+
 We evaluated our approach on a Workstation consisting of an AMD Ryzen 9 3900X 12-Core Processor 4,6 GHz, with 32 GB of RAM and an NVIDIA GeForce RTX 4070Ti GPU with 12 GB of VRAM and 7680 CUDA Cores.
 The setup is running Ubuntu release 22.04, running with Windows Subsystem for Linux, on Microsoft Windows 11 Pro, we use it because since version 2.11\cite{noauthor_build_2023} TensorFlow doesn't support GPU acceleration natively any more.
 Regarding the Software, we are using Python version 3.10.12 and using TensorFlow version 2.14.1, with CUDA version 12.3.
 
+\subsection*{Architecture}
 We are using the Fashion-MNIST dataset\cite{xiao_fashion-mnist_2017} for our experiments, which consists of 60,000 training images and 10,000 test images, each of size 28×28 pixels, with 10 classes.
 For the evaluation we haven't used not only the whole, but also a half and a quarter of the training data, which are derived from the original training data, by using Scikit-learn's\cite{pedregosa_scikit-learn_2011} \texttt{train\_test\_split} function, with a test size of 0.5 and 0.75 respectively.
 
 We used 2 DNNs and 2 CNNs, in the following table \ref{tab:architecture} a plain number describes the number of neurons in a dense layer. $CL$ describes a combination of a convolutional layer with a stride of $(1,1)$ and a kernel size of $(3,3)$ and a pooling layer with a pool size of $(2,2)$. We used.
 Adam as our optimizer with a learning rate of 0.001.
-For each model, we used 0 offset for loss and accuracy, and we used a loss offset of 0.005 and an accuracy offset of 0.01, with regression.
-
 \input{tables/architecture_table.tex}
-\section{Could the mutation of faulty neurons improve the quality and reliability of a Deep Neural Network?}\label{sec:could-the-mutation-of-faulty-neurons-improve-the-quality-and-reliability-of-a-deep-neural-network?}
-\section{Could the mutation of faulty neurons during training improve the quality and reliability of a Deep Neural Network?}\label{sec:could-the-mutation-of-faulty-neurons-during-training-improve-the-quality-and-reliability-of-a-deep-neural-network?}
-\section{Which mutations are the most promising for improvement?}\label{sec:which-mutations-are-the-most-promising-for-improvement?}
-\section{Which suspiciousness measure is the most promising for improving a Deep Neural Network?}\label{sec:which-suspiciousness-measure-is-the-most-promising-for-improving-a-deep-neural-network?}
-\section{Are the suspiciousness measures more accurate than random choosing?}\label{sec:are-the-suspiciousness-measures-more-accurate-than-random-choosing?}
+\subsection*{Parameters}
+Fo our evaluation we used the following parameters:
+\begin{enumerate}
+    \item[]\textbf{Similarity coefficient:} tarantula, dstar with value 3, ochiai and random
+    \item[]\textbf{Mutation functions:} \texttt{modify\_weight\_one\_random\_gauss,\\ modify\_weight\_all\_random\_gauss, modify\_bias, modify\_bias\_random\_gauss, modify\_all\_weights, modify\_all\_weights\_by\_scalar,\\modify\_all\_weights\_by\_scalar\_random\_gauss,\\modify\_weight\_all\_random\_by\_scalar\_gauss}
+    \item[]\textbf{Break conditions:} loss, accuracy, loss and accuracy, loss or accuracy
+    \item[]\textbf{Loss offset:} 0.005, 0
+    \item[]\textbf{Accuracy offset:} 0.01, 0
+    \item[]\textbf{Loss and accuracy regression:} True for all runs
+    \item[]\textbf{Values:} -1, -0.5, 0, 0.5, 1 \textit{0 just for value assignment, basically a deletation of a neuron}
+    \item[]\textbf{Sigma for random:} 0.5, 1
+\end{enumerate}
+\section{Impact of Training on Mutated Models}\label{sec:impact-of-training-on-mutated-models}
+
+
+\section{Effects of Mutation Without Training}\label{sec:effects-of-mutation-without-training}
+
+
+\section{Training Dataset Size and Model Performance}\label{sec:training-dataset-size-and-model-performance}
+
+
+\section{Influence of Suspiciousness Measures}\label{sec:influence-of-suspiciousness-measures}
+
+
+\section{CNN vs. DNN Architectural Efficiency}\label{sec:cnn-vs.-dnn-architectural-efficiency}
+
+
+\section{Offset Variations in Loss and Accuracy}\label{sec:offset-variations-in-loss-and-accuracy}
+
+
+\section{Break Conditions and Algorithm Performance}\label{sec:break-conditions-and-algorithm-performance}
+
+
+\section{Contributions of Different Mutation Functions}\label{sec:contributions-of-different-mutation-functions}

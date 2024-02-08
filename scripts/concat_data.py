@@ -47,6 +47,7 @@ for file, epochs, chosen_model in iterator:
     dataframe['change_loss'] = dataframe['val_loss'] / dataframe['new_loss']
     dataframe['change_accuracy'] = dataframe['new_accuracy'] / dataframe['val_accuracy']
     dataframe['initial_epochs'] = epochs
+    dataframe['dataset'] = dataframe['model'].apply(lambda x: x.split("_")[1])
     dataframes.append(dataframe)  # Append the processed DataFrame to the list
 
 # Concatenate all DataFrames in the list
@@ -54,4 +55,5 @@ final_dataframe = pd.concat(dataframes, ignore_index=True)
 
 # Save the concatenated DataFrame
 final_dataframe.to_excel("../processed_data/concatenated_data.xlsx", index=False)
+final_dataframe.to_hdf("../processed_data/concatenated_data.h5", key="df", mode="w")
 print("Processed and concatenated all files.")

@@ -35,7 +35,6 @@ for file, epochs, chosen_model in iterator:
             chosen_val_data['val_loss'].values[0]
         dataframe.loc[dataframe['trained_between_iterations'] == False, 'val_accuracy'] = \
             chosen_val_data['val_accuracy'].values[0]
-
     else:
         chosen_val_data = val_data[(val_data['model'] == chosen_model) & (val_data['epoch'] == 6)]
         dataframe = pd.merge(dataframe, val_data_six[val_data_six.model == chosen_model], how="inner", on="epoch")
