@@ -1,6 +1,19 @@
 import os
 import re
 import pandas as pd
+import numpy as np
+
+def compare_break_condition(row):
+    if row['compare_loss'] == True and row['compare_accuracy'] == True:
+        return "Loss or Accuracy"
+    elif row['compare_loss'] == True:
+        return "Loss"
+    elif row['compare_accuracy'] == True:
+        return "Accuracy"
+    elif row['compare_and_both'] == True:
+        return "Loss and Accuracy"
+    else:
+        return np.nan
 
 files = os.listdir("../data")
 files = files[:-1]
@@ -48,6 +61,8 @@ for file, epochs, chosen_model in iterator:
     dataframe['change_accuracy'] = dataframe['new_accuracy'] / dataframe['val_accuracy']
     dataframe['initial_epochs'] = epochs
     dataframe['dataset'] = dataframe['model'].apply(lambda x: x.split("_")[1])
+    dataframe['architecture'] = dataframe['model'].apply(lambda x: x.split("_")[0])
+    dataframe['break_condition'] = dataframe.apply(compare_break_condition, axis=1)
     dataframes.append(dataframe)  # Append the processed DataFrame to the list
 
 # Concatenate all DataFrames in the list

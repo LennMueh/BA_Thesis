@@ -90,15 +90,103 @@ Fo our evaluation we used the following parameters:
     \label{fig:dataset-size-training}
 \end{figure}
 \section{Influence of Suspiciousness Measures}\label{sec:influence-of-suspiciousness-measures}
-
-
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Meassure_Trained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Meassure_Trained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, with training, with different suspiciousness measures}
+    \label{fig:suspiciousness-measures-training}
+\end{figure}
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Meassure_NotTrained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Meassure_NotTrained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, without training, with different suspiciousness measures}
+    \label{fig:suspiciousness-measures-notraining}
+\end{figure}
 \section{CNN vs. DNN Architectural Efficiency}\label{sec:cnn-vs.-dnn-architectural-efficiency}
-
-
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Architecture_NotTrained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Architecture_NotTrained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, without training, with different architectures}
+    \label{fig:architecture-notraining}
+\end{figure}
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Architecture_Trained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Architecture_Trained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, with training, with different architectures}
+    \label{fig:architecture-training}
+\end{figure}
 \section{Offset Variations in Loss and Accuracy}\label{sec:offset-variations-in-loss-and-accuracy}
-
-
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Offset_Trained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Offset_Trained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, with training, with offsets or not}
+    \label{fig:offset-training}
+\end{figure}
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Offset_NotTrained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Offset_NotTrained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, without training, with offsets or not}
+    \label{fig:offset-notraining}
+\end{figure}
 \section{Break Conditions and Algorithm Performance}\label{sec:break-conditions-and-algorithm-performance}
-
-
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/BreakCondition_Trained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/BreakCondition_Trained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, with training, with different break conditions}
+    \label{fig:break-conditions-training}
+\end{figure}
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/BreakCondition_NotTrained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/BreakCondition_NotTrained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, without training, with different break conditions}
+    \label{fig:break-conditions-notraining}
+\end{figure}
 \section{Contributions of Different Mutation Functions}\label{sec:contributions-of-different-mutation-functions}
