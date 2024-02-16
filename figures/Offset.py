@@ -5,8 +5,8 @@ df = pd.read_hdf("../processed_data/concatenated_data.h5", key="df")
 
 df = df[df.epoch <= 20]
 
-df_not_trained = df[df.trained_between_iterations == False].groupby('regression_loss_offset')
-df_trained = df[df.trained_between_iterations == True].groupby('regression_loss_offset')
+df_not_trained = df[(df.trained_between_iterations == False) & (df.epoch <= 5)].groupby('regression_loss_offset')
+df_trained = df[(df.trained_between_iterations == True) & (df.epoch <= 10)].groupby('regression_loss_offset')
 
 plt.figure(figsize=(5, 6))
 labels_trained = [name for name, _ in df_trained]

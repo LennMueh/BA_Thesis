@@ -17,7 +17,7 @@ df_not_trained = df_not_trained.groupby('epoch')
 df_trained = df_trained.groupby('epoch')
 
 # First plot: Trained Models Delta Accuracy
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(10, 5))
 plt.boxplot(df_trained['change_accuracy'].apply(list), showfliers=False)
 plt.xlabel('Epoch')
 plt.ylabel('Change Accuracy')
@@ -25,7 +25,7 @@ plt.grid()
 plt.show()  # Show the first plot
 
 # Second plot: Trained Models Delta Loss
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(10, 5))
 plt.boxplot(df_trained['change_loss'].apply(list), showfliers=False)
 plt.xlabel('Epoch')
 plt.ylabel('Change Loss')

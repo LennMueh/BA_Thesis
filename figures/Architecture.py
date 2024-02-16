@@ -3,10 +3,8 @@ import matplotlib.pyplot as plt
 
 df = pd.read_hdf("../processed_data/concatenated_data.h5", key="df")
 
-df = df[df.epoch <= 20]
-
-df_not_trained = df[df.trained_between_iterations == False].groupby('architecture')
-df_trained = df[df.trained_between_iterations == True].groupby('architecture')
+df_not_trained = df[(df.trained_between_iterations == False) & (df.epoch <= 5)].groupby('architecture')
+df_trained = df[(df.trained_between_iterations == True) & (df.epoch <= 10)].groupby('architecture')
 
 plt.figure(figsize=(5, 7))
 labels_trained = [name for name, _ in df_trained]
