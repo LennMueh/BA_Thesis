@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 
 df = pd.read_hdf("../processed_data/concatenated_data.h5", key="df")
 
-df_not_trained = df[(df.trained_between_iterations == False) & (df.epoch <= 5)].groupby('break_condition')
-df_trained = df[(df.trained_between_iterations == True) & (df.epoch <= 10)].groupby('break_condition')
+df_not_trained = df[(df.trained_between_iterations == False) & (df.epoch <= 5) & (df.initial_epochs == 1)].groupby('break_condition')
+df_trained = df[(df.trained_between_iterations == True) & (df.epoch <= 10) & (df.initial_epochs == 1)].groupby('break_condition')
 
 plt.figure(figsize=(5, 12))
 labels_trained = [name for name, _ in df_trained]

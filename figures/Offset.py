@@ -5,8 +5,8 @@ df = pd.read_hdf("../processed_data/concatenated_data.h5", key="df")
 
 df = df[df.epoch <= 20]
 
-df_not_trained = df[(df.trained_between_iterations == False) & (df.epoch <= 5)].groupby('regression_loss_offset')
-df_trained = df[(df.trained_between_iterations == True) & (df.epoch <= 10)].groupby('regression_loss_offset')
+df_not_trained = df[(df.trained_between_iterations == False) & (df.epoch <= 5) & (df.initial_epochs == 1)].groupby('regression_loss_offset')
+df_trained = df[(df.trained_between_iterations == True) & (df.epoch <= 10) & (df.initial_epochs == 1)].groupby('regression_loss_offset')
 
 plt.figure(figsize=(5, 6))
 labels_trained = [name for name, _ in df_trained]
@@ -16,6 +16,7 @@ plt.xlabel('Offset')
 plt.ylabel('Change Accuracy')
 plt.xticks(rotation=45)  # Adjust rotation as needed
 plt.grid()
+plt.savefig('figures/Offset_Trained_accuracy.png', bbox_inches='tight')
 plt.show()
 
 plt.figure(figsize=(5, 6))
@@ -26,6 +27,7 @@ plt.xlabel('Offset')
 plt.ylabel('Change Accuracy')
 plt.xticks(rotation=45)  # Adjust rotation as needed
 plt.grid()
+plt.savefig('figures/Offset_NotTrained_accuracy.png', bbox_inches='tight')
 plt.show()
 
 plt.figure(figsize=(5, 6))
@@ -36,6 +38,7 @@ plt.xlabel('Offset')
 plt.ylabel('Change Loss')
 plt.xticks(rotation=45)  # Adjust rotation as needed
 plt.grid()
+plt.savefig('figures/Offset_Trained_loss.png', bbox_inches='tight')
 plt.show()
 
 plt.figure(figsize=(5, 6))
@@ -46,4 +49,5 @@ plt.xlabel('Offset')
 plt.ylabel('Change Loss')
 plt.xticks(rotation=45)  # Adjust rotation as needed
 plt.grid()
+plt.savefig('figures/Offset_NotTrained_loss.png', bbox_inches='tight')
 plt.show()
