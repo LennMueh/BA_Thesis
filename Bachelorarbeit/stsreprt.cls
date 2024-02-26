@@ -2,7 +2,7 @@
 \ProvidesClass{stsreprt}
 \RequirePackage{kvoptions}
 \DeclareBoolOption[false]{nobcorignoretitle}
-\DeclareBoolOption[false]{grayscalebody}
+\DeclareBoolOption[true]{grayscalebody}
 \DeclareBoolOption[false]{grayscaletitle}
 \DeclareBoolOption[false]{fancyheadings}
 \DeclareStringOption[scrbook]{baseclass}
