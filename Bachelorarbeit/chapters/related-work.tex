@@ -41,7 +41,24 @@ There by, it is ensured that the data covers a broader spectrum of potential rea
 Another data-centric approach is SENSEI \cite{gao_fuzz_2020}, which uses a fuzz testing derived data augmentation approach to bridge the earlier described gap by exposing and mitigating vulnerabilities in DNNs.
 
 \section{Model-Centric Approaches}\label{sec:model-centric-approaches}
+There are numerous model-centric approaches developed over the last few years, so we want to present some of them here at this point.
+For example, Apricot, a weight-adaption approach to fix deep learning models (DLM) iteratively.
+This is accomplished by leveraging insights from reduced deep learning models (rDLMs) trained on subsets of the original dataset.The approach is based on two main principles: firstly, smaller data sets help to retain the features that are essential for correct classification, and secondly, a set of rDLMs can, on average, classify test cases more accurately than a single model.
+Apricot generates the rDLMs and categorizes them based on their performance of specific test cases.
+Based on the correctly working rDLMs the average weights are used to correct the weights of the complete DLM toward the weights of the correctly classifying rDLMs or away from the misclassifying rDLMs.
 
+Another approach is NeuRecover, which tries to resolve an issue which often happens with retraining DNNs. Regression, which means, that if we try to address specific issues to enhance the performance of the models or its areas, it causes a performance decrease in other areas of the model.
+NeuRecover is attempting to leverage the training history to identify which parameters should be adjusted, there by aiming to reduce regression.
+It firstly aggregates the locations of the faults in the network and by using the training history, attempts to make the smallest necessary adjustment, there by considering the dynamic nature of the network.
+
+Finally, we introduce Arachne, a search-based approach for repairing DNNs by identifying and adjusting the weights that are most likely to cause the targeted misbehavior.
+Arachne uses differential evolution to generate patches, which are sets of adjusted neural weights that aim to correct the misclassifications.
+The algorithm begins with a group of potential solutions and evolves them over several generations towards greater fitness, as determined by a defined fitness function.
+In Arachne, the fitness function plays a critical role in guiding the search process.
+It assesses candidate patches based on their ability to correct misclassifications while maintaining correct classifications.
+This function strikes a balance between the need to correct errors and the need to maintain the overall accuracy of the model.
+Some evolutions of the Search-based approach are DistrRep, which tries to handle multiple misclassifications at the same time, in contrast to the single misclassification handled by Arachne.
+Another one isAdRep, this approach tries to overcome the static view of the DNN which is seen in Arachne.
 
 \section{DeepFault}\label{sec:deepfault}
 DeepFault\cite{eniser_deepfault_2019} is a white-box testing approach for neural networks, developed by Eniser et al. which is according to the Authors.
