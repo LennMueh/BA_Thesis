@@ -2,14 +2,41 @@ In this chapter, we will discuss proposed approaches for repairing neural networ
 These approaches \cite{nakagawa_experience_2023} can be classified into three categories: training-centric, data-centric, and model-centric.
 
 \section{Training-Centric Approaches}\label{sec:training-centric-approaches}
-
-
+The training centric solution we want to present is AutoTrainer\cite{zhang_autotrainer_2021} an approach to identify varying issues in training vanishing and exploding gradient, dying ReLU oscillating loss and slow convergence.
+AutoTrainer first starts training the model and records data on the training like the loss, it then conducts regular analysis to identify possible issues encountered during training.
+Upon detecting an issue, the solution scheduler selects an appropriate repair method.
+If a problem persists even after trying a solution, the scheduler moves on to the next solution.
+This process continues until the issue is resolved, or all solutions are exhausted unsuccessfully.
+The solutions that are used are:
+\begin{itemize}
+    \item Adding Batch Normalization Layers
+    \item Substituting Activation Functions
+    \item Adding Gradient Clipping
+    \item Substituting Initializers
+    \item Adjusting Batch Sizes
+    \item Adjusting Learning Rates
+    \item Substituting Optimizers
+\end{itemize}
+Another training centric solution is DeepDiagnosis which isn't like AutoTrainer an automatic approach, but more functioning like a debugger.
+Hence, it tries to enable the developer to make sound decisions to enhance the training of a DNN.
+It monitors the training of the Network and checks for eight error conditions:
+\begin{itemize}
+    \item Dead Nodes
+    \item Saturated Activation Functions
+    \item Exploding Tensors
+    \item Not increasing Accuracy
+    \item Not decreasing Loss
+    \item Unchanged Weights
+    \item Exploding Gradients
+    \item Fading Gradients
+\end{itemize}
+When these conditions are met, DeepDiagnosis\cite{wardat_deepdiagnosis_2021} makes these findings available to the developer and also provides a recommendation for actionable fixes to the developer.
 \section{Data-Centric Approaches}\label{sec:data-centric-approaches}
 One data centric approach for the repair of deep neural networks is DeepRepair \cite{yu_deeprepair_2022} which uses a style guided approach to enhance the training data of an DNN. The Idea for this approach is it to mitigate the gap between the training data and the real-world data provided later when the network is in production, which often contains noise patterns.
 This is done by the style of guided data augmentation by introducing the noise patterns which are frequently leading to failure.
 
 To make the augmentation more effective, DeepRepair uses a clustering-based method for generating corrupted data, by identifying and grouping similar failure patterns.
-There by, it is ensured that the data covers a broaderspectrum of potential real-world failure scenarios, enhancing the robustness of the model.
+There by, it is ensured that the data covers a broader spectrum of potential real-world failure scenarios, enhancing the robustness of the model.
 
 Another data-centric approach is SENSEI \cite{gao_fuzz_2020}, which uses a fuzz testing derived data augmentation approach to bridge the earlier described gap by exposing and mitigating vulnerabilities in DNNs.
 
