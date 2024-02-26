@@ -5,7 +5,13 @@ These approaches \cite{nakagawa_experience_2023} can be classified into three ca
 
 
 \section{Data-Centric Approaches}\label{sec:data-centric-approaches}
+One data centric approach for the repair of deep neural networks is DeepRepair \cite{yu_deeprepair_2022} which uses a style guided approach to enhance the training data of an DNN. The Idea for this approach is it to mitigate the gap between the training data and the real-world data provided later when the network is in production, which often contains noise patterns.
+This is done by the style of guided data augmentation by introducing the noise patterns which are frequently leading to failure.
 
+To make the augmentation more effective, DeepRepair uses a clustering-based method for generating corrupted data, by identifying and grouping similar failure patterns.
+There by, it is ensured that the data covers a broaderspectrum of potential real-world failure scenarios, enhancing the robustness of the model.
+
+Another data-centric approach is SENSEI \cite{gao_fuzz_2020}, which uses a fuzz testing derived data augmentation approach to bridge the earlier described gap by exposing and mitigating vulnerabilities in DNNs.
 
 \section{Model-Centric Approaches}\label{sec:model-centric-approaches}
 
