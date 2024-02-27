@@ -1,0 +1,39 @@
+In the previous chapters, we introduced a new method for repairing Deep Neural Networks and Convolutional Neural Networks.
+This method uses a spectrum-based fault localization combined with network mutations to increase network accuracy and decrease network loss.
+First, we analyse the network to identify any faults.
+We then use these findings to apply our mutation function.
+If desired, we can train the network for an additional epoch.
+Finally, we evaluate the network again.
+If its performance has declined, we revert to the previous network.
+If its performance has improved, we keep the new network and repeat the process.
+
+During the first three epochs of our approach, we observed an increase in accuracy of up to 2--5\% for the first epoch and up to 11--25\% for untrained models.
+The first epoch showed a decrease of up to 10--40\%, and the third epoch showed a decrease of up to 25--40\% compared to our benchmark.
+However, there was no further increase in accuracy for subsequent epochs, only a decrease.
+
+If we further trained our models, we get an increase of up to 2.5-7.5\% for the accuracy and a decrease of up to 12--35\% for the loss.
+Here we also see a decrease after the third epoch, but we still stay over the baseline of one for the first 10–11 epochs.
+
+The approach performs best on the full Fashion-MNIST dataset and also good on the half data set.
+For our suspiciousness measures which we utilize for our fault localization, tarantula seems to be the best performing measure, for the trained models, the other measures aren't working significantly better than the random choosing of neurons.
+The exception is in the accuracy category for the non-trained models, the ochiai measure.
+Our Approach seems to be working best on Convolutional Neural Networks, in contrast, we only see a marginal increase for Deep Neural Networks.
+For our break conditions, we see no difference in the trained conditions for the trained runs, but we see one for the non-trained ones, where we see the worst performance which depends more on the loss, this holds even true for the loss.
+Important is also the use of an Offset for both loss and accuracy.
+Another factor that can be mitigated is the use of the different mutation functions, where we see that the mutation functions aren't leading to significantly different results, with the exception that the weight mutation function are leading to better results than the bias targeting mutation functions.
+
+In future research, it would be beneficial to investigate several aspects.
+Firstly, it is essential to evaluate the performance of the approach on larger models and different datasets.
+This will help to determine a threshold beyond which further modification of the neural network is not possible.
+For instance, this threshold could be defined as a ratio between the model's modifiable parameters and the modified parameters.
+Another thing that could be investigated in this instance is the choosing of multiple neurons at a time for the modification.
+
+Due to time constraints, we decided to use the static spectrum matrix for fault localization instead of investigating other critical options.
+A faster approach for generating the matrix should be considered.
+This would lead to the possibility to change a neuron, until another more suspicious neuron arises.
+
+One element which we also introduced due to the time constraints of this thesis is the regression for the loss and accuracy offset, to get a faster release of the break condition, hence getting runs with fewer epochs.
+So the behaviour without the offset would be interesting.
+
+Another possible area of investigation would be the suspiciousness measures, one point would be the usage of suspiciousness measures based on genetic programming which superiority in spectrum-based fault localisation regarding software was already shown by Yoo et al. \cite{yoo_human_2017} which could increase the right choosing of the neurons.
+Another endeavour worth exploring would be the dstar suspiciousness measure, which we used in combination with the star value of 3, hence the investigation of values different to 3 would be needed.
