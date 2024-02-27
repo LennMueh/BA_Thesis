@@ -248,3 +248,28 @@ In contrast, the non-trained \ref{fig:mutation-functions-notraining} runs yielde
     \caption{Loss and accuracy, without training, with different mutation functions}
     \label{fig:mutation-functions-notraining}
 \end{figure}
+In regard to the values we are using for the mutation functions, there is no significant difference between the different values for the trained runs \ref{fig:mutation-values-training} or the untrained runs \ref{fig:mutation-values-notraining}.
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/MutatationValue_Trained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/MutatationValue_Trained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, with training, with different mutation values}
+    \label{fig:mutation-values-training}
+\end{figure}
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/MutatationValue_NotTrained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/MutatationValue_NotTrained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, without training, with different mutation values}
+    \label{fig:mutation-values-notraining}
+\end{figure}

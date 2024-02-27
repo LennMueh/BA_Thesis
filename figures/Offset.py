@@ -8,7 +8,7 @@ df = df[df.epoch <= 20]
 df_not_trained = df[(df.trained_between_iterations == False) & (df.epoch <= 5) & (df.initial_epochs == 1)].groupby('regression_loss_offset')
 df_trained = df[(df.trained_between_iterations == True) & (df.epoch <= 10) & (df.initial_epochs == 1)].groupby('regression_loss_offset')
 
-plt.figure(figsize=(5, 6))
+plt.figure(figsize=(5, 5))
 labels_trained = [name for name, _ in df_trained]
 data_trained = [group['change_accuracy'].tolist() for name, group in df_trained]
 plt.boxplot(data_trained, labels=labels_trained, showfliers=False)
@@ -19,7 +19,7 @@ plt.grid()
 plt.savefig('figures/Offset_Trained_accuracy.png', bbox_inches='tight')
 plt.show()
 
-plt.figure(figsize=(5, 6))
+plt.figure(figsize=(5, 5))
 labels_not_trained = [name for name, _ in df_not_trained]
 data_not_trained = [group['change_accuracy'].tolist() for name, group in df_not_trained]
 plt.boxplot(data_not_trained, labels=labels_not_trained, showfliers=False)
@@ -30,7 +30,7 @@ plt.grid()
 plt.savefig('figures/Offset_NotTrained_accuracy.png', bbox_inches='tight')
 plt.show()
 
-plt.figure(figsize=(5, 6))
+plt.figure(figsize=(5, 5))
 labels_trained = [name for name, _ in df_trained]
 data_trained = [group['change_loss'].tolist() for name, group in df_trained]
 plt.boxplot(data_trained, labels=labels_trained, showfliers=False)
@@ -41,7 +41,7 @@ plt.grid()
 plt.savefig('figures/Offset_Trained_loss.png', bbox_inches='tight')
 plt.show()
 
-plt.figure(figsize=(5, 6))
+plt.figure(figsize=(5, 5))
 labels_not_trained = [name for name, _ in df_not_trained]
 data_not_trained = [group['change_loss'].tolist() for name, group in df_not_trained]
 plt.boxplot(data_not_trained, labels=labels_not_trained, showfliers=False)
