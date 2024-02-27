@@ -37,3 +37,15 @@ So the behaviour without the offset would be interesting.
 
 Another possible area of investigation would be the suspiciousness measures, one point would be the usage of suspiciousness measures based on genetic programming which superiority in spectrum-based fault localisation regarding software was already shown by Yoo et al. \cite{yoo_human_2017} which could increase the right choosing of the neurons.
 Another endeavour worth exploring would be the dstar suspiciousness measure, which we used in combination with the star value of 3, hence the investigation of values different to 3 would be needed.
+
+A different idea would be to use the spectrum-based fault localization to not only identify suspicious neurons, but to aggregate the suspiciousness of a layer and then to modify these.
+For example, we could change the activation function of the layer, the stride of a convolutional layer or pooling layer, the kernel/filter of a convolutional layer, or we could change the size of the pooling layer.
+An approach which should be tried is the freezing of an overly trustful layer could be frozen to focus on the training of the other layers.
+
+Or another appropriate layer could be set as a predecessor or successor.
+For example, a normalization layer, a dense layer or a dropout layer as a predecessor or a regularization layer as a successor.
+Another idea would be the encapsulation of the layer in a residual block.
+At last, we could add an attention layer on either side of the suspicious layer.
+
+Another useful feature would be the automatically choosing of an appropriate fix when a condition is met in the suspicious neuron, like an exploding or vanishing gradient for example.
+Finally, we could modify the activation function of the specified neuron using a custom layer that applies the desired activation function to each neuron, to address things like dying ReLU.
