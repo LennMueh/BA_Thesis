@@ -1,0 +1,15 @@
+Deep Neural Networks (DNNs)\cite{lecun_deep_2015} are increasingly used in various applications, including highly sensitive domains such as medical diagnosis\cite{litjens_survey_2017} and autonomous vehicles\cite{bojarski_end_2016}.
+DNNs are highly advanced in areas such as image\cite{krizhevsky_imagenet_2012,litjens_survey_2017,ciresan_multi-column_2012}, video\cite{jiang_exploiting_2018}, and speech recognition\cite{hinton_deep_2012}, with a wide range of applications from simple recognition to end-to-end learning\cite{bojarski_end_2016}.
+
+Ensuring the safety of users and others encountering DNNs in safety-critical domains is of utmost importance.
+To achieve this, it is necessary to ensure the proper operation of neural networks and identify and repair any bad actors.
+
+This thesis explores the mutation of neurons, identified through spectrum-based fault localization (SBFL), as a potential method for achieving this.
+Although SBFL was first successfully used in Eniser et al.'s DeepFault\cite{eniser_deepfault_2019}, where an input was synthesized guided by the suspiciousness values elicited by the SBFL. We aim to take it to a deeper level by mutating the weights and biases based on these suspiciousness values.
+It is important to maintain a clear and concise writing style, avoiding complex terminology and sprawling descriptions.
+Additionally, we should adhere to conventional academic structure and maintain a formal register, avoiding biased or emotional language.
+Finally, we must ensure grammatical correctness and avoid introducing new content.
+
+To adapt DeepFault's SBFL to the current versions of TensorFlow and other frameworks, we first added the necessary functions for weight and bias mutation based on ranked neuron locations.
+We then implemented an algorithm to automate the mutation process with just the model, dataset, and desired parameters.
+The algorithm can not only merely be used to mutate the not properly working neurons but also mutate them and then be used to train the network.
