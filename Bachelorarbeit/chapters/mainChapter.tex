@@ -21,20 +21,19 @@ This improves execution times by preventing multiple executions.
 
 \lstinputlisting[language=Python, linerange={19-81,90-123,154-195}, caption={Saving and loading data}, label={lst:saving}]{source_analysis/utilities.py}
 
-Additionally, we modified the \texttt{get\_layer\_outs} \ref{lst:layer outs} function from native Keras \cite{chollet_keras_2015} calls to TensorFlow \cite{martin_abadi_tensorflow_2015} via \texttt{tf.keras}, which uses Keras as its backend, as recommended by the release notes of Keras 2.13.0. .
+Additionally, we modified the \texttt{get\_layer\_outs} function as shown in listing \ref{lst:layer outs} from native Keras \cite{chollet_keras_2015} calls to TensorFlow \cite{martin_abadi_tensorflow_2015} via \texttt{tf.keras}, which uses Keras as its backend, as recommended by the release notes of Keras 2.13.0. .
 Because of its better integration with the rest of the TensorFlow library.
 
 \lstinputlisting[language=Python, linerange={82-87}, caption={Layer outs}, label={lst:layer outs}]{source_analysis/utilities.py}
 
-The \texttt{construct\_spectrum\_matrices} \ref{lst:spectrum matrice} function has been modified to use \texttt{enumerate} in the loops, allowing for the value and index to be obtained in a single loop.
+The \texttt{construct\_spectrum\_matrices} function as shown in listing \ref{lst:spectrum matrice} has been modified to use \texttt{enumerate} in the loops, allowing for the value and index to be obtained in a single loop.
 This modification has resulted in a reduction in the function's runtime.
 
 \lstinputlisting[language=Python, linerange={56-90}, caption={Construct spectrum matrice}, label={lst:spectrum matrice}]{source_analysis/test_network.py}
 
-
-\section*{Mutation of the neural network}
+\section{Mutation of the neural network}\label{sec:mutation-of-the-neural-network}
 Now we move on to the second step in our approach: modifying our network.
-We designed the function \texttt{run\_modification\_algorithm} \ref{lst:mutation}\ref{fig:flowchart} for this purpose.
+We designed the function \texttt{run\_modification\_algorithm} in listing \ref{lst:mutation} and schematically shown in \ref{fig:flowchart} for this purpose.
 Our model and the associated dataset are used, along with a chosen similarity coefficient and modification function.
 In addition, we can specify whether to train the model and set an offset for the loss and accuracy.
 We can also indicate if we intend to regress the loss and accuracy, which is used as a break condition.
@@ -51,9 +50,10 @@ The pandas functions are also included to gather evaluation data.
 \input{figures/flowchart.tikz}
 
 Now, let's discuss the mutation functions that we pass to our main function.
-These functions allow us to modify the weights and biases of a neuron, which is similar to the theoretical representation of a neuron \ref{eq: DenseLayer}.
+These functions allow us to modify the weights and biases of a neuron, which is similar to the theoretical representation of a neuron given in the equation \ref{eq: DenseLayer} the background chapter.
 The basic functionality of the mutation functions is mostly the same.
-We first isolate the layer from the model, which is the first entry in the coordinate tuple. \ref{lst:weight_mod} \ref{lst:bias_mod}
+We first isolate the layer from the model, which is the first entry in the coordinate tuple.
+As seen in the two listing \ref{lst:weight_mod}, \ref{lst:bias_mod} which are the weight and bias modification functions, respectively.
 Then, we obtain the weights, where the first entry represents the weights of the neuron and the second entry represents the biases.
 The matrix can be mutated according to specific requirements.
 To do this, isolate the entries that represent the specified neuron in the second entry of the coordinate and modify them accordingly.
@@ -66,7 +66,7 @@ Multiple mutation functions have been implemented for not only dense layers but 
 Mutation functions are used to assign a singular value to all weights or the bias of a neuron.
 This value can either be fixed or random, derived from a uniform or Gaussian normal distribution.
 For random values, each weight value can be assigned a new random number individually.
-Additionally, scalar mutation functions \ref{lst:scalar_weight_mod} \ref{lst:scalar_bias_mod} can modify the existing values without assigning new ones.
+Additionally, scalar mutation functions in listing \ref{lst:scalar_weight_mod} and \ref{lst:scalar_bias_mod} can modify the existing values without assigning new ones.
 
 \lstinputlisting[language=Python, linerange={68-81,115-127}, caption={Scalar Weight Modification Functions}, label={lst:scalar_weight_mod}]{source_mutation/utilities.py}
 \lstinputlisting[language=Python, linerange={87-97}, caption={Scalar Bias Modification Functions}, label={lst:scalar_bias_mod}]{source_mutation/utilities.py}
