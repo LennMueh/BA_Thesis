@@ -1,0 +1,36 @@
+For the Spectrum-based fault localization, we adapted the DeepFault \cite{eniser_deepfault_2023} code to our needs.
+Especially, we adapted the functions to the recent versions of the used libraries and added some additional functions to save and load the data.
+
+The functions adapted from the DeepFault paper are now invoked in the \texttt{run\_analysis} function seen in listing \ref{lst:main analysis}, which is the main function for the analysis.
+We have implemented it that way, to ease the use of the analysis functions, in comparison to the original DeepFault code which was just one large python script.
+The function manges the loading of the model and the experiment or working paths.
+It checks if the necessary steps of the analysis have already been executed, hence the data is already available out of a previous run and uses them instead, because we assume that the model has not changed and the data is still valid.
+
+The data we need are the classifications, the layer outputs and the spectrum matrices.
+The classifications are the indexes of the data of the test dataset sorted in to the categories of correctly predicted and not correctly predicted.
+The layer outputs are the information about the activation for each neuron, of each layer, for each member of the test dataset.
+Now with this information we can contruct the spectrum matrix, which uses the layer outputs and classifications to determine sums of the symbols denoted in the table \ref{tab: Sus symbols}, for each neuron, if it was activated or not, and if the prediction of the network was right or wrong.
+
+When all this data is aggregated, we can determine the suspiciousness of each neuron, which is the main goal of the analysis.
+All this data is then saved to the working path, for future runs, and the suspicious neurons are returned.
+The network's neuron count is aggregated, and if the number of selected neurons \texttt{susp\_num} is less than the number of modifiable neurons, the \texttt{susp\_num} most suspicious neurons are returned.
+
+Otherwise, all modifiable neurons are returned, ranked by their level of suspicion.
+To determine the suspiciousness, we use the $\text{D}^*$, Tarantula, and Ochiai methods, which you can see in the background chapter \ref{sec:spectrum-based-fault-localisation}.
+We also added the option to return a specified number of random neurons, which can be useful for testing purposes, you can see the function in listing \ref{lst:random_choosing}.
+The function returns a list of tuples in the format of $(layer, layer\_index)$, ranked from the most suspicious neuron to the least suspicious.
+
+\lstinputlisting[language=Python, linerange={8-53,65}, caption={Main analysis function}, label={lst:main analysis}]{source_analysis/__init__.py}
+\lstinputlisting[language=Python, linerange={59-71}, caption={Random Choosing, of neurons}, label={lst:random_choosing}]{source_analysis/analysis.py}
+
+The saving and loading functions in listings \ref{lst:saving} required adaptation due to the depreciation of the \texttt{.value} property in h5py \cite{collette_h5pyh5py_2022}.
+Therefore, every loading function needs to use indexing instead of the property used by the old DeepFault code.
+Save and load functions were added for the spectrum matrices and ranked neurons, for saving time by not having to re-run the analysis every time the program is executed.
+Because of the similarity of the functions, we only show the saving and load function for the classifications in listing \ref{lst:saving}.
+All functions can be found in the appendix \ref{lst:saving_full}.
+\lstinputlisting[language=Python, linerange={19-43}, caption={Saving and loading the classifications}, label={lst:saving}]{source_analysis/utilities.py}
+
+Additionally, we modified the \texttt{get\_layer\_outs} function as shown in listing \ref{lst:layer outs} from native Keras \cite{chollet_keras_2015} calls to TensorFlow \cite{martin_abadi_tensorflow_2015} via \texttt{tf.keras}, which uses Keras as its backend, as recommended from Keras versions 2.3.0. \cite{keras_release_nodate} onward.
+Because of its better integration with the rest of the TensorFlow library.
+
+\lstinputlisting[language=Python, linerange={82-87}, caption={Layer outs}, label={lst:layer outs}]{source_analysis/utilities.py}

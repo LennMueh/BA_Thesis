@@ -50,6 +50,7 @@ def run_analysis(model_name, approach, test_images, test_labels ,susp_num=-1, st
                 suspicious_neuron_idx = an.tarantula_analysis(trainable_layers, scores, num_cf, num_uf, num_cs, num_us,
                                                               susp_num)
                 ut.save_suspicious_neurons(suspicious_neuron_idx, experiment_path, approach, susp_num, group_index)
+            ...  # other cases
             case "ochiai":
                 suspicious_neuron_idx = an.ochiai_analysis(trainable_layers, scores, num_cf, num_uf, num_cs, num_us,
                                                            susp_num)
