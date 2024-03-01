@@ -14,9 +14,9 @@ by using a vector of weights $\mathbf{w}$, a bias $b$ and an activation function
     y = f\left( \sum^n_{i=1} w_i\cdot x_i + b\right)
     \label{eq: NeuralFunction}
 \end{equation}
-For example the machine learning software library TensorFlow, which is based on Keras, uses by default Glorot uniform initializer\cite{noauthor_tfkeraslayersdense_2023,glorot_understanding_2010}, for the weights and initializes the bias with zeros.\\
+For example the machine learning software library TensorFlow, which is based on Keras, uses by default Glorot uniform initializer \cite{noauthor_tfkeraslayersdense_2023,glorot_understanding_2010}, for the weights and initializes the bias with zeros.\\
 Another important component, are the activation functions, one of the most common ones is the sigmoid function, which is today mostly used in output layers.
-The rectified linear unit, short ReLU \ref{eq: relu}\cite{fukushima_cognitron_1975,glorot_deep_2011} enables a better training for a neural network compared to the formerly common sigmoid function.
+The rectified linear unit, short ReLU \cite{fukushima_cognitron_1975,glorot_deep_2011}, as seen in Function \ref{eq: relu}, enables a better training for a neural network compared to the formerly common sigmoid function.
 \begin{equation}
     f(x) =
     \begin{cases}
@@ -25,7 +25,7 @@ The rectified linear unit, short ReLU \ref{eq: relu}\cite{fukushima_cognitron_19
     \end{cases}
     \label{eq: relu}
 \end{equation}
-Another even more promising activation function is the Gaussian Error Linear Unit, short GELU \ref{eq: relu} which was proposed by Hendrycks and Gimpel in 2016\cite{hendrycks_gaussian_2016} is used by natural language processing models like BERT\cite{devlin_bert_2019}.
+Another even more promising activation function is the Gaussian Error Linear Unit, short GELU, seen in function \ref{eq: relu}, which was proposed by Hendrycks and Gimpel in 2016 \cite{hendrycks_gaussian_2016} is used by natural language processing models like BERT \cite{devlin_bert_2019}.
 It does not just set all negative values to zero like ReLU but weights them.
 The differences can be seen in the figure. \ref{fig: activation function}
 \begin{equation}
@@ -35,20 +35,20 @@ The differences can be seen in the figure. \ref{fig: activation function}
 \input{figures/activationfunction.tikz}
 The neurons are then combined into layers, in a Deep Neural Network (DNN) we have three types of Layers:
 Input layers, output layers and the hidden layers.
-There is one input and one output layer \ref{fig: neural network}, but there is a plurality of hidden layers.
+There is one input and one output layer, but there is a plurality of hidden layers, as you can see in the figure \ref{fig: neural network}.
 The input layer, processes the input for the hidden layers, for example, it converts a 2-dimensional picture to a 1-dimensonal array, which can then be processed by the subsequent hidden layers.
-The hidden layer performs most of the computational work of a DNN, it works based on the neural equation. \ref{eq: NeuralFunction}
+The hidden layer performs most of the computational work of a DNN, it works based on the neural equation, that can be seen in the function \ref{eq: NeuralFunction}.
 The output layer takes the output of the last hidden layer and transforms it to produce a meaningful output.
 In the case of regression or binary classification, there is usually only one neuron, but for multi-class classification, the number of neurons corresponds to the number of classes to be classified.
 The output layer follows the same principle as the formula above, but it does not use a 'normal' activation function.
-Either a linear activation function or no activation function is used for regression, or the softmax \ref{eq: softmax} function is used for classification models.
+Either a linear activation function or no activation function is used for regression, or the softmax function, which can be seen in the function \ref{eq: softmax}, is used for classification models.
 \begin{equation}
     f(x_i) = \frac{e^{x_i}}{\sum^n_{j=1}e^{x_j}}
     \label{eq: softmax}
 \end{equation}
 \input{figures/neuralnetwork.tikz}
 But, how are deep neural networks trained? \cite{lecun_deep_2015}
-The first step is forward propagation, the training data is fed in to the network and flows through the layers, where each neuron performs it operation. \ref{eq: NeuralFunction}
+The first step is forward propagation, the training data is fed in to the network and flows through the layers, where each neuron performs it operation, according to the function \ref{eq: NeuralFunction}.
 Afterward the backpropagation or backpropagation of error is performed. \cite{rumelhart_learning_1986}
 Then the output is compared to the desired outcome of the training data, hence, if the predicted outcome of the network matches the actual outcome.
 If it doesn't match, it calculates how far off the prediction is.
@@ -58,7 +58,7 @@ With each iteration SGD updates the model parameters by using the gradient of th
 This isn't done for the whole dataset but just some data points.
 The learning rate describes how far a parameter is changed in the direction of a derivation for one iteration, in SGD this Learning Rate is constant and manually set.
 
-Adaptive Moment Estimation (Adam)\cite{kingma_adam_2017} is one of the successors of SGD. Adam, uses a variable learning rate which is adapted for each parameter, which uses the estimation of the first moment, the mean, and the second moment, the variance to change the learning rate.
+Adaptive Moment Estimation (Adam) \cite{kingma_adam_2017} is one of the successors of SGD. Adam, uses a variable learning rate which is adapted for each parameter, which uses the estimation of the first moment, the mean, and the second moment, the variance to change the learning rate.
 Then this process is repeated until we are gone through the entire training set, which is called an epoch.
 
 \subsection*{Core Layers in Neural Networks}\label{subsec:core-layers-in-neural-networks}
@@ -67,7 +67,7 @@ We use them in our evaluation, hence, we will discuss them in detail.
 \subsubsection{Dense Layers}
 It's characterized by its fully connected architecture, like seen in the figure \ref{fig: neural network}, meaning every node of the layer is connected to every node of the predecessor layer and every node of the successor layer.
 Dense layers are pivotal in learning intricate patterns from data, their versatility allows them to be stacked where each layer captures different levels of data abstraction.
-\ref{eq: DenseLayer}.
+The theoretical function of a dense layer can be seen in the function \ref{eq: DenseLayer}.
 Where $x = (x_1,x_2,\dots,x_n)^T$ is the input vector,
 $W = \left(\begin{smallmatrix}w_{11} & w_{12} & \dots & w_{1j}\\w_{21} & w_{22} & \dots & w_{2j}\\\vdots & \vdots & \ddots & \vdots\\w_{i1} & w_{i2} & \dots & w_{ij}\end{smallmatrix}\right)$
 is the weight vector and $b = (b_1,b_2,\dots,b_n)^T$ is the bias and $f$ is the activation function and the output function $y = (y_1,y_2,\dots,y_n)^T$.
@@ -79,14 +79,14 @@ is the weight vector and $b = (b_1,b_2,\dots,b_n)^T$ is the bias and $f$ is the 
 \end{gather}
 
 \subsubsection{Convolutional Layer}
-Convolutional layers, are used in image processing\cite{lecun_backpropagation_1989,szegedy_going_2014,krizhevsky_imagenet_2012}, unlike dense layers that try to analyse an image as a whole, but uses the concept of convolution to get a set of smaller pictures which depict isolated features of a picture.
-A convolution describes how a function f is modified by a function g, for example in the discrete case: \ref{eq: convolution}.
+Convolutional layers, are used in image processing \cite{lecun_backpropagation_1989,szegedy_going_2014,krizhevsky_imagenet_2012}, unlike dense layers that try to analyse an image as a whole, but uses the concept of convolution to get a set of smaller pictures which depict isolated features of a picture.
+A convolution describes how a function f is modified by a function g, for example in the discrete case, can be seen in the equation \ref{eq: convolution}.
 \begin{equation}
 (f \ast g)[n]
     = \sum_{m=-\infty}^{\infty}f[m]\cdot g[n - m]
     \label{eq: convolution}]
 \end{equation}
-But how does this correspond to neural networks and image processing, foremost, we have not 1Dimensional data, but 2Dimensional pictures. \ref{eq: 2Dconvolution} \ref{fig: convolution matrix}
+But how does this correspond to neural networks and image processing, foremost, we have not 1Dimensional data, but 2Dimensional pictures, as you can see in the figure \ref{fig: convolution matrix} and equation \ref{eq: 2Dconvolution}.
 \begin{equation}
 (f \ast g)[x,y]
     = \sum^{\infty}_{m=-\infty} \sum^{\infty}_{n=-\infty} f[m,n]\cdot g[x-m,y-n]
@@ -97,14 +97,15 @@ In convolutional neural networks, matrices of weights called kernels or filters 
 The output of the convolutional layer consists of feature maps, each representing the result of applying one filter to the input data.
 These maps capture different aspects such as edges or textures.
 A convolutional layer has two other variables: the number and size of filters and the activation function.
-The terms "stride" and "padding" are used to describe the movement of the filter and the preservation of information on the edge of an input, respectively.
+The terms stride and padding are used to describe the movement of the filter and the preservation of information on the edge of an input, respectively.
+In the figure \ref{fig: convolution matrix}, you can see a filter of size 3x3, which is applied to a 7x7 matrix, with a stride of 1 and no padding, which results in a 5x5 matrix.
 The stride determines the number of steps the filter takes between convolutions, with a larger stride resulting in a smaller filter map and less detail.
 Padding is an optional parameter that helps to maintain information on the edge of an input and preserve the scale of a picture.
 
 \subsubsection{Pooling Layer}
 Pooling is an often used concept in Convolutional Neural Networks to reduce the size of the individual feature map produced by the convolutional layer, while conserving important details of the feature map.
 Especially to produce an output which has a similar size as the input, a pooling layer can be avoided \cite{jain_supervised_2007}.
-There are multiple types of pooling operations, but the most used ones are Max-Pooling \ref{fig: Max Pooling} and Average-Pooling \ref{fig: Average Pooling}.
+There are multiple types of pooling operations, but the most used ones are Max-Pooling as seen in figure \ref{fig: Max Pooling} and Average-Pooling seen in figure \ref{fig: Average Pooling}.
 Which operation is best depends on the type of data to be analysed and its pooling cardinality, which describes the number of extracted features.
 There can be said, for smaller cardinalities a Max-Pooling should be used, for larger ones Average-Pooling \cite{boureau_theoretical_2010}.
 In the complex layer terminology \cite{goodfellow_deep_2016} there are, the convolution stage, the detector stage (Which is just the usage of a nonlinear activation function) and the pool stage, these stages are sublayers of the large convolutional layer.
@@ -117,8 +118,8 @@ Now, with the usage of the convolutional layer and the pooling layer, we can pre
 \section{Neural Network Testing}\label{sec:neural-network-testing}
 The testing methods can be categorized into two distinct categories, which are akin to testing in conventional software.
 They are coverage criteria and test case generation.
-In the subsequent section, we shall examine various methodologies employed for testing singular deep neural networks.\cite{huang_survey_2020}
-But first, how do we define an erroneous behaviour of a neural network? \ref{eq: erroneous behaviour}
+In the subsequent section, we shall examine various methodologies employed for testing singular deep neural networks \cite{huang_survey_2020}.
+But first, how do we define an erroneous behaviour of a neural network, as defined in the equation \ref{eq: erroneous behaviour}?
 Where $f: \mathbb{R}^{s_1} \to \mathbb{R}^{s_K}$ is a trained neural network, $\mathcal{H}: \mathbb{R}^{s_1} \to \mathbb{R}^{s_K}$ and a legitimate input $x \in \mathbb{R}^{s_1}$, then we define the erroneous behaviour as:
 \begin{equation}
     \arg \max_{j} f_j (x) \neq \arg \max_{j} \mathcal{H}_j (x)
@@ -166,7 +167,7 @@ Concolic testing combines the concrete execution of a program, with random input
 There by, the findings of the first step are used to generate the second set of inputs.
 
 \section{Spectrum-Based Fault Localization}\label{sec:spectrum-analysis}
-Another important detail that requires introduction, Spectrum-Based Fault Localization (SBFL)\cite{wong_handbook_2023}, it is a technique to identify the source of faults in software.
+Another important detail that requires introduction, Spectrum-Based Fault Localization (SBFL) \cite{wong_handbook_2023}, it is a technique to identify the source of faults in software.
 The term spectrum, describes in this context the execution profile of the program, which is collected during the execution of a test suite.
 During the execution, the coverage of each statement by a test case is recorded and if this test case is a success or a failure.
 \input{tables/symbols.tex}
@@ -175,7 +176,7 @@ This provides information on the contrast between failure and success, aiding in
 For example, in the first case, code that is often executed or every time, would be marked faulty simply for being in a programme.
 In the second case, the code wouldn't be marked faulty because it is also executed frequently in successful test cases.
 The term “code coverage” is frequently referred to as “executable statement hit spectrum” (ESHS), which denotes the extent to which certain components of the program under testing have been covered during execution.
-Some popular ESHS-based are based on a similarity coefficient, for example Tarantula\cite{jones_empirical_2005} \ref{eq: tarantula} , Ochiai\cite{ochiai_zoogeographical_1957} \ref{eq: ochiai} or Dstar\cite{wong_dstar_2014} \ref{eq: dstar} (Often also called $D^*$, where $*$ denotes the used exponent).
+Some popular ESHS-based are based on a similarity coefficient, for example Tarantula \cite{jones_empirical_2005} as seen in equation \ref{eq: tarantula} , Ochiai \cite{ochiai_zoogeographical_1957} seen in equation \ref{eq: ochiai} or Dstar \cite{wong_dstar_2014} in equation \ref{eq: dstar} (Often also called $D^*$, where $*$ denotes the used exponent).
 \begin{equation}
     \frac{\frac{a_{ef}}{a_{ef} + a_{nf}}}{\frac{a_{ef}}{a_{ef} + a_{nf}}+\frac{a_{es}}{a_{es} + a_{ns}}}
     \label{eq: tarantula}
@@ -188,22 +189,22 @@ Some popular ESHS-based are based on a similarity coefficient, for example Taran
     \frac{{a_{ef}}^*}{a_{es}+a_{nf}}
     \label{eq: dstar}
 \end{equation}
-By the work of Lee et al. \cite{hua_jie_lee_study_2009} \ref{eq: simple_tarantula} the formula for Tarantula could even be more simplified.
-Yoo et al. \cite{yoo_human_2017}said that using genetic programming to create ranking metrics can consistently exceed many human-designed ranking metrics, like the once discussed above.
+By the work of Lee et al. \cite{hua_jie_lee_study_2009} the formula for Tarantula could even be more simplified like seen in equation \ref{eq: erroneous behaviour}.
+Yoo et al. \cite{yoo_human_2017} showed that using genetic programming to create ranking metrics can consistently exceed many human-designed ranking metrics, like the measures discussed before.
 \begin{equation}
     \frac{a_{ef}}{a_{ef}+a_{es}}
     \label{eq: simple_tarantula}
 \end{equation}
-In the following, you can see an Example \cite{parsa_software_2023} to see what spectrum analysis is, and what a pitfall of this method is.
+In the following, you can see an Example from Parsa et al. \cite{parsa_software_2023} to see what spectrum analysis is, and what a pitfall of this method is.
 The Listing \ref{lst:code_snippet sfl} depicts some simple calculation program, which takes the two integers a and b as input and an integer c for the branching of the calculation.
 At line 11, the Max value is wrongly set, this is the fault that needs to be found.
 In the Table \ref{tab: sfl}, you can see the suspiciousness values calculated with ochiai and tarantula.
 
 But because line 8, is always executed with line 11 and is overall less executed than line 11, it is the more suspicious statement.
-Hence, we can see that spectrum analysis isn't the silver bullet, for eradicating faults in programs.
+Hence, we can see that spectrum analysis isn't the silver bullet, for eradicating faults in programs, but it can still be a useful tool to reduce the search space for the fault.
 \input{figures/ExampleSfl.tex}
 
-There are even more similarity coefficients, to an extent which wouldn't be feasible to be covered in this work, an extensive can be referred to by Wong et al. \cite{wong_survey_2016}.
+There are even more similarity coefficients, to an extent which wouldn't be feasible to be covered in this work, for an extensive survey one can refer to the one by Wong et al. \cite{wong_survey_2016}.
 
 There are some other examples of SBFL, which don't use ESHS, for example Program Invariants Hit Spectrum, which the coverage of program invariants.
 Those individuals attempt to identify violations of program properties in failed program executions to locate bugs.

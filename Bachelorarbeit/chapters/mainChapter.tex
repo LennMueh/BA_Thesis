@@ -1,7 +1,12 @@
-In the following chapter, we describe our approach for our "mutation-based accuracy improvements", starting with the adaptation of DeepFault's \cite{eniser_deepfault_2019} spectrum fault localisation, which we adapted to the latest versions of the libraries used and optimised for faster execution time and elimination of redundant operations that are often used across operations, such as the creation of the spectrum matrices that aggregate all analysis values for each neuron in a network.
-We used the source code from the GitHub repository of Eniser et al \cite{eniser_deepfault_2023}.
+In the following chapter, we describe our approach for our ``mutation-based accuracy improvements'', starting with the adaptation of DeepFault's \cite{eniser_deepfault_2019} spectrum fault localization.
+Afterwards, we go through our work and choices for the mutations of a neural network.
 
-The functions adapted from the DeepFault paper have been invoked in the \texttt{run\_analysis} \ref{lst:main analysis} function.
+\section{Spectrum-based fault localisation}\label{sec:spectrum-based-fault-localisation}
+For the Spectrum-based fault localization, we adapted the DeepFault \cite{eniser_deepfault_2023} code to our needs.
+Especially, we adapted the functions to the recent versions of the used libraries and added some additional functions to save and load the data.
+
+%todo: rework this paragraph
+The functions adapted from the DeepFault paper are now invoked in the \texttt{run\_analysis} \ref{lst:main analysis} function, which is the main function for the analysis, to ease the use of the analysis.
 The function manages the model loading and the experiment or working paths.
 The program checks if the necessary data, such as classifications, layer outputs, or spectrum matrices, is already available before executing the analysis functions and saving the outputs.
 The network's neuron count is aggregated, and if the number of selected neurons \texttt{susp\_num} is less than the number of modifiable neurons, the \texttt{susp\_num} most suspicious neurons are returned.
