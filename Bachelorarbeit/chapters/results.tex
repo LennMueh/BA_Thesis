@@ -1,5 +1,6 @@
 In this chapter, we will discuss the performance of our approach towards neural networks.
-We will explore various options available through our approach to elicit optimal results.
+By performance, we mean the ability of our approach to improve the accuracy of a pre-trained model and how much our approach can reduce the loss of a pre-trained model.
+We will explore various options available through our approach to the elicit optimal results.
 To achieve this, the evaluation will be based on the following research questions:
 \begin{enumerate}
     \item[]\textbf{RQ1: Impact of Training on Mutated Models} How does training a mutated pre-trained model impact its performance metrics?
@@ -37,8 +38,10 @@ Fo our evaluation we used the following parameters:
     \item[]\textbf{Loss offset:} 0.005, 0
     \item[]\textbf{Accuracy offset:} 0.01, 0
     \item[]\textbf{Loss and accuracy regression:} True for all runs
-    \item[]\textbf{Values:} -1, -0.5, 0, 0.5, 1 \textit{0 just for value assignment, basically a deletation of a neuron}
+    \item[]\textbf{Values:} -1, -0.5, 0, 0.5, 1\\ \textit{0 just for value assignment, basically a deletation of a neuron}
     \item[]\textbf{Sigma for random:} 0.5, 1
 \end{enumerate}
+We chose these parameters to evaluate the impact of different mutation functions, suspiciousness measures, and break conditions on the performance of our approach.
+Our main objective was to cover a large area of the possible parameter space to evaluate the performance of our approach, with as little parameters as possible.
 \section{Results}\label{sec:results}
 \input{chapters/results1}

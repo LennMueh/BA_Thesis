@@ -1,8 +1,11 @@
 This section will present the findings of our experiments.
-The two measures used to compare our methods are the change in loss and the change in accuracy.
-The difference between the benchmarked model and our mutated models is compared to evaluate the trained model.
-We compare the loss and accuracy of the benchmark model at a further epoch to the run epoch of our algorithm.
-For the non-expert runs, we use the standard model benchmark.
+The two measures we used to compare our methods are the change in loss and the change in accuracy.
+The change is based on the benchmark, which is the model without any mutations.
+For the further trained models, we compared the comparison model with the respective epoch of out algorithm.
+For example, the results of the 1st epoch of our algorithm for a model pre-trained for 1 epoch is compared the model trained for 2 epochs, for 6 epochs it would be compared to the model trained for 7 epochs.
+For the models without training, we always compared to the base accuracy and loss seen in the table \ref{tab:results}.
+
+
 \subsection{Impact of Training on Mutated Models}\label{subsec:impact-of-training-on-mutated-models}
 Our models \ref{fig:loss-accuracy-training} show slightly better loss and accuracy than the benchmark during training.
 However, we observed a drop in both metrics after the 12th epoch for loss and after the 11th epoch for accuracy.
