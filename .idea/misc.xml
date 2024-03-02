@@ -5,5 +5,5 @@
     <option name="pathToExecutable" value="C:\Users\lenna\AppData\Roaming\Python\Python310\Scripts\black.exe" />
     <option name="sdkName" value="Python 3.10.12 WSL (Ubuntu-22.04): (/home/ubu/.virtualenvs/BA_Thesis/bin/python)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10.12 WSL (Ubuntu-22.04): (/home/ubu/.virtualenvs/BA_Thesis/bin/python)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (BA_Thesis)" project-jdk-type="Python SDK" />
 </project>

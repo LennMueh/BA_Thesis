@@ -3,7 +3,7 @@
     \begin{tikzpicture}[node distance=2cm]
         \node (start) [startstop] {Start};
         \node (pro1) [process, below of=start] {Spectrum analysis};
-        \node (pro2) [process, below of=pro1] {Pop, head node};
+        \node (pro2) [process, below of=pro1] {Take, head coordinates of NN};
         \node (pro3) [process, below of=pro2] {Mutate node};
         \node (dec1) [decision, below of=pro3, yshift=-0.5cm] {Training?};
         \node (pro4a) [process, below of=dec1, yshift=-0.5cm] {Evaluate};
