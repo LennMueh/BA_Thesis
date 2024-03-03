@@ -57,11 +57,11 @@ As we can see in the figure \ref{fig:initial-epochs-notraining}, the models with
 While for the not trained runs, the median for loss and acurracy is not significantly better than the baseline, we can see a significant improvement for the extremes.
 With a maximum improvement of 25\% for the accuracy and 45\% for the loss, for the 1st epoch.
 But a decrease of up to -40\% for the accuracy and -70\% for the loss.
-For the 6 initial epochs, we see a lower derivation.
+For the 6 initial epochs, we see a lower deviation.
 
 For the trained runs, that can be seen in figure \ref{fig:initial-epochs-training},we see a smaller improvement over all, which is in line with the results of the previous two subsections.
 But here we also see a better result for the 1 initial epoch, than for the 6 initial epochs.
-But also a larger derivation for 1 initial epoch, than for the 6 initial epochs.
+But also a larger deviation for 1 initial epoch, than for the 6 initial epochs.
 
 We would guess that the reason tHat the 1 initial epoch has more room for improvement, then the 6 initial epoch.
 As we can see in the table \ref{tab:results} that the accuracy and loss of the 6 initial epochs is already better than the 1 initial epoch, at the beginning.
@@ -132,7 +132,7 @@ Ochiai seems also promising, but in contrast to Tarantula, we the third quartile
 Dstar is the worst performing of the three measures, but still positive with a median slightly above the baseline, for the untrained runs.
 Random performs the worst, as expected.
 For the trained runs, while we see the improvements, as earlier mentioned, with tarantula, we see no specific improvement for the other measures.
-All of them having a median near the baseline, and just a slightly different derivation and both sides of the baseline.
+All of them having a median near the baseline, and just a slightly different deviation and both sides of the baseline.
 \begin{figure}
     \begin{subfigure}{0.5\textwidth}
         \centering
@@ -158,9 +158,16 @@ All of them having a median near the baseline, and just a slightly different der
     \label{fig:suspiciousness-measures-training}
 \end{figure}
 \subsection{CNN vs. DNN Architectural Efficiency}\label{subsec:cnn-vs.-dnn-architectural-efficiency}
-For both the trained \ref{fig:architecture-notraining} and untrained \ref{fig:architecture-training} runs, CNN1 appears to be the most promising architecture, while CNN2 shows promise for untrained runs in terms of accuracy but performs poorly in terms of loss.
-For both trained and non-trained runs, the deep neural networks are not performing better than the baseline.
-CNN2 is underperforming in the trained runs.
+For the non-trained runs, as seen in the figure \ref{fig:architecture-notraining}, the CNN1 architecture is the most promising, with an improvement of up to 25\% for the accuracy and 35--45\% for the loss.
+While CNN2 is promissing for the accuray, with an improvement of up to 10\%, it is the worst for the loss, with a worsening tendency.
+The DNN models are only performing mediocre, with a median slightly above the baseline, but only slight outliers, for both loss and accuracy.
+The DNN2 is silghtly better than the DNN1, in both cases.
+
+For the trained runs, as seen in the figure \ref{fig:architecture-training}, the CNN1 architecture is the most promising, with an improvement of up to 15--25\% for the accuracy and 50--90\% for the loss.
+While CNN2 is mediocre for the accuray, with an even distribution around the median at the baseline, it is the worst for the loss, with a worsening tendency.
+The DNN models are only performing mediocre, with a median slightly above the baseline, but only slight outliers, for both loss and accuracy.
+
+We aren't seeing us able to draw conclusions from the results, especially the experiments should be repeated with properly designed models and different datasets.
 \begin{figure}
     \begin{subfigure}{0.5\textwidth}
         \centering
@@ -186,8 +193,10 @@ CNN2 is underperforming in the trained runs.
     \label{fig:architecture-training}
 \end{figure}
 \subsection{Offset Variations in Loss and Accuracy}\label{subsec:offset-variations-in-loss-and-accuracy}
-Although the median change with and without the offset is similar \ref{fig:offset-training}\ref{fig:offset-notraining}, it is important to note that the upper quartile of the categories uses the offset, as indicated by the data.
-This suggests that an offset ultimately produces a better result.
+For both trained, as seen in the figure \ref{fig:offset-training}, and untrained runs, as seen in the figure \ref{fig:offset-notraining}, the offset doesn't have a significant impact on the loss and accuracy of the models.
+While seeing the same median for the offset and no offset runs, we see a larger deviation for the offset runs, for both loss and accuracy.
+
+We would attribute this to that the offset, can lead to larger improvements, because we don't stop at local extrema in training, but also we need an even worse performance, for an epoch to break the algorithm.
 \begin{figure}
     \begin{subfigure}{0.5\textwidth}
         \centering
