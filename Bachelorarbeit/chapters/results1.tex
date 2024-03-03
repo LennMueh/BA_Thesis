@@ -8,13 +8,16 @@ For the models without training, we always compared to the base accuracy and los
 
 \subsection{Impact of Training on Mutated Models}\label{subsec:impact-of-training-on-mutated-models}
 Our models \ref{fig:loss-accuracy-training} show slightly better loss and accuracy than the benchmark during training.
-However, we observed a drop in both metrics after the 12th epoch for loss and after the 11th epoch for accuracy.
+For the first four epochs, the loss and accuracy of the models are significantly better than the benchmark.
+We see an improvement in the median for the accuracy of 1.75\% and for the loss of 3--4\%.
+Afterwards, we see a decrease of the median to the baseline of 1.
+After the 11th epoch, we see a drop of the median below the baseline.
+This holds also true for the loss, where we see the same drop after the 11th epoch.
 
-The figure \ref{fig:decay_training} displays the number of trained models.
-It appears that the break condition was not met in the previous epoch.
-By the 6th epoch, the number of running models had already been halved.
-At the 10th epoch, only one-fifth of the original runs remain.
-Therefore, for subsequent analysis, we will only consider data points with an epoch of 10 or less.
+For some epochs we can see an improvement to 2.5\% for the accuracy to an extreme of 7.5\%.
+For the loss, we see an 12\% improvement to an extreme of 40\%.
+We would attribute this to the mutation of the model and the breakage of the algorithm, as we can see in the figure \ref{fig:decay_training}.
+
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{plots/Trained_Change_Acc.png}
