@@ -32,13 +32,13 @@ We would attribute this to the mutation of the model and the breakage of the alg
     \label{fig:decay_training}
 \end{figure}
 \subsection{Effects of Mutation Without Training}\label{subsec:effects-of-mutation-without-training}
-For the models \ref{fig:loss-accuracy-Notraining}, there is a significant improvement in accuracy and loss during the first three epochs.
-However, after that, the values remain close to the baseline of 1.
+As you can see in the figure \ref{fig:loss-accuracy-Notraining}, the models without training show a significant improvement in accuracy and loss during the first three epochs.
+But we see only a median that isn't significantly better than the baseline of 1, for both loss and accuracy.
+We see a in crease for the extremes stepwise, for each of the first 3 epochs, till we reach an improvement of 25\%, but on the other hand a decrease of -17\% on the other extreme.
+The same for the loss, where we see an improvement of 45\% to a decrease of -50\%.
 
-The figure \ref{fig:decay_Notraining} shows the number of trained models.
-The break condition was not met in the previous epoch.
-Additionally, we observe that after 5 epochs, only a quarter of the runs remain, and after 10 epochs, only an eighth remains.
-Based on these results, we decided to focus on data points with an epoch of 5 or less.
+The three steps we are seeing, can be attributed to the comparison to only the 1st epoch, or 6th epoch respectively, so we are summing up any improvement of the model.
+The reason for the sharp drop we see in the figure \ref{fig:decay_Notraining}, we would attribute to to the increasing damage we are doing to the model, as we are not training it in between the mutations.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{plots/NotTrained_Change_Acc.png}
@@ -52,13 +52,19 @@ Based on these results, we decided to focus on data points with an epoch of 5 or
     \caption{Decay of data points, per epoch, without training}
     \label{fig:decay_Notraining}
 \end{figure}
-\subsection{Effects of the extend of pre Training}\label{subsec:effects-of-the-extend-of-pre-training}
-The initial epoch 1 shows \ref{fig:initial-epochs-notraining} a significant improvement in both loss and accuracy for the execution without training.
-However, this improvement is not observed in models with 6 initial epochs.
+\subsection{Effects of the extend of pre-Training}\label{subsec:effects-of-the-extend-of-pre-training}
+As we can see in the figure \ref{fig:initial-epochs-notraining}, the models with 1 initial epoch show the largest potential for improvements.
+While for the not trained runs, the median for loss and acurracy is not significantly better than the baseline, we can see a significant improvement for the extremes.
+With a maximum improvement of 25\% for the accuracy and 45\% for the loss, for the 1st epoch.
+But a decrease of up to -40\% for the accuracy and -70\% for the loss.
+For the 6 initial epochs, we see a lower derivation.
 
-In contrast, when executing the model \ref{fig:initial-epochs-training} with training, the most promising model remains the one with 1 initial epoch.
-However, models with an initial 6 epochs still produce better results.
-Due to the poor results of the non-trained 6 initial epoch models, we decided to focus solely on models with 1 initial epoch for further investigation.
+For the trained runs, that can be seen in figure \ref{fig:initial-epochs-training},we see a smaller improvement over all, which is in line with the results of the previous two subsections.
+But here we also see a better result for the 1 initial epoch, than for the 6 initial epochs.
+But also a larger derivation for 1 initial epoch, than for the 6 initial epochs.
+
+We would guess that the reason tHat the 1 initial epoch has more room for improvement, then the 6 initial epoch.
+As we can see in the table \ref{tab:results} that the accuracy and loss of the 6 initial epochs is already better than the 1 initial epoch, at the beginning.
 \begin{figure}
     \begin{subfigure}{0.5\textwidth}
         \centering
@@ -84,10 +90,17 @@ Due to the poor results of the non-trained 6 initial epoch models, we decided to
     \label{fig:initial-epochs-training}
 \end{figure}
 \subsection{Training Dataset Size and Model Performance}\label{subsec:training-dataset-size-and-model-performance}
-When examining the datasets without training \ref{fig:dataset-size-notraining}, we observe similar accuracies for both the full and half datasets.
-However, the loss is slightly worse for the half dataset compared to the full dataset.
-For the trained runs \ref{fig:dataset-size-training}, there is a greater distance between the full and half datasets.
-For both with and without training, we see not very promising results for the quarter dataset.
+As you can see in the figure \ref{fig:dataset-size-notraining}, the dataset size doesn't have a significant impact on the loss and accuracy of the models without training, for the full and half dataset.
+While we see a improvement for the full and half dataset, for the accuracy of often up to 25\% and for the loss a slight different result with 50\% and 30\% respectively.
+For the quarter dataset we see a more negative result, while a improvement is still possible, we even see the 3rd quartile just slightly above the baseline.
+And the rest all below the baseline, so roughly only a quarter of the models are better than the baseline.
+
+For the trained runs, that can be seen in the figure \ref{fig:dataset-size-training}, we see a larger difference between the full and half dataset.
+With the full dataset, we see an improvement of up to 25\% for the accuracy and 95\% for the loss.
+We even see the 1st quartile above the baseline, so three quarters of the models are better than the baseline.
+This holds also true for the half dataset, where we see an improvement of up to 7.5\% for the accuracy and a bit more than 25\% for the loss.
+Here also the quarter dataset is the worst, with only half of the models better than the baseline.
+And even that at most for 5\% for the accuracy and around 10\% for the loss.
 \begin{figure}
     \begin{subfigure}{0.5\textwidth}
         \centering
@@ -113,22 +126,13 @@ For both with and without training, we see not very promising results for the qu
     \label{fig:dataset-size-training}
 \end{figure}
 \subsection{Influence of Suspiciousness Measures}\label{subsec:influence-of-suspiciousness-measures}
-For both trained \ref{fig:suspiciousness-measures-training} and untrained runs \ref{fig:suspiciousness-measures-notraining}, Tarantula appears to be the most promising measure of suspiciousness.
-In contrast to expectations, Random only reliably exceeded in the runs without training.
-There is no discernible difference between each random choosing, ochiai, and dstar in the trained runs.
-For runs without training, ochiai appears to be superior to dstar and random selection.
-\begin{figure}
-    \begin{subfigure}{0.5\textwidth}
-        \centering
-        \includegraphics[width=0.95\textwidth]{plots/Meassure_Trained_accuracy.png}
-    \end{subfigure}
-    \begin{subfigure}{0.5\textwidth}
-        \centering
-        \includegraphics[width=0.95\textwidth]{plots/Meassure_Trained_loss.png}
-    \end{subfigure}
-    \caption{Loss and accuracy, with training, with different suspiciousness measures}
-    \label{fig:suspiciousness-measures-training}
-\end{figure}
+For both trained, as seen in the figure \ref{fig:suspiciousness-measures-training}, and untrained runs, as seen in the figure \ref{fig:suspiciousness-measures-notraining}, Tarantula appears to be the most promising measure of suspiciousness.
+Three quarters of the models are better than the baseline, with an improvement of up to 25\% for the accuracy and 30\% for the loss, for the not trained runs and 22.5\% for the accuracy and 90\% for the loss, for the trained runs.
+Ochiai seems also promising, but in contrast to Tarantula, we the third quartile is mostly below the median of tarantula, for untrained runs.
+Dstar is the worst performing of the three measures, but still positive with a median slightly above the baseline, for the untrained runs.
+Random performs the worst, as expected.
+For the trained runs, while we see the improvements, as earlier mentioned, with tarantula, we see no specific improvement for the other measures.
+All of them having a median near the baseline, and just a slightly different derivation and both sides of the baseline.
 \begin{figure}
     \begin{subfigure}{0.5\textwidth}
         \centering
@@ -140,6 +144,18 @@ For runs without training, ochiai appears to be superior to dstar and random sel
     \end{subfigure}
     \caption{Loss and accuracy, without training, with different suspiciousness measures}
     \label{fig:suspiciousness-measures-notraining}
+\end{figure}
+\begin{figure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Meassure_Trained_accuracy.png}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth]{plots/Meassure_Trained_loss.png}
+    \end{subfigure}
+    \caption{Loss and accuracy, with training, with different suspiciousness measures}
+    \label{fig:suspiciousness-measures-training}
 \end{figure}
 \subsection{CNN vs. DNN Architectural Efficiency}\label{subsec:cnn-vs.-dnn-architectural-efficiency}
 For both the trained \ref{fig:architecture-notraining} and untrained \ref{fig:architecture-training} runs, CNN1 appears to be the most promising architecture, while CNN2 shows promise for untrained runs in terms of accuracy but performs poorly in terms of loss.
