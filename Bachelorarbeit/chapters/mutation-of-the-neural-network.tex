@@ -4,22 +4,22 @@ We designed the function \texttt{run\_modification\_algorithm} in listing \ref{l
 We hand over multiple parameters to the function.
 The first parameter is \texttt{run}, which is used to be able to clearly identify the different runs of the experiment during the experimentation, it can be omitted in a production environment.
 The next parameter is \texttt{modelname}, which is the name of the model that we want to modify and is used to identify the model and being able to load the model, and it associated data used in the analysis, as seen in the previous chapter \ref{sec:spectrum-based-fault-localisation}.
-The next parameters are \texttt{train\_images, train\_labels, test\_images, test\_labels} the test data is needed to evaluate the model and perform the spectrum-based fault localisation and the training data is needed to retrain the model, if this options is chosen.
+The next parameters are \texttt{train\_images, train\_labels, test\_images, test\_labels} the test data is needed to evaluate the model and perform the spectrum-based fault localisation, and the training data is needed to retrain the model, if this options is chosen.
 
 Next we can choose \texttt{analysis\_approach}, which is the similarity coefficient we want to use to rank our neurons.
 The next parameter is \texttt{mutation\_function}, which is the mutation function we want to use to modify the weights and biases of the neurons, the mutation functions are discussed in the next subsection \ref{subsec:mutation-functions}.
 The \texttt{value} is used to specify the value parameter of the mutation function, which is used to modify the weights and biases of the neurons.
 
 The \texttt{old\_loss} and \texttt{old\_accuracy} are then used to save time by offloading the initial model evaluation required at the start of the function, which now only needs to be done once, rather than each time the function is used.
-In a production environment, these parameters can be omitted and the evaluation would be performed in the function.
+In a production environment, these parameters can be omitted, and the evaluation would be performed in the function.
 
 The parameter \texttt{train\_between\_iterations} is used to indicate whether we want to retrain the model or not, we can also specify \texttt{loss\_offset} and \texttt{loss\_accuracy} which is used to prevent the model from being terminated prematurely if the loss and accuracy are only slightly worse than the previous iteration, but may improve in the next iteration.
 We also have the option to specify \texttt{regress\_loss} and \texttt{regress\_accuracy} which is used to indicate whether we want to regress the loss and accuracy, which is used in the break conditions we will describe in the next paragraph.
 
 The break conditions are used to determine when the model should be terminated.
 We have four different break conditions, which are used to compare the loss and accuracy and determine whether the model should be terminated, these can be seen in the listing \ref{lst:mutation} in lines 19 to 23.
-We chosen them to see which condition has the greatest influence on the improvement of the model.
-For the redability of the model we have omitted the data logging functions of the function in listing \ref{lst:mutation}, the full function can be found in the appendix \ref{lst:mutation_full}.
+We have chosen them to see, which condition has the greatest influence on the improvement of the model.
+For the readability of the model we have omitted the data logging functions of the function in listing \ref{lst:mutation}, the full function can be found in the appendix \ref{lst:mutation_full}.
 
 At line 7, \texttt{tf.random.set\_seed(42)} is included for evaluation purposes, to enable comparison of results from different runs, it would be omitted in a production environment.
 
@@ -29,12 +29,12 @@ At line 7, \texttt{tf.random.set\_seed(42)} is included for evaluation purposes,
 Now, let's discuss the mutation functions that we pass to our main function.
 We have implemented multiple mutation functions, which are used to modify the weights and biases \ref{eq: DenseLayer} of the neurons in the model.
 We not only mutate the dense layers, but also the bias and filter of the 2D Convolution Layers, this can later be extended to the convolutional layers in the first dimension and third dimension.
-Two different mutation function approaches, were implemented, we either assign a value or we scale the existing values by a factor.
-Each of these approaches which are used to modify the weights and biases of the neurons, can be seen in the listing \ref{lst:weight_mod} and \ref{lst:bias_mod}.
+Two different mutation function approaches, were implemented, we either assign a value, or we scale the existing values by a factor.
+Each of these approaches, which are used to modify the weights and biases of the neurons, can be seen in the listing \ref{lst:weight_mod} and \ref{lst:bias_mod}.
 The scalar mutation functions can be seen in the listing \ref{lst:scalar_weight_mod} and \ref{lst:scalar_bias_mod}.
-We have chosen these because they are the most simplistic approaches we could think of, and we wanted to see if they would be sufficient to improve the model and could be a good starting point for future work.
+We have chosen these because they are the most simplistic approaches we could think of, and we wanted to see if they would be enough to improve the model and could be a good starting point for future work.
 
-Because of the diffent types of layers, thwy need to be addressed differently.
+Because of the different types of layers, they need to be addressed differently.
 The function \texttt{modify\_weight\_all\_random\_gauss} in listing \ref{lst:weight_mod} is used to assign a random vector of weights, which is generated by a normal distribution, to the weights of the neurons.
 While the function \texttt{modify\_weight\_one\_random\_gauss} in listing \ref{lst:weight_mod} is used to assign a random value to the weights of the neurons, which is the same across all values.
 \lstinputlisting[language=Python, linerange={4-33}, caption={Weight Modification Functions}, label={lst:weight_mod}]{source_mutation/utilities.py}
@@ -45,7 +45,7 @@ The two functions \texttt{modify\_all\_weights\_by\_scalar\_random\_gauss} and \
 \lstinputlisting[language=Python, linerange={68-81,115-127}, caption={Scalar Weight Modification Functions}, label={lst:scalar_weight_mod}]{source_mutation/utilities.py}
 The bias modification functions are used to modify the biases of the neurons.
 They are working in a similar way as the weight modification functions, but instead of modifying the weights, they modify the biases of the neurons.
-Hence, they aren't as complex as the weight modification functions, because they only affecting a single value, rather than a matrix of values.
+Hence, they aren't as complex as the weight modification functions, because they are only affecting a single value, rather than a matrix of values.
 We either assign a new value to the biases or scale the existing values by a factor, which can be seen in the listing \ref{lst:bias_mod} and \ref{lst:scalar_bias_mod}.
 \lstinputlisting[language=Python, linerange={35-45}, caption={Bias Modification Functions}, label={lst:bias_mod}]{source_mutation/utilities.py}
 \lstinputlisting[language=Python, linerange={87-97}, caption={Scalar Bias Modification Functions}, label={lst:scalar_bias_mod}]{source_mutation/utilities.py}

@@ -1,6 +1,6 @@
 Deep Neural Networks (DNNs) \cite{lecun_deep_2015} are increasingly used in today's world and more capable than ever, and are often used in highly sensitive applications domains like medical diagnosis \cite{litjens_survey_2017} or autonomous vehicles \cite{bojarski_end_2016}.
 DNNs are highly advanced in areas like image \cite{krizhevsky_imagenet_2012, ciresan_multi-column_2012}, video \cite{jiang_exploiting_2018}, or speech recognition \cite{hinton_deep_2012}.
-There, the range of applications can range from simple recognition towards end to end learning \cite{bojarski_end_2016}.
+There, the range of applications can range from simple recognition towards the end to end learning \cite{bojarski_end_2016}.
 
 Especially because of the use of DNNs in safety-critical domains, it is from the uttermost urgency to ensure the safety of every user and every other person who is encountering these systems.
 But how can we ensure the proper operation of the neural network, and find bad actors in neural networks and repair these neurons?
@@ -8,7 +8,7 @@ But how can we ensure the proper operation of the neural network, and find bad a
 The Method we explored in this thesis is the mutation of neurons, which we first identified by using spectrum-based fault localization (SBFL).
 While SBFL was already first successfully used in Eniser et al.'s DeepFault \cite{eniser_deepfault_2019} in conclusion with an input synthesizes guided by the suspiciousness values elicited by the SBFL, we want to go on to a more in-depth level and mutate the weights and biases based on these suspiciousness values.
 
-For our approach, we first adapted the SBFL provided by DeepFault to today's versions of the TensorFlow framework and the other used frameworks, afterwards we added the functions for the mutation of the weights and biases based on the ranked neuron locations provided by the SBFL.
+For our approach, we first adapted the SBFL provided by DeepFault to today's versions of the TensorFlow framework, and the other used frameworks, afterwards we added the functions for the mutation of the weights and biases based on the ranked neuron locations provided by the SBFL\@.
 The mutations either assign a value randomly, a predefined value, scales by a predefined or random value to the bias or weights of a neuron, we can also decapitate a neuron.
 Then we added an algorithm to perform the mutation automatically by just providing the model, the data-set and the wished parameters.
 We first perform the SBFL and rank the neuron in our network based on a suspiciousness measure, mutate the node, if wished, we train the model a further epoch.

@@ -1,11 +1,11 @@
 In this chapter, we are going to present the background information that is necessary for our approach.
 What are neural networks?
-How can we test them, and what is spectrum-based fault localisation?
+How can we test them, and what is spectrum-based fault localization?
 \section{Neural Networks}\label{sec:neural-networks}
 Without further ado, we will discuss what neural networks are and how they are composed.
 We describe what a layer is and what types there are.
 For what do we need optimizers and activation functions and what types are there.
-Neural Networks are useful in a multitude of fields like classification, regression, transcription, or machine translation \cite{goodfellow_deep_2016}.
+Neural Networks are useful in a multitude of fields like classification, regression, transcription or machine translation \cite{goodfellow_deep_2016}.
 Neuronal networks are composed of layers, which are composed of neurons.
 The neuron is the computational component in a deep neural network.\\
 A neuron transforms a vector of inputs $\mathbf{x}$ to the output $y$, $\mathbb{R}^n \to \mathbb{R}$
@@ -25,7 +25,7 @@ The rectified linear unit, short ReLU \cite{fukushima_cognitron_1975,glorot_deep
     \end{cases}
     \label{eq: relu}
 \end{equation}
-Another even more promising activation function is the Gaussian Error Linear Unit, short GELU, seen in function \ref{eq: relu}, which was proposed by Hendrycks and Gimpel in 2016 \cite{hendrycks_gaussian_2016} is used by natural language processing models like BERT \cite{devlin_bert_2019}.
+Another, even more promising activation function is the Gaussian Error Linear Unit, short GELU, seen in function \ref{eq: relu}, which was proposed by Hendrycks and Gimpel in 2016 \cite{hendrycks_gaussian_2016} is used by natural language processing models like BERT \cite{devlin_bert_2019}.
 It does not just set all negative values to zero like ReLU but weights them.
 The differences can be seen in the figure. \ref{fig: activation function}
 \begin{equation}
@@ -36,11 +36,11 @@ The differences can be seen in the figure. \ref{fig: activation function}
 The neurons are then combined into layers, in a Deep Neural Network (DNN) we have three types of Layers:
 Input layers, output layers and the hidden layers.
 There is one input and one output layer, but there is a plurality of hidden layers, as you can see in the figure \ref{fig: neural network}.
-The input layer, processes the input for the hidden layers, for example, it converts a 2-dimensional picture to a 1-dimensonal array, which can then be processed by the subsequent hidden layers.
+The input layer, processes the input for the hidden layers, for example, it converts a 2-dimensional picture to a 1-dimensional array, which can then be processed by the subsequent hidden layers.
 The hidden layer performs most of the computational work of a DNN, it works based on the neural equation, that can be seen in the function \ref{eq: NeuralFunction}.
 The output layer takes the output of the last hidden layer and transforms it to produce a meaningful output.
-In the case of regression or binary classification, there is usually only one neuron, but for multi-class classification, the number of neurons corresponds to the number of classes to be classified.
-The output layer follows the same principle as the formula above, but it does not use a 'normal' activation function.
+In the case of regression or binary classification, there is usually only one neuron, but for multi-class classification, the amount of neurons corresponds to the amount classes to be classified.
+The output layer follows the same principle as the formula above, but it does not use a ``normal'' activation function.
 Either a linear activation function or no activation function is used for regression, or the softmax function, which can be seen in the function \ref{eq: softmax}, is used for classification models.
 \begin{equation}
     f(x_i) = \frac{e^{x_i}}{\sum^n_{j=1}e^{x_j}}
@@ -58,14 +58,14 @@ With each iteration SGD updates the model parameters by using the gradient of th
 This isn't done for the whole dataset but just some data points.
 The learning rate describes how far a parameter is changed in the direction of a derivation for one iteration, in SGD this Learning Rate is constant and manually set.
 
-Adaptive Moment Estimation (Adam) \cite{kingma_adam_2017} is one of the successors of SGD. Adam, uses a variable learning rate which is adapted for each parameter, which uses the estimation of the first moment, the mean, and the second moment, the variance to change the learning rate.
+Adaptive Moment Estimation (Adam) \cite{kingma_adam_2017} is one of the successors of SGD. Adam, uses a variable learning rate, which is adapted for each parameter, which uses the estimation of the first moment, the mean, and the second moment, the variance to change the learning rate.
 Then this process is repeated until we are gone through the entire training set, which is called an epoch.
 
 \subsection*{Core Layers in Neural Networks}\label{subsec:core-layers-in-neural-networks}
 In the following, we will discuss the core layers in neural networks, which are the dense layer, the convolutional layer and the pooling layer.
 We use them in our evaluation, hence, we will discuss them in detail.
 \subsubsection{Dense Layers}
-It's characterized by its fully connected architecture, like seen in the figure \ref{fig: neural network}, meaning every node of the layer is connected to every node of the predecessor layer and every node of the successor layer.
+It is characterized by its fully connected architecture, like seen in the figure \ref{fig: neural network}, meaning every node of the layer is connected to every node of the predecessor layer and every node of the successor layer.
 Dense layers are pivotal in learning intricate patterns from data, their versatility allows them to be stacked where each layer captures different levels of data abstraction.
 The theoretical function of a dense layer can be seen in the function \ref{eq: DenseLayer}.
 Where $x = (x_1,x_2,\dots,x_n)^T$ is the input vector,
@@ -96,17 +96,17 @@ But how does this correspond to neural networks and image processing, foremost, 
 In convolutional neural networks, matrices of weights called kernels or filters replace singular weights in dense layers.
 The output of the convolutional layer consists of feature maps, each representing the result of applying one filter to the input data.
 These maps capture different aspects such as edges or textures.
-A convolutional layer has two other variables: the number and size of filters and the activation function.
+A convolutional layer has two other variables: the number and size of filters, and the activation function.
 The terms stride and padding are used to describe the movement of the filter and the preservation of information on the edge of an input, respectively.
 In the figure \ref{fig: convolution matrix}, you can see a filter of size 3x3, which is applied to a 7x7 matrix, with a stride of 1 and no padding, which results in a 5x5 matrix.
-The stride determines the number of steps the filter takes between convolutions, with a larger stride resulting in a smaller filter map and less detail.
+The stride determines the amount steps the filter takes between convolutions, with a larger stride resulting in a smaller filter map and less detail.
 Padding is an optional parameter that helps to maintain information on the edge of an input and preserve the scale of a picture.
 
 \subsubsection{Pooling Layer}
 Pooling is an often used concept in Convolutional Neural Networks to reduce the size of the individual feature map produced by the convolutional layer, while conserving important details of the feature map.
-Especially to produce an output which has a similar size as the input, a pooling layer can be avoided \cite{jain_supervised_2007}.
+Especially to produce an output, which has a similar size as the input, a pooling layer can be avoided \cite{jain_supervised_2007}.
 There are multiple types of pooling operations, but the most used ones are Max-Pooling as seen in figure \ref{fig: Max Pooling} and Average-Pooling seen in figure \ref{fig: Average Pooling}.
-Which operation is best depends on the type of data to be analysed and its pooling cardinality, which describes the number of extracted features.
+Which operation is best depends on the type of data to be analysed and its pooling cardinality, which describes the amount of extracted features.
 There can be said, for smaller cardinalities a Max-Pooling should be used, for larger ones Average-Pooling \cite{boureau_theoretical_2010}.
 In the complex layer terminology \cite{goodfellow_deep_2016} there are, the convolution stage, the detector stage (Which is just the usage of a nonlinear activation function) and the pool stage, these stages are sublayers of the large convolutional layer.
 In the simple layer terminology, those three are all individual layers.
@@ -131,18 +131,18 @@ We need the coverage criteria to get a quantitative basis for deciding how thoro
 The criteria used in neural network testing differ from those in software testing.
 
 \subsubsection{Neuron Coverage}
-Neuron coverage is the most basic coverage criteria, it is the ratio of the number of neurons activated by the test cases to the total number of neurons in the network \cite{pei_deepxplore_2017}.
+Neuron coverage is the most basic coverage criteria, it is the ratio of the amount of neurons activated by the test cases to the total amount of neurons in the network \cite{pei_deepxplore_2017}.
 A neuron is activated if the output of the neuron is greater than zero.
 The neuron coverage is equivalent to the statement coverage in software testing, it helps to measure the thoroughness of the test cases.
 
 \subsubsection{Safety Coverage}
-The Safety Coverage is derived, by discretizing the input space into a set of hyper-rectangles \cite{beyer_feature-guided_2018}, each of these hyper-rectangles exhibit the same pattern of activations of neurons, because it has a similar feature set.
+The Safety Coverage is derived, by discretizing the input space into a set of hyper-rectangles \cite{beyer_feature-guided_2018}, each hyper-rectangle exhibit the same pattern of activations of neurons, because it has a similar feature set.
 A hyper-rectangle is considered safely covered if a test case is classified correctly for all points in the hyper-rectangle.
 \subsubsection{Modified Condition/Decision Coverage}
 Modified Condition/Decision Coverage (MC/DC) is a method in software testing \cite{hayhurst_practical_2001}, which requires that each condition in a decision is tested independently and that each condition is shown to affect the decision outcome independently.
 This is done by varying the input of the condition while holding the other conditions constant \cite{sun_deepconcolic_2019}.
 The method is particularly useful in identifying cases where multiple conditions contribute to a decision's outcome.
-By using a sign change and a value change to change, it's tried to exploit the relationship between those and use these as a coverage criterion.
+By using a sign change, and a value change to change, it is tried to exploit the relationship between those and use these as a coverage criterion.
 \subsubsection{Quantitative Projection}
 Quantitative Projection Coverage, is based on the assumption that the input differs on some kind of operation condition \cite{cheng_manifesting_2018}.
 For example, for self-driving cars: weather, landscape or impeding items.
@@ -162,7 +162,7 @@ This can help us because a neural network, is designed for high-dimensional data
 \subsubsection{Symbolic Execution}
 Despite the efficacy of input mutation and fuzzing in generating a substantial quantity of random data, it is uncertain whether certain test objectives will be fulfilled.
 With Symbolic Execution, we try to find out which input causes a part of a program to execute.
-One approach in Symbolic Execution is concolic testing, which is a hybrid testing technique which is adapted for neural networks with DeepConcolic \cite{sun_deepconcolic_2019}.
+One approach in Symbolic Execution is concolic testing, which is a hybrid testing technique, which is adapted for neural networks with DeepConcolic \cite{sun_deepconcolic_2019}.
 Concolic testing combines the concrete execution of a program, with random input generation, hence symbolic data.
 There by, the findings of the first step are used to generate the second set of inputs.
 
@@ -175,8 +175,8 @@ SBFL records not only failed test cases but also successful ones.
 This provides information on the contrast between failure and success, aiding in the identification of truly faulty statements.
 For example, in the first case, code that is often executed or every time, would be marked faulty simply for being in a programme.
 In the second case, the code wouldn't be marked faulty because it is also executed frequently in successful test cases.
-The term “code coverage” is frequently referred to as “executable statement hit spectrum” (ESHS), which denotes the extent to which certain components of the program under testing have been covered during execution.
-Some popular ESHS-based are based on a similarity coefficient, for example Tarantula \cite{jones_empirical_2005} as seen in equation \ref{eq: tarantula} , Ochiai \cite{ochiai_zoogeographical_1957} seen in equation \ref{eq: ochiai} or Dstar \cite{wong_dstar_2014} in equation \ref{eq: dstar} (Often also called $D^*$, where $*$ denotes the used exponent).
+The term “code coverage” is frequently called “executable statement hit spectrum” (ESHS), which denotes the extent to which certain components of the program under testing have been covered during execution.
+Some popular ESHS-based are based on a similarity coefficient, for example Tarantula \cite{jones_empirical_2005} as seen in equation \ref{eq: tarantula}, Ochiai \cite{ochiai_zoogeographical_1957} seen in equation \ref{eq: ochiai} or Dstar \cite{wong_dstar_2014} in equation \ref{eq: dstar} (Often also called $D^*$, where $*$ denotes the used exponent).
 \begin{equation}
     \frac{\frac{a_{ef}}{a_{ef} + a_{nf}}}{\frac{a_{ef}}{a_{ef} + a_{nf}}+\frac{a_{es}}{a_{es} + a_{ns}}}
     \label{eq: tarantula}
@@ -204,7 +204,7 @@ But because line 8, is always executed with line 11 and is overall less executed
 Hence, we can see that spectrum analysis isn't the silver bullet, for eradicating faults in programs, but it can still be a useful tool to reduce the search space for the fault.
 \input{figures/ExampleSfl.tex}
 
-There are even more similarity coefficients, to an extent which wouldn't be feasible to be covered in this work, for an extensive survey one can refer to the one by Wong et al. \cite{wong_survey_2016}.
+There are even more similarity coefficients, to an extent, which wouldn't be feasible to be covered in this work, for an extensive survey one can refer to the one by Wong et al. \cite{wong_survey_2016}.
 
 There are some other examples of SBFL, which don't use ESHS, for example Program Invariants Hit Spectrum, which the coverage of program invariants.
 Those individuals attempt to identify violations of program properties in failed program executions to locate bugs.

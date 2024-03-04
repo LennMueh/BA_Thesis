@@ -23,8 +23,8 @@ Regarding the Software, we are using Python version 3.10.12 and using TensorFlow
 We are using the Fashion-MNIST dataset\cite{xiao_fashion-mnist_2017} for our experiments, which consists of 60,000 training images and 10,000 test images, each of size 28×28 pixels, with 10 classes.
 For the evaluation we haven't used not only the whole, but also a half and a quarter of the training data, which are derived from the original training data, by using Scikit-learn's\cite{pedregosa_scikit-learn_2011} \texttt{train\_test\_split} function, with a test size of 0.5 and 0.75 respectively.
 
-We used 2 DNNs and 2 CNNs, in the following table \ref{tab:archi} a plain number describes the number of neurons in a dense layer. $CL$ describes a combination of a convolutional layer with a stride of $(1,1)$ and a kernel size of $(3,3)$ and a pooling layer with a pool size of $(2,2)$. We used.
-Adam as our optimizer with a learning rate of 0.001.
+We used 2 DNNs and 2 CNNs, in the following table \ref{tab:archi} a plain number describes the amount of neurons in a dense layer. $CL$ describes a combination of a convolutional layer with a stride of $(1,1)$ and a kernel size of $(3,3)$ and a pooling layer with a pool size of $(2,2)$.
+We used Adam as our optimizer with a learning rate of 0.001.
 
 The models were selected for their small size and ability to accommodate both deep neural networks and convolutional neural networks.
 This was done to save time and allow for the evaluation of as many parameters as possible within the time frame of this thesis.

@@ -15,16 +15,16 @@ If we further trained our models, we get an increase of up to 2.5-7.5\% for the 
 Here we also see a decrease after the third epoch, but we still stay over the baseline of one for the first 10–11 epochs.
 
 The approach performs best on the full Fashion-MNIST dataset and also good on the half data set.
-For our suspiciousness measures which we utilize for our fault localization, tarantula seems to be the best performing measure, for the trained models, the other measures aren't working significantly better than the random choosing of neurons.
-The exception is in the accuracy category for the non-trained models, the ochiai measure.
+For our suspiciousness measures, which we utilize for our fault localization, tarantula seems to be the best performing measure, for the trained models, the other measures aren't working significantly better than the random choosing of neurons.
+The exception is in the accuracy category for the non-trained models, the Ochiai measure.
 Our Approach seems to be working best on Convolutional Neural Networks, in contrast, we only see a marginal increase for Deep Neural Networks.
 For our break conditions, we see no difference in the trained conditions for the trained runs, but we see one for the non-trained ones, where we see the worst performance which depends more on the loss, this holds even true for the loss.
 Important is also the use of an Offset for both loss and accuracy.
 Another factor that can be mitigated is the use of the different mutation functions, where we see that the mutation functions aren't leading to significantly different results, with the exception that the weight mutation function are leading to better results than the bias targeting mutation functions.
 
 In future research, it would be beneficial to investigate several aspects.
-Firstly, it is essential to evaluate the performance of the approach on larger models and different datasets.
-This will help to determine a threshold beyond which further modification of the neural network is not possible.
+Firstly, it is essential to evaluate the performance of the approach on larger models and more domain specific models and different datasets.
+This will help to determine a threshold beyond which further modification of the neural network is impossible.
 For instance, this threshold could be defined as a ratio between the model's modifiable parameters and the modified parameters.
 Another thing that could be investigated in this instance is the choosing of multiple neurons at a time for the modification.
 
@@ -40,7 +40,7 @@ Another endeavour worth exploring would be the dstar suspiciousness measure, whi
 
 A different idea would be to use the spectrum-based fault localization to not only identify suspicious neurons, but to aggregate the suspiciousness of a layer and then to modify these.
 For example, we could change the activation function of the layer, the stride of a convolutional layer or pooling layer, the kernel/filter of a convolutional layer, or we could change the size of the pooling layer.
-An approach which should be tried is the freezing of an overly trustful layer could be frozen to focus on the training of the other layers.
+An approach, which should be tried is the freezing of an overly trustful layer could be frozen to focus on the training of the other layers.
 
 Or another appropriate layer could be set as a predecessor or successor.
 For example, a normalization layer, a dense layer or a dropout layer as a predecessor or a regularization layer as a successor.
@@ -49,3 +49,5 @@ At last, we could add an attention layer on either side of the suspicious layer.
 
 Another useful feature would be the automatically choosing of an appropriate fix when a condition is met in the suspicious neuron, like an exploding or vanishing gradient for example.
 Finally, we could modify the activation function of the specified neuron using a custom layer that applies the desired activation function to each neuron, to address things like dying ReLU.
+
+At last, we would find it beneficial to investigate some different methods for the offset in the Algorithm, to get a more precise release of the break condition.

@@ -17,8 +17,8 @@ The solutions that are used are:
     \item Adjusting Learning Rates
     \item Substituting Optimizers
 \end{itemize}
-Another training centric solution is DeepDiagnosis \cite{wardat_deepdiagnosis_2021} which isn't like AutoTrainer an automatic approach, but more functioning like a debugger.
-Hence, it tries to enable the developer to make sound decisions to enhance the training of a DNN .
+Another training centric solution is DeepDiagnosis \cite{wardat_deepdiagnosis_2021}, which isn't like AutoTrainer an automatic approach, but more functioning like a debugger.
+Hence, it tries to enable the developer to make sound decisions to enhance the training of a DNN\@.
 It monitors the training of the Network and checks for eight error conditions:
 \begin{itemize}
     \item Dead Nodes
@@ -30,25 +30,26 @@ It monitors the training of the Network and checks for eight error conditions:
     \item Exploding Gradients
     \item Fading Gradients
 \end{itemize}
-When these conditions are met, DeepDiagnosis makes these findings available to the developer and also provides a recommendation for actionable fixes to the developer.
+When these conditions are met, DeepDiagnosis makes these findings available to the developer and provides a recommendation for actionable fixes to the developer.
 \section{Data-Centric Approaches}\label{sec:data-centric-approaches}
-One data centric approach for the repair of deep neural networks is DeepRepair \cite{yu_deeprepair_2022} which uses a style guided approach to enhance the training data of an DNN. The Idea for this approach is it to mitigate the gap between the training data and the real-world data provided later when the network is in production, which often contains noise patterns.
-This is done by the style of guided data augmentation by introducing the noise patterns which are frequently leading to failure.
+One data centric approach for the repair of deep neural networks is DeepRepair \cite{yu_deeprepair_2022} which uses a style guided approach to enhance the training data of an DNN. The Idea for this approach is it to mitigate the gap between the training data, and the real-world data provided later when the network is in production, which often contains noise patterns.
+This is done by the style of guided data augmentation by introducing the noise patterns, which are frequently leading to failure.
 
 To make the augmentation more effective, DeepRepair uses a clustering-based method for generating corrupted data, by identifying and grouping similar failure patterns.
 There by, it is ensured that the data covers a broader spectrum of potential real-world failure scenarios, enhancing the robustness of the model.
 
-Another data-centric approach is SENSEI \cite{gao_fuzz_2020}, which uses a fuzz testing derived data augmentation approach to bridge the earlier described gap by exposing and mitigating vulnerabilities in DNNs.
+Another data-centric approach is SENSEI \cite{gao_fuzz_2020}, which uses a fuzz testing \ref{sec:neural-network-testing} derived data augmentation approach to bridge the earlier described gap by exposing and mitigating vulnerabilities in DNNs.
 
 \section{Model-Centric Approaches}\label{sec:model-centric-approaches}
 There are numerous model-centric approaches developed over the last few years, so we want to present some of them here at this point.
 For example, Apricot \cite{zhang_apricot_2019}, a weight-adaption approach to fix deep learning models (DLM) iteratively.
-This is accomplished by leveraging insights from reduced deep learning models (rDLMs) trained on subsets of the original dataset.The approach is based on two main principles: firstly, smaller data sets help to retain the features that are essential for correct classification, and secondly, a set of rDLMs can, on average, classify test cases more accurately than a single model.
+This is accomplished by leveraging insights from reduced deep learning models (rDLMs) trained on subsets of the original dataset.
+The approach is based on two main principles: firstly, smaller data sets help to retain the features that are essential for correct classification, and secondly, a set of rDLMs can, on average, classify test cases more accurately than a single model.
 Apricot generates the rDLMs and categorizes them based on their performance of specific test cases.
 Based on the correctly working rDLMs the average weights are used to correct the weights of the complete DLM toward the weights of the correctly classifying rDLMs or away from the misclassifying rDLMs.
 
-Another approach is NeuRecover \cite{tokui_neurecover_2022}, which tries to resolve an issue which often happens with retraining DNNs. Regression, which means, that if we try to address specific issues to enhance the performance of the models or its areas, it causes a performance decrease in other areas of the model.
-NeuRecover is attempting to leverage the training history to identify which parameters should be adjusted, there by aiming to reduce regression.
+Another approach is NeuRecover \cite{tokui_neurecover_2022}, which tries to resolve an issue, which often happens with retraining DNNs. Regression, which means, that if we try to address specific issues to enhance the performance of the models or its areas, it causes a performance decrease in other areas of the model.
+NeuRecover is attempting to leverage the training history to identify, which parameters should be adjusted, there by aiming to reduce regression.
 It firstly aggregates the locations of the faults in the network and by using the training history, attempts to make the smallest necessary adjustment, there by considering the dynamic nature of the network.
 
 Finally, we introduce Arachne \cite{sohn_arachne_2023}, a search-based approach for repairing DNNs by identifying and adjusting the weights that are most likely to cause the targeted misbehavior.
@@ -56,20 +57,20 @@ Arachne uses differential evolution to generate patches, which are sets of adjus
 The algorithm begins with a group of potential solutions and evolves them over several generations towards greater fitness, as determined by a defined fitness function.
 In Arachne, the fitness function plays a critical role in guiding the search process.
 It assesses candidate patches based on their ability to correct misclassifications while maintaining correct classifications.
-This function strikes a balance between the need to correct errors and the need to maintain the overall accuracy of the model.
+This function strikes a balance between the need to correct errors, and the need to maintain the overall accuracy of the model.
 Some evolutions of the Search-based approach are DistrRep \cite{calsi_distributed_2023}, which tries to handle multiple misclassifications at the same time, in contrast to the single misclassification handled by Arachne.
-Another one is AdRep \cite{li_calsi_adaptive_2023}, this approach tries to overcome the static view of the DNN which is seen in Arachne.
+Another one is AdRep \cite{li_calsi_adaptive_2023}, this approach tries to overcome the static view of the DNN, which is seen in Arachne.
 
 \section{DeepFault}\label{sec:deepfault}
 DeepFault \cite{eniser_deepfault_2019} is a white-box testing approach for neural networks, developed by Eniser et al. which is according to the Authors.
 \begin{quote}
     ... the first fault localization-based white-box testing approach for DNNs.
 \end{quote}
-There are two objectives to the approach, the identification of suspicious neurons, which have undesirable behaviour, where the respective neuron is suspected to lead to an undesirable outcome in the whole network.
+There are two objectives to the approach, the identification of suspicious neurons, which have undesirable behaviour, where the respective neuron is suspected to lead to an undesirable outcome in the network.
 And the synthesis of new inputs for the neural network, to specially retrain the (most) suspicious values.
 
 In this First Part, DeepFault is establishing a Hit Spectrum($HS$) as seen in \ref{eq:hit_spectrum} for all neurons, which take the form of a tuple.
-The input, and output layers are left out because they are considered inherently correct.
+The input and output layers are left out because they are considered inherently correct.
 \begin{equation}
     HS_n = (attr_n^{as}, attr_n^{af}, attr_n^{ns}, attr_n^{nf})\label{eq:hit_spectrum}
 \end{equation}

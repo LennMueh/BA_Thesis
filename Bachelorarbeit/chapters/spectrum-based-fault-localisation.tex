@@ -2,22 +2,22 @@ For the Spectrum-based fault localization, we adapted the DeepFault \cite{eniser
 Especially, we adapted the functions to the recent versions of the used libraries and added some additional functions to save and load the data.
 
 The functions adapted from the DeepFault paper are now invoked in the \texttt{run\_analysis} function seen in listing \ref{lst:main analysis}, which is the main function for the analysis.
-We have implemented it that way, to ease the use of the analysis functions, in comparison to the original DeepFault code which was just one large python script.
+We have implemented it that way, to ease the use of the analysis functions, in comparison to the original DeepFault code, which was just one large python script.
 The function manges the loading of the model and the experiment or working paths.
-It checks if the necessary steps of the analysis have already been executed, hence the data is already available out of a previous run and uses them instead, because we assume that the model has not changed and the data is still valid.
+It checks if the necessary steps of the analysis have already been executed, hence the data is already available out of a previous run and uses them instead, because we assume that the model has not changed, and the data is still valid.
 
 The data we need are the classifications, the layer outputs and the spectrum matrices.
 The classifications are the indexes of the data of the test dataset sorted in to the categories of correctly predicted and not correctly predicted.
 The layer outputs are the information about the activation for each neuron, of each layer, for each member of the test dataset.
-Now with this information we can contruct the spectrum matrix, which uses the layer outputs and classifications to determine sums of the symbols denoted in the table \ref{tab: Sus symbols}, for each neuron, if it was activated or not, and if the prediction of the network was right or wrong.
+Now with this information we can construct the spectrum matrix, which uses the layer outputs and classifications to determine sums of the symbols denoted in the table \ref{tab: Sus symbols}, for each neuron, if it was activated or not, and if the prediction of the network was right or wrong.
 
 When all this data is aggregated, we can determine the suspiciousness of each neuron, which is the main goal of the analysis.
 All this data is then saved to the working path, for future runs, and the suspicious neurons are returned.
-The network's neuron count is aggregated, and if the number of selected neurons \texttt{susp\_num} is less than the number of modifiable neurons, the \texttt{susp\_num} most suspicious neurons are returned.
+The network's neuron count is aggregated, and if the amount of selected neurons \texttt{susp\_num} is less than the amount of modifiable neurons, the \texttt{susp\_num} most suspicious neurons are returned.
 
 Otherwise, all modifiable neurons are returned, ranked by their level of suspicion.
 To determine the suspiciousness, we use the $\text{D}^*$, Tarantula, and Ochiai methods, which you can see in the background chapter \ref{sec:spectrum-based-fault-localisation}.
-We also added the option to return a specified number of random neurons, which can be useful for testing purposes, you can see the function in listing \ref{lst:random_choosing}.
+We also added the option to return a specified amount of random neurons, which can be useful for testing purposes, you can see the function in listing \ref{lst:random_choosing}.
 The function returns a list of tuples in the format of $(layer, layer\_index)$, ranked from the most suspicious neuron to the least suspicious.
 
 \lstinputlisting[language=Python, linerange={8-53,65}, caption={Main analysis function}, label={lst:main analysis}]{source_analysis/__init__.py}
