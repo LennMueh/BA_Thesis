@@ -2,7 +2,7 @@ In this chapter, we will discuss proposed approaches for repairing neural networ
 These approaches \cite{nakagawa_experience_2023} can be classified into three categories: training-centric, data-centric, and model-centric.
 
 \section{Training-Centric Approaches}\label{sec:training-centric-approaches}
-The training centric solution we want to present is AutoTrainer \cite{zhang_autotrainer_2021} an approach to identify varying issues in training vanishing and exploding gradient, dying ReLU oscillating loss and slow convergence.
+The first training centric solution we want to present is AutoTrainer \cite{zhang_autotrainer_2021} an approach to identify varying issues in training vanishing and exploding gradient, dying ReLU oscillating loss and slow convergence.
 AutoTrainer first starts training the model and records data on the training like the loss, it then conducts regular analysis to identify possible issues encountered during training.
 Upon detecting an issue, the solution scheduler selects an appropriate repair method.
 If a problem persists even after trying a solution, the scheduler moves on to the next solution.
@@ -32,13 +32,13 @@ It monitors the training of the Network and checks for eight error conditions:
 \end{itemize}
 When these conditions are met, DeepDiagnosis makes these findings available to the developer and provides a recommendation for actionable fixes to the developer.
 \section{Data-Centric Approaches}\label{sec:data-centric-approaches}
-One data centric approach for the repair of deep neural networks is DeepRepair \cite{yu_deeprepair_2022} which uses a style guided approach to enhance the training data of an DNN. The Idea for this approach is it to mitigate the gap between the training data, and the real-world data provided later when the network is in production, which often contains noise patterns.
+One data centric approach, we want to present for the repair of deep neural networks is DeepRepair \cite{yu_deeprepair_2022} which uses a style guided approach to enhance the training data of an DNN. The Idea for this approach is it to mitigate the gap between the training data, and the real-world data provided later when the network is in production, which often contains noise patterns.
 This is done by the style of guided data augmentation by introducing the noise patterns, which are frequently leading to failure.
 
 To make the augmentation more effective, DeepRepair uses a clustering-based method for generating corrupted data, by identifying and grouping similar failure patterns.
 There by, it is ensured that the data covers a broader spectrum of potential real-world failure scenarios, enhancing the robustness of the model.
 
-Another data-centric approach is SENSEI \cite{gao_fuzz_2020}, which uses a fuzz testing \ref{sec:neural-network-testing} derived data augmentation approach to bridge the earlier described gap by exposing and mitigating vulnerabilities in DNNs.
+Another data-centric approach is SENSEI \cite{gao_fuzz_2020}, which uses a fuzz testing, which can be seen in the section \ref{sec:neural-network-testing}, derived data augmentation approach to bridge the earlier described gap by exposing and mitigating vulnerabilities in DNNs.
 
 \section{Model-Centric Approaches}\label{sec:model-centric-approaches}
 There are numerous model-centric approaches developed over the last few years, so we want to present some of them here at this point.
@@ -80,8 +80,8 @@ The input and output layers are left out because they are considered inherently 
     \item $attr^{ns}_n$ is the number of times the neuron $n$ is not activated in successful test cases.
     \item $attr^{nf}_n$ is the number of times the neuron $n$ is not activated in failed test cases.
 \end{itemize}
-Then the hit spectra are in a suspiciousness measures, in DeepFault Tarantula \ref{eq: tarantula}, Ochiai \ref{eq: ochiai}, $D^3$ \ref{eq: dstar} are used.
-These are not used to identify one wrong neuron, but rather a set of wrong neurons.
+Then the hit spectra are in a suspiciousness measures, in DeepFault Tarantula, Ochiai, $D^3$ are used, which can be seen in the equations \ref{eq: tarantula}, \ref{eq: ochiai} and \ref{eq: dstar}.
+These are not only used to identify one wrong neuron, but rather a set of wrong neurons.
 For that, the suspiciousness values of the neurons are used to sort the neurons in decreasing order of suspiciousness, if multiple neurons happen to get the same value, the neuron in a deeper layer is used.
 
 Guided by the suspiciousness measures, DeepFault modifies the input, for which the neural network has made the correct decision, in a targeted way.

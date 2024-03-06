@@ -1,12 +1,12 @@
 Deep Neural Networks (DNNs) \cite{lecun_deep_2015} are increasingly used in today's world and more capable than ever, and are often used in highly sensitive applications domains like medical diagnosis \cite{litjens_survey_2017} or autonomous vehicles \cite{bojarski_end_2016}.
 DNNs are highly advanced in areas like image \cite{krizhevsky_imagenet_2012, ciresan_multi-column_2012}, video \cite{jiang_exploiting_2018}, or speech recognition \cite{hinton_deep_2012}.
-There, the range of applications can range from simple recognition towards the end to end learning \cite{bojarski_end_2016}.
+There, the range of applications can range from simple recognition towards end to end learning \cite{bojarski_end_2016}.
 
 Especially because of the use of DNNs in safety-critical domains, it is from the uttermost urgency to ensure the safety of every user and every other person who is encountering these systems.
 But how can we ensure the proper operation of the neural network, and find bad actors in neural networks and repair these neurons?
 
 The Method we explored in this thesis is the mutation of neurons, which we first identified by using spectrum-based fault localization (SBFL).
-While SBFL was already first successfully used in Eniser et al.'s DeepFault \cite{eniser_deepfault_2019} in conclusion with an input synthesizes guided by the suspiciousness values elicited by the SBFL, we want to go on to a more in-depth level and mutate the weights and biases based on these suspiciousness values.
+While SBFL was already first successfully used in Eniser et al.'s DeepFault \cite{eniser_deepfault_2019} in conclusion with an input synthesizes guided by the suspiciousness values, elicited by the SBFL, we want to go on to a more in-depth level and mutate the weights and biases based on these suspiciousness values.
 
 For our approach, we first adapted the SBFL provided by DeepFault to today's versions of the TensorFlow framework, and the other used frameworks, afterwards we added the functions for the mutation of the weights and biases based on the ranked neuron locations provided by the SBFL\@.
 The mutations either assign a value randomly, a predefined value, scales by a predefined or random value to the bias or weights of a neuron, we can also decapitate a neuron.
@@ -17,18 +17,18 @@ Then we evaluate the model and if our break condition is met we give back the mo
 To evaluate our Approach, we used the Fashion-MNIST dataset by Xiao et al. \cite{xiao_fashion-mnist_2017}.
 We used 4 model architectures, two Deep Neural Networks (DNN) and two Convolutional Neural Networks (CNN) to run our evaluation.
 For the training, we haven't only used the full dataset to train the model, but also half and a quarter of the dataset.
-Another thing that differentiated the models, we also trained them for either one or six epochs before using the algorithm.
+Another thing that differentiated the models, we also trained them for either one or six epochs, before using the algorithm.
 We evaluated our approach based on the change of the performance (loss and accuracy) of the network against the baseline network.
 If we further trained the model, we compared against the further trained reference model, else we compared the change against the initial performance of the model.
 
-There by elicited an accuracy improvement in some cases up to in 25\% for the first three epochs of the algorithm for the not further trained models.
+There by we elicited an accuracy improvement in some cases up to in 25\% for the first three epochs of the algorithm for the not further trained models.
 For the further trained models, we see an accuracy improvement of up to 7.5\%.
-We see similar improvements in the loss values of the models.
+We see similar improvements in the loss values for the models.
 
 Furthermore, we investigated the impact of the different suspiciousness measures and compared the usefulness against random choosing of the neurons.
-Another thing we tried to elicit the effect of the different dataset sizes and the extent of the initial training.
+Another thing we tried to elicit is the effect of the different dataset sizes and the extent of the initial training.
 Of course, we also tried to find the best configuration of the parameters for our Algorithm.
-Exemplary of this is if the usage of an offset for the accuracy and loss, leads to better results.
+Exemplary of this is if the usage of an offset for the accuracy and loss, which leads to better results.
 For that, we also saw the need to evaluate the different break conditions for the algorithm.
 And at last, we evaluated our different mutation functions and the assigned values.
 

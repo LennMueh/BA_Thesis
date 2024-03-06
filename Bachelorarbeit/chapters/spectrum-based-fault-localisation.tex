@@ -3,7 +3,7 @@ Especially, we adapted the functions to the recent versions of the used librarie
 
 The functions adapted from the DeepFault paper are now invoked in the \texttt{run\_analysis} function seen in listing \ref{lst:main analysis}, which is the main function for the analysis.
 We have implemented it that way, to ease the use of the analysis functions, in comparison to the original DeepFault code, which was just one large python script.
-The function manges the loading of the model and the experiment or working paths.
+The function manages the loading of the model and the experiment or working paths.
 It checks if the necessary steps of the analysis have already been executed, hence the data is already available out of a previous run and uses them instead, because we assume that the model has not changed, and the data is still valid.
 
 The data we need are the classifications, the layer outputs and the spectrum matrices.
